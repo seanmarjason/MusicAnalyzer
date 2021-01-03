@@ -8,6 +8,7 @@ var sound = null;
 var fourier;
 
 function preload(){
+	// load default sound
 	sound = loadSound('assets/stomper_reggae_bit.mp3');
 }
 
@@ -15,6 +16,7 @@ function setup(){
 	 createCanvas(windowWidth, windowHeight);
 	 background(0);
 	 controls = new ControlsAndInput();
+	//  sound = loadSound(controls.trackSelector.selectedTrack);
 
 	 //instantiate the fft object
 	 fourier = new p5.FFT();

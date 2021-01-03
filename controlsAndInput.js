@@ -3,22 +3,27 @@
 function ControlsAndInput(){
 	
 	this.menuDisplayed = false;
+	this.menuX = 20;
+	this.menuY = 100;
 	
 	//playback button displayed in the top left of the screen
 	this.playbackButton = new PlaybackButton();
 
+	this.trackSelector = new TrackSelector();
+
 	//make the window fullscreen or revert to windowed
 	this.mousePressed = function(){
-		if(!this.playbackButton.hitCheck()){
-			var fs = fullscreen();
-			fullscreen(!fs);
-		}
+		this.playbackButton.hitCheck();
+		// if(!this.playbackButton.hitCheck()){
+			// var fs = fullscreen();
+			// fullscreen(!fs);
+		// }
 	};
 
 	//responds to keyboard presses
 	//@param keycode the ascii code of the keypressed
 	this.keyPressed = function(keycode){
-		console.log(keycode);
+		// console.log(keycode);
 		if(keycode == 32){
 			this.menuDisplayed = !this.menuDisplayed;
 		}
@@ -42,7 +47,7 @@ function ControlsAndInput(){
 		//only draw the menu if menu displayed is set to true.
 		if(this.menuDisplayed){
 
-			text("Select a visualisation:", 100, 30);
+			text("Select a visualisation:", this.menuX, this.menuY);
 			this.menu();
 		}	
 		pop();
@@ -52,8 +57,8 @@ function ControlsAndInput(){
 	this.menu = function(){
 		//draw out menu items for each visualisation
 		for(var i = 0; i < vis.visuals.length; i++){
-			var yLoc = 70 + i*40;
-			text((i+1) + ":  " +vis.visuals[i].name, 100, yLoc);
+			var yLoc = this.menuY + 70 + i*40;
+			text((i+1) + ":  " +vis.visuals[i].name, this.menuX, yLoc);
 		}
 	};
 }
