@@ -4,6 +4,7 @@ var controls = null;
 var vis = null;
 //variable for the p5 sound object
 var sound = null;
+var soundTime = 0;
 //variable for p5 fast fourier transform
 var fourier;
 
@@ -16,7 +17,6 @@ function setup(){
 	 createCanvas(windowWidth, windowHeight);
 	 background(0);
 	 controls = new ControlsAndInput();
-	//  sound = loadSound(controls.trackSelector.selectedTrack);
 
 	 //instantiate the fft object
 	 fourier = new p5.FFT();
@@ -35,6 +35,7 @@ function draw(){
 	vis.selectedVisual.draw();
 	//draw the controls on top.
 	controls.draw();
+	soundTime = sound.currentTime();
 }
 
 function mouseClicked(){
