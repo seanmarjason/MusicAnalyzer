@@ -20,6 +20,7 @@ function ControlsAndInput(){
 			// var fs = fullscreen();
 			// fullscreen(!fs);
 		// }
+		this.trackNavigator.jumpTrack(mouseX);
 	};
 
 	//responds to keyboard presses
@@ -53,6 +54,10 @@ function ControlsAndInput(){
 		}	
 
 		this.trackNavigator.draw();
+
+		if(this.playbackButton.playing) {
+			this.trackNavigator.drawTimeMarker(soundTime);
+		}
 		pop();
 
 	};
