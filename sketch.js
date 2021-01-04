@@ -26,6 +26,7 @@ function setup(){
 	 vis.add(new Spectrum());
 	 vis.add(new WavePattern());
 	 vis.add(new Needles());
+	 vis.add(new Synthesizer());
 
 }
 
@@ -40,6 +41,18 @@ function draw(){
 
 function mouseClicked(){
 	controls.mousePressed();
+}
+
+function mousePressed() {
+	if(vis.selectedVisual.mousePressed) {
+		vis.selectedVisual.mousePressed();
+	}
+}
+
+function mouseReleased() {
+	if(vis.selectedVisual.mouseReleased) {
+		vis.selectedVisual.mouseReleased();
+	}
 }
 
 function keyPressed(){

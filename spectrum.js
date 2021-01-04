@@ -1,29 +1,25 @@
 function Spectrum(){
 	this.name = "spectrum";
 
+	var bins = 64;
+	var binWidth = width / bins;
+	var binHeight = height - 100;
+
 	this.draw = function(){
 		push();
-		var spectrum = fourier.analyze();
+		var spectrum = fourier.analyze(bins);
 		noStroke();
-		//fill(0,255,0)
-		// for (var i = 0; i< spectrum.length; i++){
-		// 	var x = map(i, 0, spectrum.length, 0, width);
-		//     var h = -height + map(spectrum[i], 0, 255, height, 0);
-		//     rect(x, height, width / spectrum.length, h );
-  // 		}
 
-
-		for(var i = 0; i<spectrum.length; i++){
+		for(var i = 0; i<bins; i++){
 
 			//fade the colour of the bin from green to red
 			var g = map(spectrum[i], 0, 255, 255, 0);
 			fill(spectrum[i], g, 0);
 
-			//draw each bin as a rectangle from the left of the screen
-			//across
-			var y = map(i, 0, spectrum.length, 0, height);
-			var w = map(spectrum[i], 0, 255, 0, width);
-			rect(0, y, w, height/spectrum.length);
+			//draw each bin as a rectangle from the left of the screen across
+			var x = map(i, 0, bins, 0, width);
+			var h = -binHeight + map(spectrum[i], 0, 255, binHeight, 0);
+			rect(x, height, binWidth - 2, h);
 		}  		
 		pop();
 	};
