@@ -22,21 +22,21 @@ function TrackNavigator(){
     push();
     textSize(14);
 
-    // Track Lines - start and end
-    stroke(255);
-    strokeWeight(4);
-    line(this.start, this.y - 5, this.start, this.y + 5)
-    line(this.end, this.y - 5, this.end, this.y + 5)
+    // Track Line - time remaining
+    stroke(100);
+    strokeWeight(2);
+    line(trackPosition, this.y, this.end, this.y);
 
     // Track Line - time elapsed
     stroke(255);
     strokeWeight(4);
     line(this.start, this.y, trackPosition, this.y);
 
-    // Track Line - time remaining
-    stroke(100);
-    strokeWeight(2);
-    line(trackPosition, this.y, this.end, this.y);
+    // Track Lines - start and end
+    stroke(255);
+    strokeWeight(4);
+    line(this.start, this.y - 5, this.start, this.y + 5)
+    line(this.end, this.y - 5, this.end, this.y + 5)
 
     // Draw track ellapsed time and duration
     strokeWeight(1);
