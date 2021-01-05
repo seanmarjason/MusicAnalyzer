@@ -27,4 +27,8 @@ function WavePattern() {
 		endShape();
 		pop();
 	};
+
+	this.reset = function() {
+		
+	}
 }

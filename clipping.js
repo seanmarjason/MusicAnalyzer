@@ -72,4 +72,11 @@ function Clipping(){
 			pop();
 		}
 	};
+
+	this.reset = function() {
+		maxSignals = [];
+		for(i = 0; i < bins; i++) {
+			maxSignals.push(0);
+		}
+	}
 }

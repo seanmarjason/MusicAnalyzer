@@ -4,7 +4,7 @@ function ControlsAndInput(){
 	
 	this.menuDisplayed = false;
 	this.menuX = 20;
-	this.menuY = 100;
+	this.menuY = 120;
 	
 	//playback button displayed in the top left of the screen
 	this.playbackButton = new PlaybackButton();
@@ -52,20 +52,25 @@ function ControlsAndInput(){
 		fill("white");
 		stroke("black");
 		strokeWeight(2);
-		textSize(34);
 		this.playbackButton.draw();
-
-		// only draw the menu if menu displayed is set to true.
-		if(this.menuDisplayed){
-			text("Select a tool:", this.menuX, this.menuY);
-			this.menu();
-		}	
 
 		this.trackNavigator.draw();
 
 		if(this.playbackButton.playing) {
 			this.trackNavigator.drawTimeMarker(soundTime);
 		}
+		pop();
+
+		// only draw the menu if menu displayed is set to true.
+		push();
+		if(this.menuDisplayed){
+			fill(255);
+			rect(0, 75, 400, height - 75);
+			fill(33, 33, 33);
+			textSize(24);
+			text("Select a tool:", this.menuX, this.menuY);
+			this.menu();
+		}	
 		pop();
 
 	};

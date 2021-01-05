@@ -31,7 +31,9 @@ function TrackSelector(){
       controls.playbackButton.playing = false;
     }
     sound = loadSound(tracks[sel.value()], soundLoaded);
+    vis.selectedVisual.reset();
   });
+
 
   // stub function for callback upon successful loading of new audio file
   let soundLoaded = function(){

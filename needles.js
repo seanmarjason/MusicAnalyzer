@@ -115,4 +115,8 @@ function Needles() {
 		pop();
 	};
 
+	this.reset = function() {
+		
+	}
+
 }

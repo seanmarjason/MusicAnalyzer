@@ -189,4 +189,8 @@ function Synthesizer() {
     }
     note = '';
   }
+
+  this.reset = function() {
+		
+	}
 }
