@@ -98,7 +98,7 @@ function Levels() {
 		arc(0, 0, 20, 20, PI, 2 * PI);
 		textAlign(CENTER);
 		textSize(12);
-		text(freqLabel, 0, -(this.plotHeight / 2));
+		text(freqLabel + ' (amp)', 0, -(this.plotHeight / 2));
 
 		for (var i = 0; i < 9; i++) {
 			//for each tick work out the start and end coordinates of
@@ -109,7 +109,10 @@ function Levels() {
 			var y = (this.dialRadius) * sin(nextTickAngle);
 			var y1 = (this.dialRadius - 5) * sin(nextTickAngle);
 
+			var tag = (map(i, 0, 9, 0, 255)).toFixed();
+
 			line(x, y, x1, y1);
+			text(tag, x, y - 5);
 			nextTickAngle += PI / 10;
 		}
 		pop();
