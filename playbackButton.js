@@ -1,8 +1,8 @@
 //displays and handles clicks on the playback button.
 function PlaybackButton(){
 	
-	this.x = 20;
-	this.y = 20;
+	this.x = 30;
+	this.y = 25;
 	this.width = 20;
 	this.height = 20;
 

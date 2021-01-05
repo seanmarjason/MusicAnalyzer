@@ -11,8 +11,8 @@ function TrackSelector(){
     'Swedish House Mafia - Save The World': 'assets/SwedishHouseMafia_SaveTheWorld.mp3',
   }
 
-  this.x = 60;
-  this.y = 20;
+  this.x = 80;
+  this.y = 25;
 
   let sel;
   sel = createSelect();

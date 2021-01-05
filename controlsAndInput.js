@@ -37,17 +37,25 @@ function ControlsAndInput(){
 		}
 	};
 
-	//draws the playback button and potentially the menu
+	//draws the playback button and other controls
 	this.draw = function(){
+
+		// Header Bar
+		push();
+		noStroke();
+		fill(31, 31, 31);
+		rect(0, 0, width, 75);
+		pop();
+
+		//playback button 
 		push();
 		fill("white");
 		stroke("black");
 		strokeWeight(2);
 		textSize(34);
-
-		//playback button 
 		this.playbackButton.draw();
-		//only draw the menu if menu displayed is set to true.
+
+		// only draw the menu if menu displayed is set to true.
 		if(this.menuDisplayed){
 			text("Select a tool:", this.menuX, this.menuY);
 			this.menu();
