@@ -19,8 +19,8 @@ function setup(){
 	 //create a new visualisation container and add visualisations
 	 vis = new Visualisations();
 	 vis.add(new Clipping());
+	 vis.add(new Levels());
 	 vis.add(new WavePattern());
-	 vis.add(new Needles());
 	 vis.add(new Synthesizer());
 
 }

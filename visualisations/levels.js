@@ -1,7 +1,7 @@
 //constructor function to draw a
-function Needles() {
+function Levels() {
 	//name of the visualisation
-	this.name = "needles";
+	this.name = "Analyze Levels";
 
 	var needlesFourier = new p5.FFT();
 
