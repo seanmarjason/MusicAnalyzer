@@ -3,11 +3,14 @@ function Spectrum(){
 
 	var bins = 64;
 	var binWidth = width / bins;
-	var binHeight = height - 100;
+	var binHeight = height - 200;
+
+	var spectrumFourier = new p5.FFT(0.8, bins);
 
 	this.draw = function(){
 		push();
-		var spectrum = fourier.analyze(bins);
+		var spectrum = spectrumFourier.analyze(bins);
+
 		noStroke();
 
 		for(var i = 0; i<bins; i++){

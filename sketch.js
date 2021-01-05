@@ -5,8 +5,6 @@ var vis = null;
 //variable for the p5 sound object
 var sound = null;
 var soundTime = 0;
-//variable for p5 fast fourier transform
-var fourier;
 
 function preload(){
 	// load default sound
@@ -17,9 +15,6 @@ function setup(){
 	 createCanvas(windowWidth, windowHeight);
 	 background(0);
 	 controls = new ControlsAndInput();
-
-	 //instantiate the fft object
-	 fourier = new p5.FFT();
 
 	 //create a new visualisation container and add visualisations
 	 vis = new Visualisations();

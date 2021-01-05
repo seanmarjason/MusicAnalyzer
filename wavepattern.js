@@ -3,6 +3,8 @@ function WavePattern() {
 	//vis name
 	this.name = "wavepattern";
 
+	var wavepatternFourier = new p5.FFT();
+
 	//draw the wave form to the screen
 	this.draw = function() {
 		push();
@@ -12,7 +14,7 @@ function WavePattern() {
 
 		beginShape();
 		//calculate the waveform from the fft.
-		var wave = fourier.waveform();
+		var wave = wavepatternFourier.waveform();
 		for (var i = 0; i < wave.length; i++) {
 			//for each element of the waveform map it to screen
 			//coordinates and make a new vertex at the point.

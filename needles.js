@@ -3,6 +3,8 @@ function Needles() {
 	//name of the visualisation
 	this.name = "needles";
 
+	var needlesFourier = new p5.FFT();
+
 	//how large is the arc of the needle plot.
 	var minAngle = PI + PI / 10;
 	var maxAngle = TWO_PI - PI / 10;
@@ -27,7 +29,7 @@ function Needles() {
 	// draw the plots to the screen
 	this.draw = function() {
 		//create an array amplitude values from the fft.
-		var spectrum = fourier.analyze();
+		var spectrum = needlesFourier.analyze();
 		//iterator for selecting frequency bin.
 		var currentBin = 0;
 		push();
@@ -47,7 +49,7 @@ function Needles() {
 				//add on the ticks
 				this.ticks(x + w / 2, y + h, this.frequencyBins[currentBin]);
 
-				var energy = fourier.getEnergy(this.frequencyBins[currentBin]);
+				var energy = needlesFourier.getEnergy(this.frequencyBins[currentBin]);
 
 				//add the needle
 				this.needle(energy, x + w / 2, y + h);
