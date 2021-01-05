@@ -13,7 +13,7 @@ function preload(){
 
 function setup(){
 	 createCanvas(windowWidth, windowHeight);
-	 background(0);
+	 background(18, 18, 18);
 	 controls = new ControlsAndInput();
 
 	 //create a new visualisation container and add visualisations

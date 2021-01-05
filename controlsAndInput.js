@@ -49,7 +49,7 @@ function ControlsAndInput(){
 		this.playbackButton.draw();
 		//only draw the menu if menu displayed is set to true.
 		if(this.menuDisplayed){
-			text("Select a visualisation:", this.menuX, this.menuY);
+			text("Select a tool:", this.menuX, this.menuY);
 			this.menu();
 		}	
 
