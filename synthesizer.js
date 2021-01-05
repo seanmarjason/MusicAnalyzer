@@ -6,6 +6,8 @@ function Synthesizer() {
   this.x = 350;
   this.y = height / 2;
 
+  let img = loadImage('assets/Treble_Clef_White.png');
+
   const keys = [
     {'note': 'C3', 'freq': 130.8128, 'position': 1, 'type': 'white'},
     {'note': 'C#3', 'freq': 138.5913, 'position': 1.5, 'type': 'black'},
@@ -42,11 +44,13 @@ function Synthesizer() {
   let keyWidthSmall = 25
   let keyHeight = 200;
   let keyHeightSmall = 120;
+  let note = '';
 
   // Oscillator 1
   const osc1 = new p5.Oscillator();
   let wave1 = 'square';
   let amp1 = 0.5;
+  let osc1Enabled = true;
 
   // Oscillator 2
   const osc2 = new p5.Oscillator();
@@ -63,7 +67,6 @@ function Synthesizer() {
   let osc3Enabled = true;
   let osc3Octave = 0;
   let osc3Offset = 0;
-
 
 	//draw the synthesizer to the screen
 	this.draw = function() {
@@ -83,6 +86,19 @@ function Synthesizer() {
         rect((this.x + (keys[i].position * 2) * keyWidthSmall) + (keyWidthSmall/2), this.y, keyWidthSmall, keyHeightSmall);
       }
     }
+
+    //draw notes
+    push();
+    stroke(255);
+    strokeWeight(2);
+    for (i = 0; i < 6; i++) {
+      line (this.x, ((this.y / 2) + i * 25), width - 20, ((this.y / 2) + i * 25))
+    }
+    image(img, 250, 300, 200, 200);
+    fill(255);
+    textSize(50);
+    text(note, 800, 250);
+    pop();
   };
   
   this.mousePressed = function() {
@@ -96,6 +112,7 @@ function Synthesizer() {
             && mouseY > this.y
             && mouseY < (this.y + keyHeightSmall)){
               this.playNote(blackKeys[i].freq);
+              note = blackKeys[i].note;
               return
         }
       }
@@ -105,6 +122,7 @@ function Synthesizer() {
         if( mouseX > (this.x + whiteKeys[i].position * keyWidth) 
             && mouseX < ((this.x + whiteKeys[i].position * keyWidth) + keyWidth)){
               this.playNote(whiteKeys[i].freq);
+              note = whiteKeys[i].note;
               return
         }
       }
@@ -113,11 +131,13 @@ function Synthesizer() {
 
   this.playNote = function(frequency) {
     // play first oscillator
-    osc1.start();
-    osc1.setType(wave1);
-    osc1.amp(amp1);
-    console.log('osc1:', frequency);
-    osc1.freq(frequency);
+    if (osc1Enabled) {
+      osc1.start();
+      osc1.setType(wave1);
+      osc1.amp(amp1);
+      console.log('osc1:', frequency);
+      osc1.freq(frequency);
+    }
 
     // play second oscillator
     if (osc2Enabled) {
@@ -167,5 +187,6 @@ function Synthesizer() {
     if (osc3Enabled) {
       osc3.stop();
     }
+    note = '';
   }
 }
