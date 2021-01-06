@@ -2,7 +2,7 @@
 function Synthesizer() {
 
   //vis name
-  this.name = "synthesizer";
+  this.name = "Synthesizer";
   this.x = 350;
   this.y = height / 2;
 
