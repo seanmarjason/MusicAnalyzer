@@ -13,8 +13,13 @@ function PlaybackButton(){
 
 	this.draw = function(){
 		if(this.playing){
+			push();
+			fill("white");
+			stroke("black");
+			strokeWeight(2);
 			rect(this.x, this.y, this.width/2 - 2, this.height);
 			rect(this.x + (this.width/2 + 2), this.y, this.width/2 - 2, this.height);
+			pop();
 		}
 		else if (!this.enabled){
 			push();
@@ -25,8 +30,12 @@ function PlaybackButton(){
 			pop();
 		}
 		else {	
+			push();
+			fill("white");
+			stroke("black");
+			strokeWeight(2);
 			triangle(this.x, this.y, this.x + this.width, this.y + this.height/2, this.x, this.y+this.height);
-
+			pop();
 		}
 	};
 

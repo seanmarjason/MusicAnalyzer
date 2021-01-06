@@ -3,7 +3,7 @@
 function TrackNavigator(){
 
   this.start = 400;
-  this.end = width - 50
+  this.end = width - 100
   this.y = 30;
   this.trackCurrentTime = 0;
 
@@ -18,28 +18,35 @@ function TrackNavigator(){
     trackElapsed = soundTime;
     trackRemaining = (trackDuration - trackElapsed);
     trackPosition = map(trackElapsed, 0, trackDuration, this.start, this.end);
-    
-    push();
-    textSize(14);
 
     // Track Line - time remaining
+    push();
     stroke(100);
     strokeWeight(2);
     line(trackPosition, this.y, this.end, this.y);
+    pop();
 
     // Track Line - time elapsed
+    push();
     stroke(255);
     strokeWeight(4);
     line(this.start, this.y, trackPosition, this.y);
+    pop();
 
     // Track Lines - start and end
+    push();
     stroke(255);
     strokeWeight(4);
     line(this.start, this.y - 5, this.start, this.y + 5)
     line(this.end, this.y - 5, this.end, this.y + 5)
+    pop();
 
     // Draw track ellapsed time and duration
+    push();
+    fill("white");
+		stroke("black");
     strokeWeight(1);
+    textSize(14);
     text(convertSecondsToMinutes(trackElapsed), this.start, this.y + 25);
     textAlign(RIGHT);
     text(("-" + convertSecondsToMinutes(trackRemaining)), this.end, this.y + 25)
@@ -82,6 +89,6 @@ function TrackNavigator(){
 
   // resize trackNavigator on window resize
   this.onResize = function() {
-    this.end = width - 20;
+    this.end = width - 100;
 	};
 }

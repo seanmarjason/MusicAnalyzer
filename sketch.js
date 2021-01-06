@@ -62,4 +62,5 @@ function windowResized(){
 		vis.selectedVisual.onResize();
 	}
 	controls.trackNavigator.onResize();
+	controls.fullscreenButton.onResize();
 }

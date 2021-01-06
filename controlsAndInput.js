@@ -6,10 +6,12 @@ function ControlsAndInput(){
 	this.menuX = 20;
 	this.menuY = 120;
 
-	var headerHeight = 75;
+	const headerHeight = 75;
 	
 	//playback button displayed in the top left of the screen
 	this.playbackButton = new PlaybackButton();
+
+	this.fullscreenButton = new FullscreenButton();
 
 	this.trackSelector = new TrackSelector();
 
@@ -18,10 +20,7 @@ function ControlsAndInput(){
 	//make the window fullscreen or revert to windowed
 	this.mousePressed = function(){
 		this.playbackButton.hitCheck();
-		// if(!this.playbackButton.hitCheck()){
-			// var fs = fullscreen();
-			// fullscreen(!fs);
-		// }
+		this.fullscreenButton.hitCheck();
 		this.trackNavigator.jumpTrack(mouseX);
 	};
 
@@ -50,18 +49,16 @@ function ControlsAndInput(){
 		pop();
 
 		//playback button 
-		push();
-		fill("white");
-		stroke("black");
-		strokeWeight(2);
 		this.playbackButton.draw();
-
-		this.trackNavigator.draw();
-
 		if(this.playbackButton.playing) {
 			this.trackNavigator.drawTimeMarker(soundTime);
 		}
-		pop();
+
+		// fullscreen button
+		this.fullscreenButton.draw();
+
+		// track navigator
+		this.trackNavigator.draw();
 
 		// only draw the menu if menu displayed is set to true.
 		push();
