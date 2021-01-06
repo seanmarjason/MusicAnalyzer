@@ -3,11 +3,10 @@ function Clipping(){
 
 	var bins = 64;
 	var binWidth = width / bins;
-	var binHeight = height - 200;
+	var binHeight = height / 4 * 3;
+	var signalThreshold = 200;
 
 	var spectrumFourier = new p5.FFT(0.8, bins);
-
-	var signalThreshold = 200;
 
 	// initialize maxSignals array
 	var maxSignals = [];
@@ -38,20 +37,24 @@ function Clipping(){
 			// fade the colour of the bin from green to red
 			push();
 			noStroke();
-			var g = map(spectrum[i], 0, 255, 255, 0);
-			fill(spectrum[i], g, 0);
+			// var g = map(spectrum[i], 0, 255, 255, 0);
+			// fill(spectrum[i], g, 0);
+			var b = map(spectrum[i], 0, 255, 255, 0);
+			fill(spectrum[i], 150, b);
 
-			//draw each bin as a rectangle from the left of the screen across
+			// draw each bin as a rectangle from the left of the screen across
 			var x = map(i, 0, bins, 0, width);
 			var h = -binHeight + map(spectrum[i], 0, 255, binHeight, 0);
 			rect(x, height, binWidth - 2, h);
 			pop()
 
-			// update & draw max signals
+			// update max signals
 			push();
 			if (maxSignals[i] < spectrum[i]) {
 				maxSignals[i] = spectrum[i];
 			}
+
+			// draw max signals
 			stroke(255);
 			strokeWeight(5);
 			var l = map(maxSignals[i], 0, 255, height, height - binHeight);
@@ -60,7 +63,7 @@ function Clipping(){
 
 			// show error information where max signal exceeds threshold
 			push();
-			fill(255, 0, 0);
+			fill(255, 150, 0);
 			textSize(12);
 			stroke(50);
 			strokeWeight(2);
