@@ -40,7 +40,7 @@ function Levels() {
 
 				//calculate the size of the plots
 				var x = this.pad + j * this.plotWidth;
-				var y = this.pad + i * this.plotHeight;
+				var y = this.pad + i * this.plotHeight + 25;
 				var w = this.plotWidth - this.pad;
 				var h = this.plotHeight - this.pad;
 

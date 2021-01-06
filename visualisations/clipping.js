@@ -31,14 +31,12 @@ function Clipping(){
 			noStroke();
 			textAlign(RIGHT);
 			textSize(14);
-			text('Signal Threshold: ' + signalThreshold, width - 20, signalThresholdLine - 20);
+			text('Signal Threshold: ' + signalThreshold, width - 50, signalThresholdLine - 20);
 			pop();
 
 			// fade the colour of the bin from green to red
 			push();
 			noStroke();
-			// var g = map(spectrum[i], 0, 255, 255, 0);
-			// fill(spectrum[i], g, 0);
 			var b = map(spectrum[i], 0, 255, 255, 0);
 			fill(spectrum[i], 150, b);
 
