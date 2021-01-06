@@ -9,7 +9,7 @@ function Synthesizer() {
 
   // keyboard parameters
   let keyWidth = 50;
-  let keyWidthSmall = 25
+  let keyWidthSmall = 25;
   let keyHeight = 200;
   let keyHeightSmall = 120;
   let note = 'Play Something!';
@@ -97,10 +97,10 @@ function Synthesizer() {
     textAlign(CENTER);
 
     let objectEntries = Object.entries(settings);
-    let settingsWidth = 300;
+    let settingsWidth = (width - 100) / objectEntries.length;
+    let startPosition = (width / 2) - ((settingsWidth * objectEntries.length) / 2)
     for(i = 0; i < objectEntries.length; i++) {
-      let startPosition = (width / 2 - (settingsWidth * objectEntries.length) / 2) 
-      let positionX = (startPosition * (i + 1)) + (settingsWidth / 2);
+      let positionX = startPosition + (i * settingsWidth) + (settingsWidth / 2);
       let positionY = height / 2
       text('Oscillator ' + (i+1), positionX, positionY);
       text('Enabled: ' + objectEntries[i][1].enabled, positionX, positionY + 50)
@@ -211,6 +211,12 @@ function Synthesizer() {
     }
     note = 'Play Something!';
   }
+
+  this.onResize = function() {
+    this.x = width / 2;
+    this.y = height / 4 * 3;
+    keyboardStartPosition = this.x - (whiteKeys.length * keyWidth / 2);
+	};
 
   this.reset = function() {
 		
