@@ -21,6 +21,7 @@ function setup(){
 	 vis.add(new Clipping());
 	 vis.add(new Levels());
 	 vis.add(new WavePattern());
+	 vis.add(new Stage());
 	 vis.add(new Synthesizer());
 
 }
