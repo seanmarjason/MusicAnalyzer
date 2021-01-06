@@ -5,6 +5,8 @@ function ControlsAndInput(){
 	this.menuDisplayed = false;
 	this.menuX = 20;
 	this.menuY = 120;
+
+	var headerHeight = 75;
 	
 	//playback button displayed in the top left of the screen
 	this.playbackButton = new PlaybackButton();
@@ -44,7 +46,7 @@ function ControlsAndInput(){
 		push();
 		noStroke();
 		fill(31, 31, 31);
-		rect(0, 0, width, 75);
+		rect(0, 0, width, headerHeight);
 		pop();
 
 		//playback button 
@@ -64,8 +66,9 @@ function ControlsAndInput(){
 		// only draw the menu if menu displayed is set to true.
 		push();
 		if(this.menuDisplayed){
+			noStroke();
 			fill(255);
-			rect(0, 75, 400, height - 75);
+			rect(0, headerHeight, 400, height - headerHeight - 3);
 			fill(33, 33, 33);
 			textSize(24);
 			text("Select a tool:", this.menuX, this.menuY);

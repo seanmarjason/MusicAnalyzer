@@ -3,7 +3,7 @@
 function TrackNavigator(){
 
   this.start = 400;
-  this.end = width - 20
+  this.end = width - 50
   this.y = 30;
   this.trackCurrentTime = 0;
 
