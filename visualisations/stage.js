@@ -12,11 +12,21 @@ function Stage() {
   let speakerHeight = 400;
   let speakerWidth = 100;
 
-  let stageLights = 5;
-  let stageLightInterval = width / stageLights;
+  let stageLightNumber = 5;
+  let stageLightInterval = width / stageLightNumber;
+  let stageLights = [];
 
-  let featureLights = 5;
-  let featureLightInterval = deskWidth / featureLights;
+  for(i = 0; i < stageLightNumber; i++) {
+    stageLights.push((stageLightInterval * i) + (stageLightInterval / 2))
+  }
+
+  let featureLightNumber = 5;
+  let featureLightInterval = deskWidth / featureLightNumber;
+  var featureLights = []
+
+  for(i = 0; i < featureLightNumber; i++) {
+    featureLights.push((width / 4 + (featureLightInterval * i) + (featureLightInterval / 2)))
+  }
 
   const stageFourier = new p5.FFT();
   const amplitude = new p5.Amplitude();
@@ -38,9 +48,7 @@ function Stage() {
     fill(255, 255, 255);
     noStroke();
     let stageLightSize = map(stageFourier.getEnergy('treble'), 0, 255, 10, 100);
-    for(i = 0; i < stageLights; i++) {
-      circle((stageLightInterval * i) + (stageLightInterval / 2), height / 5, stageLightSize);
-    }
+    stageLights.forEach((light) => circle(light, height / 5, stageLightSize))
     pop();
 
     // draw kit
@@ -56,9 +64,10 @@ function Stage() {
     fill(255, 255, 255);
     noStroke();
     let featureLightSize = map(stageFourier.getEnergy('bass'), 0, 255, 10, 100);
-    for(i = 0; i < featureLights; i++) {
-      circle(width / 4 + (featureLightInterval * i) + (featureLightInterval / 2), stageHeight + (deskHeight / 2), featureLightSize);
-    }
+    // for(i = 0; i < featureLights; i++) {
+    //   circle(width / 4 + (featureLightInterval * i) + (featureLightInterval / 2), stageHeight + (deskHeight / 2), featureLightSize);
+    // }
+    featureLights.forEach((light) => circle(light, stageHeight + (deskHeight / 2), featureLightSize))
     pop();
 	};
 
