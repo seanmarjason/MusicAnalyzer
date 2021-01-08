@@ -4,7 +4,7 @@ function Clipping(){
 	var bins = 64;
 	var binWidth = width / bins;
 	var binHeight = height / 4 * 3;
-	var signalThreshold = 200;
+	var signalThreshold = 240;
 
 	var spectrumFourier = new p5.FFT(0.8, bins);
 
