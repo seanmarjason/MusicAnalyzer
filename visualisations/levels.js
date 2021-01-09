@@ -3,7 +3,7 @@ function Levels() {
 	//name of the visualisation
 	this.name = "Analyze Levels";
 
-	var needlesFourier = new p5.FFT();
+	var levelsFourier = new p5.FFT();
 
 	//how large is the arc of the needle plot.
 	var minAngle = PI + PI / 10;
@@ -29,7 +29,7 @@ function Levels() {
 	// draw the plots to the screen
 	this.draw = function() {
 		//create an array amplitude values from the fft.
-		var spectrum = needlesFourier.analyze();
+		var spectrum = levelsFourier.analyze();
 		//iterator for selecting frequency bin.
 		var currentBin = 0;
 		push();
@@ -49,7 +49,7 @@ function Levels() {
 				//add on the ticks
 				this.ticks(x + w / 2, y + h, this.frequencyBins[currentBin]);
 
-				var energy = needlesFourier.getEnergy(this.frequencyBins[currentBin]);
+				var energy = levelsFourier.getEnergy(this.frequencyBins[currentBin]);
 
 				//add the needle
 				this.needle(energy, x + w / 2, y + h);

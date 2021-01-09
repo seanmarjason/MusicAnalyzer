@@ -6,7 +6,7 @@ function Clipping(){
 	var binHeight = height / 4 * 3;
 	var signalThreshold = 240;
 
-	var spectrumFourier = new p5.FFT(0.8, bins);
+	var clippingFourier = new p5.FFT(0.8, bins);
 
 	// initialize maxSignals array
 	var maxSignals = [];
@@ -16,7 +16,7 @@ function Clipping(){
 
 	this.draw = function(){
 
-		var spectrum = spectrumFourier.analyze(bins);
+		var spectrum = clippingFourier.analyze(bins);
 
 		for(var i = 0; i < bins; i++){
 

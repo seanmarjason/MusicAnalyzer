@@ -29,8 +29,6 @@ function Stage() {
   }
 
   const stageFourier = new p5.FFT();
-  const amplitude = new p5.Amplitude();
-  amplitude.smooth(0.9);
 
 	//draw the stage to the screen
 	this.draw = function() {
@@ -48,7 +46,9 @@ function Stage() {
     fill(255, 255, 255);
     noStroke();
     let stageLightSize = map(stageFourier.getEnergy('treble'), 0, 255, 10, 100);
-    stageLights.forEach((light) => circle(light, height / 5, stageLightSize))
+    stageLights.forEach(function(light) {
+      circle(light, height / 5, stageLightSize)
+    });
     pop();
 
     // draw kit
@@ -64,10 +64,9 @@ function Stage() {
     fill(255, 255, 255);
     noStroke();
     let featureLightSize = map(stageFourier.getEnergy('bass'), 0, 255, 10, 100);
-    // for(i = 0; i < featureLights; i++) {
-    //   circle(width / 4 + (featureLightInterval * i) + (featureLightInterval / 2), stageHeight + (deskHeight / 2), featureLightSize);
-    // }
-    featureLights.forEach((light) => circle(light, stageHeight + (deskHeight / 2), featureLightSize))
+    featureLights.forEach(function(light) {
+      circle(light, stageHeight + (deskHeight / 2), featureLightSize)
+    });
     pop();
 	};
 
