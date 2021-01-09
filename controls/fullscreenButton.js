@@ -1,10 +1,14 @@
 //displays and handles clicks on the fullscreen button.
 function FullscreenButton(){
 	
-	this.x = width - 50;
-	this.y = 35;
-	this.width = 20;
-	this.height = 20;
+	this.onResize = function() {
+		this.x = width - 50;
+		this.y = 35;
+		this.width = 20;
+		this.height = 20;
+	};
+
+	this.onResize()
 
 	//flag to determine whether to expand or collapse on button click and
 	//to determine which icon to draw
@@ -43,9 +47,5 @@ function FullscreenButton(){
 		}
 			return false;
 	};
-
-	this.onResize = function() {
-		this.x = width - 50;
-		this.y = 35;
-	};
+	
 }

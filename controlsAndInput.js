@@ -3,13 +3,20 @@
 function ControlsAndInput(){
 
 	const headerHeight = 75;
-	
-	//playback button displayed in the top left of the screen
-	this.playbackButton = new PlaybackButton();
-	this.fullscreenButton = new FullscreenButton();
-	this.trackSelector = new TrackSelector();
-	this.trackNavigator = new TrackNavigator();
-	this.menu = new Menu();
+
+	this.setup = function() {
+
+		// initialise controls
+		this.playbackButton = new PlaybackButton();
+		this.fullscreenButton = new FullscreenButton();
+		this.trackSelector = new TrackSelector();
+		this.trackNavigator = new TrackNavigator();
+		this.menu = new Menu();
+		
+		// initialise track selector
+		this.trackSelector.setup();
+
+	}
 
 	//make the window fullscreen or revert to windowed
 	this.mousePressed = function(){

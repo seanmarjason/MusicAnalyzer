@@ -15,6 +15,7 @@ function setup(){
 	 createCanvas(windowWidth, windowHeight);
 	 background(18, 18, 18);
 	 controls = new ControlsAndInput();
+	 controls.setup();
 
 	 //create a new visualisation container and add visualisations
 	 vis = new Visualisations();

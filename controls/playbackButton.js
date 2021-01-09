@@ -1,11 +1,15 @@
 //displays and handles clicks on the playback button.
 function PlaybackButton(){
-	
-	this.x = 30;
-	this.y = 25;
-	this.width = 20;
-	this.height = 20;
 
+	this.onResize = function() {
+		this.x = 30;
+		this.y = 25;
+		this.width = 20;
+		this.height = 20;
+	}
+
+	this.onResize();
+	
 	//flag to determine whether to play or pause after button click and
 	//to determine which icon to draw
 	this.playing = false;
