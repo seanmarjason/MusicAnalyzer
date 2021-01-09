@@ -18,11 +18,18 @@ function ControlsAndInput(){
 
 	}
 
-	//make the window fullscreen or revert to windowed
 	this.mousePressed = function(){
-		this.playbackButton.hitCheck();
+
+		// check for clicks on playback button and handle sound play/pause
+		if(this.playbackButton.hitCheck()) {
+			sound.isPlaying() ? sound.pause() : sound.loop();
+		};
+
 		this.fullscreenButton.hitCheck();
-		this.trackNavigator.jumpTrack(mouseX);
+
+		if (this.trackNavigator.hitCheck()) {
+			sound.jump(this.trackNavigator.jumpTrack(mouseX));
+		}
 	};
 
 	//responds to keyboard presses
@@ -53,12 +60,10 @@ function ControlsAndInput(){
 
 		//playback button 
 		this.playbackButton.draw();
-		if(this.playbackButton.playing) {
-			this.trackNavigator.drawTimeMarker(soundTime);
-		}
 
 		// track navigator
 		this.trackNavigator.draw();
+		this.trackNavigator.updateTrackPosition(sound.duration(), sound.currentTime());
 
 		// fullscreen button
 		this.fullscreenButton.draw();

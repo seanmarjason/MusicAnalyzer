@@ -5,19 +5,20 @@ function TrackNavigator(){
   this.start = 400;
   this.end = width - 100
   this.y = 30;
-  this.trackCurrentTime = 0;
 
   let trackDuration;
   let trackElapsed = 0;
   let trackRemaining;
   let trackPosition = this.start;
 
+  this.updateTrackPosition = function(currentSoundDuration, currentSoundTime) {
+    trackDuration = currentSoundDuration;
+    trackElapsed = currentSoundTime;
+    trackRemaining = trackDuration - trackElapsed;
+    trackPosition = map(trackElapsed, 0, trackDuration, this.start, this.end)
+  }
+
   this.draw = function() {
-    // Reset Track Time Elapsed & Remaining while song is playing
-    trackDuration = sound.duration();
-    trackElapsed = soundTime;
-    trackRemaining = (trackDuration - trackElapsed);
-    trackPosition = map(trackElapsed, 0, trackDuration, this.start, this.end);
 
     // Track Line - time remaining
     push();
@@ -51,6 +52,14 @@ function TrackNavigator(){
     textAlign(RIGHT);
     text(("-" + convertSecondsToMinutes(trackRemaining)), this.end, this.y + 25)
     pop();
+
+    // Draw track marker
+    push();
+    stroke(0);
+    strokeWeight(2);
+    fill(255)
+    rect(trackPosition - 4, this.y - 10, 8, 20);
+    pop();
   }
 
   // convert seconds to minutes and seconds
@@ -62,29 +71,17 @@ function TrackNavigator(){
             : (elapsedMinutes + '.' + elapsedSeconds));
   }
 
-  // draw a marker at where the track is currently positioned
-  this.drawTimeMarker = function(time) {
-    let y = this.y;
-    let min = this.start;
-    let max = this.end;
-
-    let trackPosition = map(time, 0, trackDuration, min, max)
-    
-    push();
-    stroke(0);
-    strokeWeight(2);
-    fill(255)
-    rect(trackPosition - 4, y - 10, 8, 20);
-    pop();
+  this.hitCheck = function() {
+    if(	mouseX > this.start && mouseX < this.end
+      && mouseY > this.y - 10	&& mouseY < this.y + 10) {
+        return true;
+    }
   }
 
   // jump to another position in track on click
   this.jumpTrack = function(position) {
-    if(	mouseX > this.start && mouseX < this.end
-      && mouseY > this.y - 10	&& mouseY < this.y + 10) {
-        let jumpPosition = map(position, this.start, this.end, 0, trackDuration);
-        sound.jump(jumpPosition);
-    }
+      let jumpPosition = map(position, this.start, this.end, 0, trackDuration);
+      return jumpPosition;
   }
 
   // resize trackNavigator on window resize
