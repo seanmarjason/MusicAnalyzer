@@ -80,6 +80,10 @@ function ControlsAndInput(){
 			pop();
 		}
 	};
+
+	this.reset = function() {
+		vis.selectedVisual.reset();
+	}
 }
 
 

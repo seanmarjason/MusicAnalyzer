@@ -45,12 +45,12 @@ function TrackSelector(){
       controls.playbackButton.playing = false;
     }
     sound = loadSound(tracks[track], soundLoaded);
-    vis.selectedVisual.reset();
   }
 
   // Callback upon successful loading of new audio file
   var soundLoaded = function(){
     controls.playbackButton.enabled = true;
+    controls.reset();
   }
 
 }
