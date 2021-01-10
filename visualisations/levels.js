@@ -16,14 +16,14 @@ function Levels() {
 	//for each plot.
 	this.frequencyBins = ["bass", "lowMid", "highMid", "treble"];
 
-	//resize the plots sizes when the screen is resized.
+	// set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
 	this.onResize = function() {
 		this.pad = width / 20;
 		this.plotWidth = (width - this.pad) / this.plotsAcross;
 		this.plotHeight = (height - this.pad) / this.plotsDown;
 		this.dialRadius = (this.plotWidth - this.pad) / 2 - 5;
 	};
-	//call onResize to set initial values when the object is created
 	this.onResize();
 
 	// draw the plots to the screen

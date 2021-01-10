@@ -2,15 +2,23 @@
 // and handles ability to navigate track
 function TrackNavigator(){
 
-  this.start = 400;
-  this.end = width - 100
-  this.y = 30;
+  // set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
+  this.onResize = function() {
+    this.start = 400;
+    this.end = width - 100
+    this.y = 30;
+    this.end = width - 100;
+  };
+  this.onResize();
 
+  // set variables to use for drawing navigator
   var trackDuration;
   var trackElapsed = 0;
   var trackRemaining;
   var trackPosition = this.start;
 
+  // method to update the track position while playing or on click
   this.updateTrackPosition = function(currentSoundDuration, currentSoundTime) {
     trackDuration = currentSoundDuration;
     trackElapsed = currentSoundTime;
@@ -18,23 +26,24 @@ function TrackNavigator(){
     trackPosition = map(trackElapsed, 0, trackDuration, this.start, this.end)
   }
 
+
   this.draw = function() {
 
-    // Track Line - time remaining
+    // Track Line for time remaining (current time to end of track)
     push();
     stroke(100);
     strokeWeight(2);
     line(trackPosition, this.y, this.end, this.y);
     pop();
 
-    // Track Line - time elapsed
+    // Track Line for time elapsed (start time to current time)
     push();
     stroke(255);
     strokeWeight(4);
     line(this.start, this.y, trackPosition, this.y);
     pop();
 
-    // Track Lines - start and end
+    // Track Lines - start and end dashes
     push();
     stroke(255);
     strokeWeight(4);
@@ -42,7 +51,7 @@ function TrackNavigator(){
     line(this.end, this.y - 5, this.end, this.y + 5)
     pop();
 
-    // Draw track ellapsed time and duration
+    // Draw track ellapsed and remaining times
     push();
     fill("white");
 		stroke("black");
@@ -53,16 +62,16 @@ function TrackNavigator(){
     text(("-" + convertSecondsToMinutes(trackRemaining)), this.end, this.y + 25)
     pop();
 
-    // Draw track marker
+    // Draw track marker at urrent time
     push();
     stroke(0);
     strokeWeight(2);
     fill(255)
-    rect(trackPosition - 4, this.y - 10, 8, 20);
+    rect(trackPosition - 4, this.y - 10, 8, 20); // rect marker at width of 8 (track position +/- 4 pixels)
     pop();
   }
 
-  // convert seconds to minutes and seconds
+  // private method to convert seconds to minutes and seconds for display to user
   var convertSecondsToMinutes = function(seconds) {
     var elapsedMinutes = (Math.floor(seconds / 60)).toFixed();
     var elapsedSeconds = (seconds % 60).toFixed();
@@ -71,6 +80,7 @@ function TrackNavigator(){
             : (elapsedMinutes + '.' + elapsedSeconds));
   }
 
+  // public method for checking if user jumps through track using navigator
   this.hitCheck = function() {
     if(	mouseX > this.start && mouseX < this.end
       && mouseY > this.y - 10	&& mouseY < this.y + 10) {
@@ -78,14 +88,11 @@ function TrackNavigator(){
     }
   }
 
-  // jump to another position in track on click
+  // public method to jump to another position in track on click
   this.jumpTrack = function(position) {
       var jumpPosition = map(position, this.start, this.end, 0, trackDuration);
       return jumpPosition;
   }
 
-  // resize trackNavigator on window resize
-  this.onResize = function() {
-    this.end = width - 100;
-	};
+
 }

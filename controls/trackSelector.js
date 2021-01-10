@@ -13,6 +13,8 @@ function TrackSelector(){
 
   this.loading = false;
 
+  // set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
   this.onResize = function() {
     this.x = 80;
     this.y = 25;
@@ -22,18 +24,21 @@ function TrackSelector(){
   this.onResize();
 
   this.setup = function() {
+
+    // create selector element for user to select a track
     var sel;
     sel = createSelect();
     sel.position(this.x, this.y);
     sel.size(this.width, this.height);
     Object.keys(tracks).forEach((item) => sel.option(item));
 
+    // when user changes selection, change track
     sel.changed(function() {
       changeTrack(sel.value());
     });
   }
 
-  // function to change track on selection
+  // private function to change track on selection
   var changeTrack = function(track) {
     controls.playbackButton.enabled = false;
     if(sound.isPlaying()) {
@@ -43,7 +48,7 @@ function TrackSelector(){
     sound = loadSound(tracks[track], soundLoaded);
   }
 
-  // Callback upon successful loading of new audio file
+  // private callback upon successful loading of new audio file
   var soundLoaded = function(){
     controls.playbackButton.enabled = true;
     controls.reset();

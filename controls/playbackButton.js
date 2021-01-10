@@ -1,13 +1,14 @@
 //displays and handles clicks on the playback button.
 function PlaybackButton(){
 
+	// set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
 	this.onResize = function() {
 		this.x = 30;
 		this.y = 25;
 		this.width = 20;
 		this.height = 20;
 	}
-
 	this.onResize();
 	
 	//flag to determine whether to play or pause after button click and
@@ -21,6 +22,7 @@ function PlaybackButton(){
 			fill("white");
 			stroke("black");
 			strokeWeight(2);
+			// draw pause button
 			rect(this.x, this.y, this.width/2 - 2, this.height);
 			rect(this.x + (this.width/2 + 2), this.y, this.width/2 - 2, this.height);
 			pop();
@@ -30,6 +32,7 @@ function PlaybackButton(){
 			noFill();
 			stroke(75);
 			strokeWeight(6)
+			// draw loading icon
 			circle(this.x + this.width / 2, this.y + this.height / 2, this.width,	this.height);
 			pop();
 		}
@@ -38,7 +41,10 @@ function PlaybackButton(){
 			fill("white");
 			stroke("black");
 			strokeWeight(2);
-			triangle(this.x, this.y, this.x + this.width, this.y + this.height/2, this.x, this.y+this.height);
+			// draw play icon
+			triangle(	this.x, this.y, 
+								this.x + this.width, this.y + this.height/2, 
+								this.x, this.y+this.height);
 			pop();
 		}
 	};

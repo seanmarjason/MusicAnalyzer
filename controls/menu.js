@@ -1,11 +1,14 @@
 function Menu() {
 
+	// set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
 	this.onResize = function() {
 		this.x = 20;
 		this.y = 120;
 	}
 	this.onResize();
 
+	// set boolean to toggle menu on / off
   this.displayed = false;
 
   this.draw = function(){

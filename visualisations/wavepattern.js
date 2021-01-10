@@ -6,9 +6,11 @@ function WavePattern() {
 	var wavepatternFourier = new p5.FFT(0.1, 32);
 	wavepatternFourier.smooth(0.8);
 
-	var wave = {};
-	var waveHistory = [];
+	var wave = {}; // private object to hold wave position parameters
+	var waveHistory = []; // private array to hold historic waves for 3D effect
 
+	// set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
 	this.onResize = function() {
 		wave.position = height / 4 * 3;
 		wave.height = height / 5;
@@ -17,6 +19,7 @@ function WavePattern() {
 	}
 	this.onResize();
 
+	// settings for 3D effect
 	this.retentionHistory = 100;
 	this.offsetX = 10;
 	this.offsetY = 10;
@@ -56,10 +59,12 @@ function WavePattern() {
 		push();
 		noFill();
 		strokeWeight(1);
+		// for each historic wavepattern
 		for (var i = 1; i < waveHistory.length; i++) {
 			stroke(255 - (map(i, 1, waveHistory.length, 0, 255)));
 			beginShape();
 			vertex((wave.start - 10) + (i * this.offsetX), wave.position - (i * this.offsetY));
+			// for each value in the wavepattern
 			for (var j = 0; j < waveHistory[i].length; j++) {
 				var x = map(j, 0, waveHistory[i].length, wave.start + (i * this.offsetX), wave.end + (i * this.offsetX));
 				var y = map(waveHistory[i][j], -1, 1, wave.position - wave.height - (i * this.offsetY), wave.position + wave.height - (i * this.offsetY))

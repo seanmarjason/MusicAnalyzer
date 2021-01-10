@@ -11,6 +11,8 @@ function Stage() {
   var speakers = {};
   var lightRack = {};
 
+  // set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
   this.onResize = function() {
     stage.height = height / 4 * 3;
     stage.depth = height / 4;
@@ -22,12 +24,15 @@ function Stage() {
   }
   this.onResize();
 
+  // define the number of lights to be drawn
   this.stageLightAmt = 5;
   this.featureLightAmt = 5;
 
+  // arrays to hold lights to retain position values
   var stageLights = [];
   var featureLights = [];
 
+  // create stage lights
   for(i = 0; i < this.stageLightAmt; i++) {
     var int = width / this.stageLightAmt
     var x = (int * i) + (int / 2);
@@ -35,6 +40,7 @@ function Stage() {
     stageLights.push({x, y})
   }
 
+  // create feature lights
   for(i = 0; i < this.featureLightAmt; i++) {
     var int = desk.width / this.featureLightAmt;
     var x = (width / 4 + (int * i) + (int / 2));

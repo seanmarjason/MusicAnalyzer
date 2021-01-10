@@ -4,6 +4,7 @@ function Synthesizer() {
   //vis name
   this.name = "Synthesizer";
 
+  // notes that will be available for user selection
   var notes = [
     {'note': 'C3', 'freq': 130.8128, 'position': 0, 'type': 'white'},
     {'note': 'C#3', 'freq': 138.5913, 'position': 0.5, 'type': 'black'},
@@ -47,9 +48,12 @@ function Synthesizer() {
     }
   }
 
+  // separate white and black keys for drawing and hit checks
   var whiteKeys = notes.filter((note) => note.type == 'white');
   var blackKeys = notes.filter((note) => note.type == 'black');
 
+  // set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
   this.onResize = function() {
     keyboardX = width / 2;
     keyboardY = height / 4 * 3;
@@ -103,7 +107,7 @@ function Synthesizer() {
                                       keyboard.blackKey.height) });
     pop();
 
-    // draw oscillator settings
+    // draw oscillator settings to the screen
     push();
     fill(255);
     textSize(16);
@@ -163,6 +167,7 @@ function Synthesizer() {
     }
   };
 
+  // play the note selected, with harmonies based on oscillator settings
   this.playNote = function(frequency) {
     this.oscillators.forEach(function(oscillator) {
       if (oscillator.enabled) {
@@ -175,6 +180,7 @@ function Synthesizer() {
     });
   }
 
+  // private function to adjust octave based on oscillator settings to create harmonies (1 unit = 1 octave)
   var adjustOctave = function(frequency, octave) {
     if (octave == 0) {
       return frequency
@@ -184,6 +190,7 @@ function Synthesizer() {
     }
   }
 
+  // private function to adjust frequency based on oscillator settings to create harmonies (1 unit = 1 half-step)
   var adjustFrequency = function(frequency, offset) {
     var twelfthRootOfTwo = Math.pow(2, 1/12);
     if (offset == 0) {
@@ -194,6 +201,7 @@ function Synthesizer() {
     }
   }
 
+  // stop oscillators when mouse released
   this.mouseReleased = function() {
     this.oscillators.forEach(function(oscillator) {
       if (oscillator.enabled) {
