@@ -39,13 +39,13 @@ function TrackSelector(){
 
   // function to change track on selection
   var changeTrack = function(track) {
-      controls.playbackButton.enabled = false;
-      if(sound.isPlaying()) {
-        sound.pause();
-        controls.playbackButton.playing = false;
-      }
-      sound = loadSound(tracks[track], soundLoaded);
-      vis.selectedVisual.reset();
+    controls.playbackButton.enabled = false;
+    if(sound.isPlaying()) {
+      sound.pause();
+      controls.playbackButton.playing = false;
+    }
+    sound = loadSound(tracks[track], soundLoaded);
+    vis.selectedVisual.reset();
   }
 
   // Callback upon successful loading of new audio file
