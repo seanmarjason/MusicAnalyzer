@@ -1,37 +1,44 @@
 function Clipping(){
 	this.name = "Analyze Track Clipping";
 
-	var bins = 64;
-	var binWidth = width / bins;
-	var binHeight = height / 4 * 3;
-	var signalThreshold = 240;
+	this.bins = 64;
+	this.signalThreshold = 240;
+	
+	var binWidth;
+	var binHeight;
 
-	var clippingFourier = new p5.FFT(0.8, bins);
+	this.onResize = function() {
+		binWidth = width / this.bins;
+		binHeight = height / 4 * 3;
+	}
+	this.onResize();
+
+	var clippingFourier = new p5.FFT(0.8, this.bins);
 
 	// initialize maxSignals array
 	var maxSignals = [];
-	for(i = 0; i < bins; i++) {
+	for(i = 0; i < this.bins; i++) {
 		maxSignals.push(0);
 	}
 
 	this.draw = function(){
 
-		var spectrum = clippingFourier.analyze(bins);
+		var spectrum = clippingFourier.analyze(this.bins);
 
-		for(var i = 0; i < bins; i++){
+		for(var i = 0; i < this.bins; i++){
 
 			// draw signal threshold
 			push();
 			stroke(100);
 			strokeWeight(1);
-			var signalThresholdLine = map(signalThreshold, 0, 255, height, height - binHeight);
+			var signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight);
 			line(0, signalThresholdLine, width, signalThresholdLine);
 
 			fill(100);
 			noStroke();
 			textAlign(RIGHT);
 			textSize(14);
-			text('Signal Threshold: ' + signalThreshold, width - 50, signalThresholdLine - 20);
+			text('Signal Threshold: ' + this.signalThreshold, width - 50, signalThresholdLine - 20);
 			pop();
 
 			// fade the colour of the bin from green to red
@@ -41,7 +48,7 @@ function Clipping(){
 			fill(spectrum[i], 150, b);
 
 			// draw each bin as a rectangle from the left of the screen across
-			var x = map(i, 0, bins, 0, width);
+			var x = map(i, 0, this.bins, 0, width);
 			var h = -binHeight + map(spectrum[i], 0, 255, binHeight, 0);
 			rect(x, height, binWidth - 2, h);
 			pop()
@@ -65,8 +72,8 @@ function Clipping(){
 			textSize(12);
 			stroke(50);
 			strokeWeight(2);
-			if (maxSignals[i] > signalThreshold) {
-				var issue = (map(i, 0, bins, 20, 20000)).toFixed(2);
+			if (maxSignals[i] > this.signalThreshold) {
+				var issue = (map(i, 0, this.bins, 20, 20000)).toFixed(2);
 				text('~' + issue + 'Hz', x, l - 25);
 				line(x + (binWidth / 2), height, x + (binWidth / 2), l + 5);
 			}
@@ -76,7 +83,7 @@ function Clipping(){
 
 	this.reset = function() {
 		maxSignals = [];
-		for(i = 0; i < bins; i++) {
+		for(i = 0; i < this.bins; i++) {
 			maxSignals.push(0);
 		}
 	}

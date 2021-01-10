@@ -3,18 +3,8 @@ function Synthesizer() {
 
   //vis name
   this.name = "Synthesizer";
-  
-  this.x = width / 2;
-  this.y = height / 4 * 3;
 
-  // keyboard parameters
-  let keyWidth = 50;
-  let keyWidthSmall = 25;
-  let keyHeight = 200;
-  let keyHeightSmall = 120;
-  let note = 'Play Something!';
-
-  const keys = [
+  var notes = [
     {'note': 'C3', 'freq': 130.8128, 'position': 0, 'type': 'white'},
     {'note': 'C#3', 'freq': 138.5913, 'position': 0.5, 'type': 'black'},
     {'note': 'D3', 'freq': 146.8324, 'position': 1, 'type': 'white'},
@@ -42,52 +32,75 @@ function Synthesizer() {
     {'note': 'C5', 'freq': 523.2511, 'position': 14, 'type': 'white'},
   ]
 
-  const blackKeys = keys.filter((key) => key.type == 'black');
-  const whiteKeys = keys.filter((key) => key.type == 'white');
+  // keyboard parameters
+  var keyboard = {
+    x: 0,
+    y: 0,
+    start: 0,
+    whiteKey: {
+      width: 50,
+      height: 200
+    },
+    blackKey: {
+      width: 25, 
+      height: 120
+    }
+  }
 
-  let keyboardStartPosition = this.x - (whiteKeys.length * keyWidth / 2);
+  var whiteKeys = notes.filter((note) => note.type == 'white');
+  var blackKeys = notes.filter((note) => note.type == 'black');
+
+  this.onResize = function() {
+    keyboardX = width / 2;
+    keyboardY = height / 4 * 3;
+    keyboardStart = keyboardX - (whiteKeys.length * keyboard.whiteKey.width / 2);
+  };
+  this.onResize();
+
+  var currentNote = 'Play Something!';
 
   // Instantiate Oscillators
-  const osc1 = new p5.Oscillator();
-  const osc2 = new p5.Oscillator();
-  const osc3 = new p5.Oscillator();
-
-  let settings = {
-    oscillator1: {
+  this.oscillators = [
+    {
+      osc: new p5.Oscillator(),
       'wave': 'sine',
       'amplitude': 0.2,
       'enabled': true,
       'octave': 0,
       'offset': 0
     },
-    oscillator2: {
-      'wave': 'sine',
+    {
+      osc: new p5.Oscillator(),
+      'wave': 'square',
       'amplitude': 0.05,
       'enabled': true,
       'octave': 0,
       'offset': 0
     },
-    oscillator3: {
-      'wave': 'sine',
+    {
+      osc: new p5.Oscillator(),
+      'wave': 'sawtooth',
       'amplitude': 0.05,
       'enabled': true,
       'octave': 0,
       'offset': 0
     },
-  }
+  ]
 
-
-	//draw the synthesizer to the screen
 	this.draw = function() {
 
+    // draw keyboard to the screen
     push();
     fill(255)
-    whiteKeys.forEach(key => { rect(keyboardStartPosition + key.position * keyWidth, this.y, keyWidth, keyHeight) });
+    whiteKeys.forEach(key => { rect( keyboardStart + key.position * keyboard.whiteKey.width,
+                                     keyboardY, 
+                                     keyboard.whiteKey.width, 
+                                     keyboard.whiteKey.height) });
     fill(0)
-    blackKeys.forEach(key => { rect(  (keyboardStartPosition + (key.position * 2) * keyWidthSmall) + (keyWidthSmall/2),
-                                      this.y,
-                                      keyWidthSmall,
-                                      keyHeightSmall) });
+    blackKeys.forEach(key => { rect( (keyboardStart + (key.position * 2) * keyboard.blackKey.width) + (keyboard.blackKey.width/2),
+                                      keyboardY,
+                                      keyboard.blackKey.width,
+                                      keyboard.blackKey.height) });
     pop();
 
     // draw oscillator settings
@@ -95,20 +108,19 @@ function Synthesizer() {
     fill(255);
     textSize(16);
     textAlign(CENTER);
+    var settingsWidth = (width - 100) / this.oscillators.length;
+    var startPosition = (width / 2) - ((settingsWidth * this.oscillators.length) / 2);
 
-    let objectEntries = Object.entries(settings);
-    let settingsWidth = (width - 100) / objectEntries.length;
-    let startPosition = (width / 2) - ((settingsWidth * objectEntries.length) / 2)
-    for(i = 0; i < objectEntries.length; i++) {
-      let positionX = startPosition + (i * settingsWidth) + (settingsWidth / 2);
-      let positionY = height / 2
+    for(i = 0; i < this.oscillators.length; i++) {
+      var positionX = startPosition + (i * settingsWidth) + (settingsWidth / 2);
+      var positionY = height / 2
       text('Oscillator ' + (i+1), positionX, positionY);
-      text('Enabled: ' + objectEntries[i][1].enabled, positionX, positionY + 50)
-      text('Amplitude: ' + objectEntries[i][1].amplitude, positionX, positionY + 75)
-      text('Wave Type: ' + objectEntries[i][1].wave, positionX, positionY + 100)
-      text('Octave Offset: ' + objectEntries[i][1].octave, positionX, positionY + 125)
-      text('Tone Offset: ' + objectEntries[i][1].offset, positionX, positionY + 150)
-    }
+      text('Enabled: ' + this.oscillators[i].enabled, positionX, positionY + 50)
+      text('Amplitude: ' + this.oscillators[i].amplitude, positionX, positionY + 75)
+      text('Wave Type: ' + this.oscillators[i].wave, positionX, positionY + 100)
+      text('Octave Offset: ' + this.oscillators[i].octave, positionX, positionY + 125)
+      text('Tone Offset: ' + this.oscillators[i].offset, positionX, positionY + 150)
+    };
     pop();
 
     // draw notes
@@ -118,33 +130,33 @@ function Synthesizer() {
     fill(255);
     textSize(50);
     textAlign(CENTER);
-    text(note, width / 2, height / 5);
+    text(currentNote, width / 2, height / 5);
     pop();
   };
   
   this.mousePressed = function() {
 
     // check if mouse press is within keyboard
-    if(mouseY > this.y && mouseY < this.y + keyHeight) {
+    if(mouseY > keyboardY && mouseY < keyboardY + keyboard.whiteKey.height) {
 
       // check if black key pressed
       for(i = 0; i < blackKeys.length; i++) {
-        if( mouseX > ((keyboardStartPosition + (blackKeys[i].position * 2) * keyWidthSmall) + (keyWidthSmall/2)) 
-            && mouseX < (((keyboardStartPosition + (blackKeys[i].position * 2) * keyWidthSmall) + (keyWidthSmall/2)) + keyWidthSmall)
-            && mouseY > this.y
-            && mouseY < (this.y + keyHeightSmall)){
+        if( mouseX > ((keyboardStart + (blackKeys[i].position * 2) * keyboard.blackKey.width) + (keyboard.blackKey.width/2)) 
+            && mouseX < (((keyboardStart + (blackKeys[i].position * 2) * keyboard.blackKey.width) + (keyboard.blackKey.width/2)) + keyboard.blackKey.width)
+            && mouseY > keyboardY
+            && mouseY < (keyboardY + keyboard.blackKey.height)){
               this.playNote(blackKeys[i].freq);
-              note = blackKeys[i].note;
+              currentNote = blackKeys[i].note;
               return
         }
       }
 
       // if no black key pressed, check if white key pressed
       for(i = 0; i < whiteKeys.length; i++) {
-        if( mouseX > (keyboardStartPosition + whiteKeys[i].position * keyWidth) 
-            && mouseX < ((keyboardStartPosition + whiteKeys[i].position * keyWidth) + keyWidth)){
+        if( mouseX > (keyboardStart + whiteKeys[i].position * keyboard.whiteKey.width) 
+            && mouseX < ((keyboardStart + whiteKeys[i].position * keyboard.whiteKey.width) + keyboard.whiteKey.width)){
               this.playNote(whiteKeys[i].freq);
-              note = whiteKeys[i].note;
+              currentNote = whiteKeys[i].note;
               return
         }
       }
@@ -152,35 +164,18 @@ function Synthesizer() {
   };
 
   this.playNote = function(frequency) {
-    // play first oscillator
-    if (settings.oscillator1.enabled) {
-      let playfrequency = adjustFrequency((adjustOctave(frequency, settings.oscillator1.octave)), settings.oscillator1.offset);
-      osc1.start();
-      osc1.setType(settings.oscillator1.wave);
-      osc1.amp(settings.oscillator1.amplitude);
-      osc1.freq(playfrequency);
-    }
-
-    // play second oscillator
-    if (settings.oscillator2.enabled) {
-      let playfrequency = adjustFrequency((adjustOctave(frequency, settings.oscillator2.octave)), settings.oscillator2.offset);
-      osc2.start();
-      osc2.setType(settings.oscillator2.wave);
-      osc2.amp(settings.oscillator2.amplitude);
-      osc2.freq(playfrequency);
-    }
-
-    //play third oscillator
-    if (settings.oscillator3.enabled) {
-      let playfrequency = adjustFrequency((adjustOctave(frequency, settings.oscillator3.octave)), settings.oscillator3.offset);
-      osc3.start();
-      osc3.setType(settings.oscillator3.wave);
-      osc3.amp(settings.oscillator3.amplitude);
-      osc3.freq(playfrequency);
-    }
+    this.oscillators.forEach(function(oscillator) {
+      if (oscillator.enabled) {
+        var playfrequency = adjustFrequency((adjustOctave(frequency, oscillator.octave)), oscillator.offset);
+        oscillator.osc.start();
+        oscillator.osc.setType(oscillator.wave);
+        oscillator.osc.amp(oscillator.amplitude);
+        oscillator.osc.freq(playfrequency);
+      }
+    });
   }
 
-  let adjustOctave = function(frequency, octave) {
+  var adjustOctave = function(frequency, octave) {
     if (octave == 0) {
       return frequency
     }
@@ -189,8 +184,8 @@ function Synthesizer() {
     }
   }
 
-  let adjustFrequency = function(frequency, offset) {
-    let twelfthRootOfTwo = Math.pow(2, 1/12);
+  var adjustFrequency = function(frequency, offset) {
+    var twelfthRootOfTwo = Math.pow(2, 1/12);
     if (offset == 0) {
       return frequency;
     }
@@ -200,23 +195,13 @@ function Synthesizer() {
   }
 
   this.mouseReleased = function() {
-    if (settings.oscillator1.enabled) {
-      osc1.stop();
-    }
-    if (settings.oscillator2.enabled) {
-      osc2.stop();
-    }
-    if (settings.oscillator3.enabled) {
-      osc3.stop();
-    }
-    note = 'Play Something!';
+    this.oscillators.forEach(function(oscillator) {
+      if (oscillator.enabled) {
+        oscillator.osc.stop();
+      }
+    });
+    currentNote = 'Play Something!';
   }
-
-  this.onResize = function() {
-    this.x = width / 2;
-    this.y = height / 4 * 3;
-    keyboardStartPosition = this.x - (whiteKeys.length * keyWidth / 2);
-	};
 
   this.reset = function() {
 		

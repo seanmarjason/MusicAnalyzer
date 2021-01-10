@@ -2,7 +2,7 @@
 //controls
 function ControlsAndInput(){
 
-	const headerHeight = 75;
+	var headerHeight = 75;
 
 	this.setup = function() {
 

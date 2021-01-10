@@ -6,10 +6,10 @@ function TrackNavigator(){
   this.end = width - 100
   this.y = 30;
 
-  let trackDuration;
-  let trackElapsed = 0;
-  let trackRemaining;
-  let trackPosition = this.start;
+  var trackDuration;
+  var trackElapsed = 0;
+  var trackRemaining;
+  var trackPosition = this.start;
 
   this.updateTrackPosition = function(currentSoundDuration, currentSoundTime) {
     trackDuration = currentSoundDuration;
@@ -63,9 +63,9 @@ function TrackNavigator(){
   }
 
   // convert seconds to minutes and seconds
-  let convertSecondsToMinutes = function(seconds) {
-    let elapsedMinutes = (Math.floor(seconds / 60)).toFixed();
-    let elapsedSeconds = (seconds % 60).toFixed();
+  var convertSecondsToMinutes = function(seconds) {
+    var elapsedMinutes = (Math.floor(seconds / 60)).toFixed();
+    var elapsedSeconds = (seconds % 60).toFixed();
     return  (elapsedSeconds < 10 ? 
             (elapsedMinutes + '.0' + elapsedSeconds) 
             : (elapsedMinutes + '.' + elapsedSeconds));
@@ -80,7 +80,7 @@ function TrackNavigator(){
 
   // jump to another position in track on click
   this.jumpTrack = function(position) {
-      let jumpPosition = map(position, this.start, this.end, 0, trackDuration);
+      var jumpPosition = map(position, this.start, this.end, 0, trackDuration);
       return jumpPosition;
   }
 

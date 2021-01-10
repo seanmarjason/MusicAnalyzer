@@ -2,33 +2,46 @@
 function Stage() {
 	//vis name
   this.name = "Stage Visualiser";
+
+  var stageFourier = new p5.FFT();
+  var stageAmplitude = new p5.Amplitude();
   
-  let stageHeight = height / 4 * 3;
-  let stageDepth = height / 4
+  var stage = {};
+  var desk = {};
+  var speakers = {};
+  var lightRack = {};
 
-  let deskHeight = 250;
-  let deskWidth = width / 4 * 2;
+  this.onResize = function() {
+    stage.height = height / 4 * 3;
+    stage.depth = height / 4;
+    desk.height = 250;
+    desk.width = width / 4 * 2;
+    speakers.height = 400;
+    speakers.width = 100;
+    lightRack.height = height / 5;
+  }
+  this.onResize();
 
-  let speakerHeight = 400;
-  let speakerWidth = 100;
+  this.stageLightAmt = 5;
+  this.featureLightAmt = 5;
 
-  let stageLightNumber = 5;
-  let stageLightInterval = width / stageLightNumber;
-  let stageLights = [];
+  var stageLights = [];
+  var featureLights = [];
 
-  for(i = 0; i < stageLightNumber; i++) {
-    stageLights.push((stageLightInterval * i) + (stageLightInterval / 2))
+  for(i = 0; i < this.stageLightAmt; i++) {
+    var int = width / this.stageLightAmt
+    var x = (int * i) + (int / 2);
+    var y = lightRack.height;
+    stageLights.push({x, y})
   }
 
-  let featureLightNumber = 5;
-  let featureLightInterval = deskWidth / featureLightNumber;
-  var featureLights = []
-
-  for(i = 0; i < featureLightNumber; i++) {
-    featureLights.push((width / 4 + (featureLightInterval * i) + (featureLightInterval / 2)))
+  for(i = 0; i < this.featureLightAmt; i++) {
+    var int = desk.width / this.featureLightAmt;
+    var x = (width / 4 + (int * i) + (int / 2));
+    var y = stage.height + (desk.height / 2)
+    featureLights.push({x, y});
   }
 
-  const stageFourier = new p5.FFT();
 
 	//draw the stage to the screen
 	this.draw = function() {
@@ -37,35 +50,39 @@ function Stage() {
     // draw stage background
     push();
     fill(10, 10, 10);
-    rect(0, stageHeight, width, stageDepth); //stage
+    rect(0, stage.height, width, stage.depth); //stage
     rect(0, 0, width, height / 5); //light assembley
     pop();
 
     // draw stage lights
     push();
-    fill(255, 255, 255);
     noStroke();
-    let stageLightSize = map(stageFourier.getEnergy('treble'), 0, 255, 10, 100);
+    var stageLightIntensity = map(stageAmplitude.getLevel(), 0, 1, 10, 255);
+    fill(255, 255, 255, stageLightIntensity);
+    var stageLightSize = map(stageFourier.getEnergy('treble'), 0, 255, 10, 100);
     stageLights.forEach(function(light) {
-      circle(light, height / 5, stageLightSize)
+      circle(light.x, light.y, stageLightSize)
+      triangle(light.x, light.y, light.x - stageLightSize, stage.height, light.x + stageLightSize, stage.height);
     });
     pop();
 
     // draw kit
     push();
     fill(20, 20, 20);
-    rect(width / 4, stageHeight - deskHeight + (deskHeight / 2), deskWidth, deskHeight); //desk
-    rect(width / 8, stageHeight - speakerHeight + (speakerHeight / 2), speakerWidth, speakerHeight); //speaker set 1
-    rect(width / 8 * 7 - speakerWidth, stageHeight - speakerHeight + (speakerHeight / 2), speakerWidth, speakerHeight); //speaker set 2
+    rect(width / 4, stage.height - desk.height + (desk.height / 2), desk.width, desk.height); //desk
+    rect(width / 8, stage.height - speakers.height + (speakers.height / 2), speakers.width, speakers.height); //speakers set 1
+    rect(width / 8 * 7 - speakers.width, stage.height - speakers.height + (speakers.height / 2), speakers.width, speakers.height); //speakers set 2
     pop();
 
     // draw feature lights
     push();
-    fill(255, 255, 255);
     noStroke();
-    let featureLightSize = map(stageFourier.getEnergy('bass'), 0, 255, 10, 100);
+    var featureLightIntensity = map(stageAmplitude.getLevel(), 0, 1, 10, 255);
+    fill(255, 255, 255, featureLightIntensity);
+    var featureLightSize = map(stageFourier.getEnergy('bass'), 0, 255, 10, 100);
     featureLights.forEach(function(light) {
-      circle(light, stageHeight + (deskHeight / 2), featureLightSize)
+      circle(light.x, light.y, featureLightSize)
+      triangle(light.x, light.y, light.x - featureLightSize, light.y - 200, light.x + featureLightSize, light.y - 200);
     });
     pop();
 	};

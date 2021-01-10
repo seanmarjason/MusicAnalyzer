@@ -52,7 +52,7 @@ function Levels() {
 				var energy = levelsFourier.getEnergy(this.frequencyBins[currentBin]);
 
 				//add the needle
-				this.needle(energy, x + w / 2, y + h);
+				this.drawNeedle(energy, x + w / 2, y + h);
 				currentBin++;
 			}
 		}
@@ -66,7 +66,7 @@ function Levels() {
 	 *@param centreX: central x coordinate of the plot rectangle
 	 *@param bottomY: The bottom y coordinate of the plot rectangle
 	 */
-	this.needle = function(energy, centreX, bottomY) {
+	this.drawNeedle = function(energy, centreX, bottomY) {
 		push();
 		stroke('#333333');
 		//translate so 0 is at the bottom of the needle
