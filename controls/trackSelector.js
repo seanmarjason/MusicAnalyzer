@@ -11,6 +11,8 @@ function TrackSelector(){
     'Ukulele': 'assets/bensound-ukulele.mp3',
   }
 
+  this.loading = false;
+
   this.onResize = function() {
     this.x = 80;
     this.y = 25;
@@ -27,14 +29,7 @@ function TrackSelector(){
     Object.keys(tracks).forEach((item) => sel.option(item));
 
     sel.changed(function() {
-      
-      controls.playbackButton.enabled = false;
-      if(sound.isPlaying()) {
-        sound.pause();
-        controls.playbackButton.playing = false;
-      }
-      sound = loadSound(tracks[sel.value()], soundLoaded);
-      vis.selectedVisual.reset();
+      changeTrack(sel.value());
     });
   }
 
@@ -42,8 +37,20 @@ function TrackSelector(){
     // TBD
   }
 
+  // function to change track on selection
+  var changeTrack = function(track) {
+      controls.playbackButton.enabled = false;
+      if(sound.isPlaying()) {
+        sound.pause();
+        controls.playbackButton.playing = false;
+      }
+      sound = loadSound(tracks[track], soundLoaded);
+      vis.selectedVisual.reset();
+  }
+
   // Callback upon successful loading of new audio file
   var soundLoaded = function(){
     controls.playbackButton.enabled = true;
   }
+
 }
