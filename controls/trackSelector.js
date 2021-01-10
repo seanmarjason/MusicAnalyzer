@@ -33,10 +33,6 @@ function TrackSelector(){
     });
   }
 
-  this.addTrack = function() {
-    // TBD
-  }
-
   // function to change track on selection
   var changeTrack = function(track) {
     controls.playbackButton.enabled = false;
