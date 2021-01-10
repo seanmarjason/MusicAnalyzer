@@ -28,29 +28,28 @@ function TrackSelector(){
     sel.size(this.width, this.height);
     Object.keys(tracks).forEach((item) => sel.option(item));
 
-    sel.changed(function() {
-      changeTrack(sel.value());
+    sel.changed(() => {
+      var self = this; //bind this to callback
+      changeTrack(sel.value(), self);
     });
   }
 
-  this.addTrack = function() {
-    // TBD
-  }
-
   // function to change track on selection
-  var changeTrack = function(track) {
+  var changeTrack = function(track, scope) {
+    scope.loading = true;
     controls.playbackButton.enabled = false;
     if(sound.isPlaying()) {
       sound.pause();
       controls.playbackButton.playing = false;
     }
-    sound = loadSound(tracks[track], soundLoaded);
+    sound = loadSound(tracks[track], soundLoaded.bind(scope));
     vis.selectedVisual.reset();
   }
 
   // Callback upon successful loading of new audio file
   var soundLoaded = function(){
     controls.playbackButton.enabled = true;
+    this.loading = false;
   }
 
 }
