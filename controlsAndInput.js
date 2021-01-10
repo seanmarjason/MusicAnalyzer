@@ -51,8 +51,6 @@ function ControlsAndInput(){
 	//draws the playback button and other controls
 	this.draw = function(){
 
-		// console.log(this.trackSelector.loading);
-
 		// Header Bar
 		push();
 		noStroke();
