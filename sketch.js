@@ -25,12 +25,21 @@ function setup(){
 	 vis.add(new Stage());
 	 vis.add(new Synthesizer());
 
+	 settings = new Settings();
+	 settings.add(new ClippingSettings());
+	 settings.add(new LevelsSettings());
+	 settings.add(new WavepatternSettings());
+	 settings.add(new StageSettings());
+	 settings.add(new SynthesizerSettings());
+
 }
 
 function draw(){
 	background(0);
 	//draw the selected visualisation
 	vis.selectedVisual.draw();
+	//draw the selected visualisation's controls
+	settings.draw();
 	//draw the controls on top.
 	controls.draw();
 	soundTime = sound.currentTime();
@@ -54,6 +63,7 @@ function mouseReleased() {
 
 function keyPressed(){
 	controls.keyPressed(keyCode);
+	settings.keyPressed(keyCode);
 }
 
 //when the window has been resized. Resize canvas to fit 
