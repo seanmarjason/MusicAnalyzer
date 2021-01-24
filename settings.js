@@ -38,8 +38,8 @@ function Settings(){
 
     // use number keys to select a visual
 		if(keycode > 48 && keycode < 58){
-			this.selectedSettings.close();
-			this.open = !this.open
+			this.open && this.selectedSettings.close();
+			this.open = false;
 			var settingsNumber = keycode - 49;
 			this.selectSettings(this.settings[settingsNumber].name); 
 		}
