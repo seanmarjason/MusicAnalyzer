@@ -32,22 +32,22 @@ function Settings(){
 
 		// use spacebar to interact with menu
 		if(keycode == 13){
-      this.open = !this.open
+			!this.open ? this.selectedSettings.open() : this.selectedSettings.close();
+			this.open = !this.open
     }
 
     // use number keys to select a visual
 		if(keycode > 48 && keycode < 58){
+			this.selectedSettings.close();
+			this.open = !this.open
 			var settingsNumber = keycode - 49;
 			this.selectSettings(this.settings[settingsNumber].name); 
 		}
 
-
-  }
-
+	}
+	
   this.draw = function() {
     // only draw the settings if settings pane is open.
-
-    // console.log(this.selectedSettings.draw);
 
 		if(this.open){
 			this.selectedSettings.draw();
@@ -56,7 +56,8 @@ function Settings(){
 			push();
 			fill(150);
 			textSize(12);
-			text('Press [enter] to open settings', width / 2, 100);
+			textAlign(RIGHT);
+			text('Press [enter] to open settings', width - 10, 100);
 			pop();
 		}
   }

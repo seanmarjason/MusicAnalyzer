@@ -23,6 +23,10 @@ function Clipping(){
 		maxSignals.push(0);
 	}
 
+	this.setSignalThreshold = function(value) {
+		this.signalThreshold = value;
+	}
+
 	this.draw = function(){
 
 		var spectrum = clippingFourier.analyze(this.bins);
