@@ -3,7 +3,7 @@ function SynthesizerSettings() {
   this.name = "Synthesizer Settings"
 
   // Oscillator 1
-  var oscillator1Settings = {x: 50, y: 200}
+  var oscillator1Settings = {x: (width/2) - 500, y: 200}
   var enabled1;
   var amp1;
   var wave1;
@@ -11,6 +11,7 @@ function SynthesizerSettings() {
   var offset1;
 
   // Oscillator 2
+  var oscillator2Settings = {x: (width/2) - 50, y: 200}
   var enabled2;
   var amp2;
   var wave2;
@@ -18,6 +19,7 @@ function SynthesizerSettings() {
   var offset2;
 
   // Oscillator 3
+  var oscillator3Settings = {x: (width/2) + 450, y: 200}
   var enabled3;
   var amp3;
   var wave3;
@@ -58,6 +60,72 @@ function SynthesizerSettings() {
     offset1.value(vis.selectedVisual.oscillators[0].offset);
     offset1.changed(() => vis.selectedVisual.oscillators[0].offset = offset1.value());
 
+
+    // OSCILLATOR 2
+    // Enabled
+    enabled2 = createCheckbox('', vis.selectedVisual.oscillators[1].enabled);
+    enabled2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 35);
+    enabled2.changed(() => vis.selectedVisual.oscillators[1].enabled = !vis.selectedVisual.oscillators[1].enabled);
+
+    // Amplitude
+    amp2 = createSlider(0, 1, vis.selectedVisual.oscillators[1].amplitude, 0.05);
+    amp2.position(oscillator2Settings.x, oscillator2Settings.y + 125)
+    amp2.changed(() => vis.selectedVisual.oscillators[1].amplitude = amp2.value());
+
+    // Wave
+    wave2 = createSelect();
+    wave2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 175);
+    ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave2.option(item));
+    wave2.value(vis.selectedVisual.oscillators[1].wave);
+    wave2.changed(() => vis.selectedVisual.oscillators[1].wave = wave2.value());
+
+    // Octave
+    octave2 = createSelect();
+    octave2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 225);
+    [-2, -1, 0, 1, 2].forEach(item => octave2.option(item));
+    octave2.value(vis.selectedVisual.oscillators[1].octave);
+    octave2.changed(() => vis.selectedVisual.oscillators[1].octave = octave2.value());
+
+    // Tone
+    offset2 = createSelect();
+    offset2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 275);
+    [-2, -1, 0, 1, 2].forEach(item => offset2.option(item));
+    offset2.value(vis.selectedVisual.oscillators[1].offset);
+    offset2.changed(() => vis.selectedVisual.oscillators[1].offset = offset2.value());
+
+
+        // OSCILLATOR 3
+    // Enabled
+    enabled3 = createCheckbox('', vis.selectedVisual.oscillators[2].enabled);
+    enabled3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 35);
+    enabled3.changed(() => vis.selectedVisual.oscillators[2].enabled = !vis.selectedVisual.oscillators[2].enabled);
+
+    // Amplitude
+    amp3 = createSlider(0, 1, vis.selectedVisual.oscillators[2].amplitude, 0.05);
+    amp3.position(oscillator3Settings.x, oscillator3Settings.y + 125)
+    amp3.changed(() => vis.selectedVisual.oscillators[2].amplitude = amp3.value());
+
+    // Wave
+    wave3 = createSelect();
+    wave3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 175);
+    ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave3.option(item));
+    wave3.value(vis.selectedVisual.oscillators[2].wave);
+    wave3.changed(() => vis.selectedVisual.oscillators[2].wave = wave3.value());
+
+    // Octave
+    octave3 = createSelect();
+    octave3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 225);
+    [-2, -1, 0, 1, 2].forEach(item => octave3.option(item));
+    octave3.value(vis.selectedVisual.oscillators[2].octave);
+    octave3.changed(() => vis.selectedVisual.oscillators[2].octave = octave3.value());
+
+    // Tone
+    offset3 = createSelect();
+    offset3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 275);
+    [-2, -1, 0, 1, 2].forEach(item => offset3.option(item));
+    offset3.value(vis.selectedVisual.oscillators[2].offset);
+    offset3.changed(() => vis.selectedVisual.oscillators[2].offset = offset3.value());
+
   }
 
   this.draw = function() {
@@ -74,6 +142,20 @@ function SynthesizerSettings() {
     text('Octave: ', oscillator1Settings.x, oscillator1Settings.y + 240)
     text('Offset: ', oscillator1Settings.x, oscillator1Settings.y + 290)
 
+    text('Oscillator 2', oscillator2Settings.x, oscillator2Settings.y)
+    text('Enabled:', oscillator2Settings.x, oscillator2Settings.y + 50)
+    text('Amplitude: ' + vis.selectedVisual.oscillators[1].amplitude, oscillator2Settings.x, oscillator2Settings.y + 100)
+    text('Wave: ', oscillator2Settings.x, oscillator2Settings.y + 190)
+    text('Octave: ', oscillator2Settings.x, oscillator2Settings.y + 240)
+    text('Offset: ', oscillator2Settings.x, oscillator2Settings.y + 290)
+
+    text('Oscillator 3', oscillator3Settings.x, oscillator3Settings.y)
+    text('Enabled:', oscillator3Settings.x, oscillator3Settings.y + 50)
+    text('Amplitude: ' + vis.selectedVisual.oscillators[2].amplitude, oscillator3Settings.x, oscillator3Settings.y + 100)
+    text('Wave: ', oscillator3Settings.x, oscillator3Settings.y + 190)
+    text('Octave: ', oscillator3Settings.x, oscillator3Settings.y + 240)
+    text('Offset: ', oscillator3Settings.x, oscillator3Settings.y + 290)
+
   }
 
   this.close = function() {
@@ -82,5 +164,17 @@ function SynthesizerSettings() {
     wave1.remove();
     octave1.remove();
     offset1.remove();
+
+    enabled2.remove();
+    amp2.remove();
+    wave2.remove();
+    octave2.remove();
+    offset2.remove();
+
+    enabled3.remove();
+    amp3.remove();
+    wave3.remove();
+    octave3.remove();
+    offset3.remove();
   }
 }
