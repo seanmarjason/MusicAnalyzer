@@ -24,30 +24,61 @@ function Stage() {
   }
   this.onResize();
 
-  // define the number of lights to be drawn
-  this.stageLightAmt = 5;
-  this.featureLightAmt = 5;
+  // define key settings for each froup of lights
+  this.stageLight = {
+    amount: 5,
+    energy: 'treble',
+    colour: color(255, 255, 255)
+  }
+
+  this.featureLight = {
+    amount: 5,
+    energy: 'bass',
+    colour: color(255, 255, 255)
+  }
 
   // arrays to hold lights to retain position values
   var stageLights = [];
   var featureLights = [];
 
   // create stage lights
-  for(i = 0; i < this.stageLightAmt; i++) {
-    var int = width / this.stageLightAmt
-    var x = (int * i) + (int / 2);
-    var y = lightRack.height;
-    stageLights.push({x, y})
+  var createStageLights = function(numOfLights) {
+    stageLights.length = 0;
+    for(i = 0; i < numOfLights; i++) {
+      var int = width / numOfLights
+      var x = (int * i) + (int / 2);
+      var y = lightRack.height;
+      stageLights.push({x, y})
+    }
+    console.log(stageLights);
   }
 
   // create feature lights
-  for(i = 0; i < this.featureLightAmt; i++) {
-    var int = desk.width / this.featureLightAmt;
-    var x = (width / 4 + (int * i) + (int / 2));
-    var y = stage.height + (desk.height / 2)
-    featureLights.push({x, y});
+  var createFeatureLights = function(numOfLights) {
+    featureLights.length = 0;
+    for(i = 0; i < numOfLights; i++) {
+      var int = desk.width / numOfLights;
+      var x = (width / 4 + (int * i) + (int / 2));
+      var y = stage.height + (desk.height / 2)
+      featureLights.push({x, y});
+    }
   }
 
+  // create function to call to update stage light amount
+  this.setStageLightAmt = function (value) {
+    this.stageLight.amount = value;
+    createStageLights(value);
+  };
+
+  // create function to call to update stage light amount
+  this.setFeatureLightAmt = function (value) {
+    this.featureLight.amount = value;
+    createFeatureLights(value);
+  };
+
+  // create lights before draw loop
+  createStageLights(this.stageLight.amount);
+  createFeatureLights(this.featureLight.amount);
 
 	//draw the stage to the screen
 	this.draw = function() {
@@ -64,8 +95,9 @@ function Stage() {
     push();
     noStroke();
     var stageLightIntensity = map(stageAmplitude.getLevel(), 0, 1, 10, 255);
-    fill(255, 255, 255, stageLightIntensity);
-    var stageLightSize = map(stageFourier.getEnergy('treble'), 0, 255, 10, 100);
+    this.stageLight.colour.setAlpha(stageLightIntensity);
+    fill(this.stageLight.colour);
+    var stageLightSize = map(stageFourier.getEnergy(this.stageLight.energy), 0, 255, 10, 100);
     stageLights.forEach(function(light) {
       circle(light.x, light.y, stageLightSize)
       triangle(light.x, light.y, light.x - stageLightSize, stage.height, light.x + stageLightSize, stage.height);
@@ -84,8 +116,9 @@ function Stage() {
     push();
     noStroke();
     var featureLightIntensity = map(stageAmplitude.getLevel(), 0, 1, 10, 255);
-    fill(255, 255, 255, featureLightIntensity);
-    var featureLightSize = map(stageFourier.getEnergy('bass'), 0, 255, 10, 100);
+    this.featureLight.colour.setAlpha(featureLightIntensity);
+    fill(this.featureLight.colour);
+    var featureLightSize = map(stageFourier.getEnergy(this.featureLight.energy), 0, 255, 10, 100);
     featureLights.forEach(function(light) {
       circle(light.x, light.y, featureLightSize)
       triangle(light.x, light.y, light.x - featureLightSize, light.y - 200, light.x + featureLightSize, light.y - 200);
