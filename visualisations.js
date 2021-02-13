@@ -25,4 +25,12 @@ function Visualisations(){
 			}
 		}
 	};
+
+	this.onResize = function() {
+		this.visuals.forEach(function(visual) {
+			if (visual.hasOwnProperty('resize')) {
+				visual.resize();
+			}
+		})
+	}
 }

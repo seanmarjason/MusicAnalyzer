@@ -3,17 +3,22 @@ function StageSettings() {
   this.name = "Stage Settings"
 
   // Stage Lights
-  var stageLightSettings = {x: (width/2) - (width/4), y: 200}
+  var stageLightSettings;
   var stageLightAmt;
   var stageLightEnergy;
   var stageLightColour;
 
   // Feature Lights
-  var featureLightSettings = {x: (width/2) + (width/4), y: 200}
+  var featureLightSettings;
   var featureLightAmt;
   var featureLightEnergy;
   var featureLightColour;
 
+  this.onResize = function() {
+    stageLightSettings = {x: (width/2) - (width/4), y: 200}
+    featureLightSettings = {x: (width/2) + (width/4) - 100, y: 200}
+  }
+  this.onResize();
 
   this.open = function() {
 

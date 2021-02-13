@@ -60,6 +60,12 @@ function Settings(){
 			text('Press [enter] to open settings', width - 10, 100);
 			pop();
 		}
-  }
+	}
+	
+	this.onResize = function() {
+		this.settings.forEach(function(setting) {
+			setting.onResize();
+		})
+	}
 }
 

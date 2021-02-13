@@ -5,7 +5,12 @@ function ClippingSettings() {
   // Signal Threshold
   var signalThreshold;
   var signalThresholdOptions = [50, 100, 150, 200, 240];
-  var signalThresholdPos = {x: width/2 - 50, y: 200}
+  var signalThresholdPos
+
+  this.onResize = function() {
+    signalThresholdPos = {x: width/2 - 50, y: 200}
+  }
+  this.onResize();
 
   // create DOM elements only on show
   // avoids multiple elements created in draw loop

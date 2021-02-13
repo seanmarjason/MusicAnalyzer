@@ -70,9 +70,15 @@ function keyPressed(){
 //if the visualisation needs to be resized call its onResize method
 function windowResized(){
 	resizeCanvas(windowWidth, windowHeight);
-	if(vis.selectedVisual.hasOwnProperty('onResize')){
-		vis.selectedVisual.onResize();
-	}
+
+	vis.onResize();
+
 	controls.trackNavigator.onResize();
 	controls.fullscreenButton.onResize();
+
+	if (settings.open) {
+		settings.open = false;
+		settings.selectedSettings.close();
+	}
+	settings.onResize();
 }

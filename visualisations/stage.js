@@ -13,7 +13,7 @@ function Stage() {
 
   // set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
-  this.onResize = function() {
+  this.resize = function() {
     stage.height = height / 4 * 3;
     stage.depth = height / 4;
     desk.height = 250;
@@ -22,7 +22,7 @@ function Stage() {
     speakers.width = 100;
     lightRack.height = height / 5;
   }
-  this.onResize();
+  this.resize();
 
   // define key settings for each froup of lights
   this.stageLight = {
@@ -50,7 +50,6 @@ function Stage() {
       var y = lightRack.height;
       stageLights.push({x, y})
     }
-    console.log(stageLights);
   }
 
   // create feature lights

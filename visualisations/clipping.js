@@ -9,11 +9,11 @@ function Clipping(){
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
-	this.onResize = function() {
+	this.resize = function() {
 		binWidth = width / this.bins;
 		binHeight = height / 4 * 3;
 	}
-	this.onResize();
+	this.resize();
 
 	var clippingFourier = new p5.FFT(0.8, this.bins);
 

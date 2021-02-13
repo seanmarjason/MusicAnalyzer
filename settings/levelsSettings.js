@@ -2,6 +2,10 @@
 function LevelsSettings() {
   this.name = "Levels Settings"
 
+  this.onResize = function() {
+    
+  }
+
   this.open = function() {
 
   }

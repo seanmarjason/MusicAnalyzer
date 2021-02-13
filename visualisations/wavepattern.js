@@ -11,13 +11,13 @@ function WavePattern() {
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
-	this.onResize = function() {
+	this.resize = function() {
 		wave.position = height / 4 * 3;
 		wave.height = height / 5;
 		wave.start = 100;
 		wave.end = width - 100;
 	}
-	this.onResize();
+	this.resize();
 
 	// settings for 3D effect
 	this.retentionHistory = 100;

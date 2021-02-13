@@ -54,12 +54,12 @@ function Synthesizer() {
 
   // set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
-  this.onResize = function() {
+  this.resize = function() {
     keyboardX = width / 2;
     keyboardY = height / 4 * 3;
     keyboardStart = keyboardX - (whiteKeys.length * keyboard.whiteKey.width / 2);
   };
-  this.onResize();
+  this.resize();
 
   var currentNote = 'Play Something!';
 

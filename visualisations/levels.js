@@ -18,13 +18,13 @@ function Levels() {
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
-	this.onResize = function() {
+	this.resize = function() {
 		this.pad = width / 20;
 		this.plotWidth = (width - this.pad) / this.plotsAcross;
 		this.plotHeight = (height - this.pad) / this.plotsDown;
 		this.dialRadius = (this.plotWidth - this.pad) / 2 - 50;
 	};
-	this.onResize();
+	this.resize();
 
 	// draw the plots to the screen
 	this.draw = function() {

@@ -2,6 +2,11 @@
 function WavepatternSettings() {
   this.name = "Wavepattern Settings"
 
+  this.onResize = function() {
+
+  }
+  this.onResize();
+
   this.open = function() {
 
   }

@@ -3,7 +3,7 @@ function SynthesizerSettings() {
   this.name = "Synthesizer Settings"
 
   // Oscillator 1
-  var oscillator1Settings = {x: (width/2) - 500, y: 200}
+  var oscillator1Settings;
   var enabled1;
   var amp1;
   var wave1;
@@ -11,7 +11,7 @@ function SynthesizerSettings() {
   var offset1;
 
   // Oscillator 2
-  var oscillator2Settings = {x: (width/2) - 50, y: 200}
+  var oscillator2Settings;
   var enabled2;
   var amp2;
   var wave2;
@@ -19,12 +19,19 @@ function SynthesizerSettings() {
   var offset2;
 
   // Oscillator 3
-  var oscillator3Settings = {x: (width/2) + 450, y: 200}
+  var oscillator3Settings;
   var enabled3;
   var amp3;
   var wave3;
   var octave3;
   var offset3;
+
+  this.onResize = function() {
+    oscillator1Settings = {x: (width/2) - (width/3), y: 200}
+    oscillator2Settings = {x: (width/2) - 50, y: 200}
+    oscillator3Settings = {x: (width/2) + (width/3) - 100, y: 200}
+  }
+  this.onResize();
 
   this.open = function() {
 
