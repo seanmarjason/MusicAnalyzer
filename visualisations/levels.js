@@ -1,4 +1,3 @@
-//constructor function to draw a
 function Levels() {
 	//name of the visualisation
 	this.name = "Analyze Levels";
@@ -9,34 +8,59 @@ function Levels() {
 	var minAngle = PI + PI / 10;
 	var maxAngle = TWO_PI - PI / 10;
 
-	this.plotsAcross = 2;
-	this.plotsDown = 2;
+	// setup default plots to draw
+	this.plots = {
+		bass: true,
+		lowMid: true,
+		mid: false,
+		highMid: true,
+		treble: true
+	}
 
-	//frquencies used by the energyfunction to retrieve a value
-	//for each plot.
-	this.frequencyBins = ["bass", "lowMid", "highMid", "treble"];
+	var plotsEnabled;
+	var plotsAcross;
+	var plotsDown;
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
 	this.resize = function() {
 		this.pad = width / 20;
-		this.plotWidth = (width - this.pad) / this.plotsAcross;
-		this.plotHeight = (height - this.pad) / this.plotsDown;
+		this.plotWidth = (width - this.pad) / plotsAcross;
+		this.plotHeight = (height - this.pad) / plotsDown;
 		this.dialRadius = (this.plotWidth - this.pad) / 2 - 50;
 	};
-	this.resize();
 
 	// draw the plots to the screen
 	this.draw = function() {
+
+		// select the plots to be draw in this loop
+		plotsEnabled = Object.keys(this.plots).filter(key => (
+			this.plots[key] === true)
+		);
+
+		// calculate plot positioning based on number of plots enabled
+		plotsAcross = Math.ceil(plotsEnabled.length/2);
+		plotsDown = 2;
+
+		// set size of plots based on number of plots to display
+		this.resize();
+
 		//create an array amplitude values from the fft.
 		var spectrum = levelsFourier.analyze();
+
 		//iterator for selecting frequency bin.
 		var currentBin = 0;
+
 		push();
 		fill('#f0f2d2');
-		//nested for loop to place plots in 2*2 grid.
-		for (var i = 0; i < this.plotsDown; i++) {
-			for (var j = 0; j < this.plotsAcross; j++) {
+		//nested for loop to place plots in grid
+		for (var i = 0; i < plotsDown; i++) {
+			for (var j = 0; j < plotsAcross; j++) {
+
+				// exit loop if all plots drawn
+				if(currentBin >= plotsEnabled.length) {
+					break;
+				}
 
 				//calculate the size of the plots
 				var x = this.pad + j * this.plotWidth;
@@ -59,14 +83,14 @@ function Levels() {
 				//add on the ticks
 				this.ticks(x + w / 2, y + h);
 
-				var energy = levelsFourier.getEnergy(this.frequencyBins[currentBin]);
+				var energy = levelsFourier.getEnergy(plotsEnabled[currentBin]);
 
 				//add label for plot
 				push();
 				textAlign(CENTER);
 				textSize(12);
 				fill(000000);
-				text(this.frequencyBins[currentBin] + ' (amp)', x + (w/2), y + h - 50);
+				text(plotsEnabled[currentBin] + ' (amp)', x + (w/2), y + h - 50);
 				pop();
 
 				//add the needle

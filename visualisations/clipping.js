@@ -25,6 +25,7 @@ function Clipping(){
 
 	this.setSignalThreshold = function(value) {
 		this.signalThreshold = value;
+		this.reset();
 	}
 
 	this.draw = function(){
@@ -47,7 +48,7 @@ function Clipping(){
 			text('Signal Threshold: ' + this.signalThreshold, width - 50, signalThresholdLine - 20);
 			pop();
 
-			// fade the colour of the bin from green to red
+			// fade the colour of the bin
 			push();
 			noStroke();
 			var b = map(spectrum[i], 0, 255, 255, 0);

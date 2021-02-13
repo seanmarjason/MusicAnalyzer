@@ -3,12 +3,12 @@ function ClippingSettings() {
   this.name = "Clipping Settings"
 
   // Signal Threshold
+  var clippingSettings
   var signalThreshold;
   var signalThresholdOptions = [50, 100, 150, 200, 240];
-  var signalThresholdPos
 
   this.onResize = function() {
-    signalThresholdPos = {x: width/2 - 50, y: 200}
+    clippingSettings = {x: width/2 - 50, y: 200}
   }
   this.onResize();
 
@@ -18,7 +18,7 @@ function ClippingSettings() {
 
     // SIGNAL THRESHOLD
     signalThreshold = createSelect();
-    signalThreshold.position(signalThresholdPos.x, signalThresholdPos.y);
+    signalThreshold.position(clippingSettings.x, clippingSettings.y);
     signalThreshold.size(100, 25)
     signalThresholdOptions.forEach(option => signalThreshold.option(option));
     signalThreshold.selected(vis.selectedVisual.signalThreshold);
@@ -34,7 +34,7 @@ function ClippingSettings() {
     fill(0);
     text(this.name, width / 2, 100);
 
-    text('Signal Threshold (Hz):', signalThresholdPos.x, signalThresholdPos.y - 10)
+    text('Signal Threshold (Hz):', clippingSettings.x, clippingSettings.y - 10)
   }
 
   // remove DOM elements on hide
