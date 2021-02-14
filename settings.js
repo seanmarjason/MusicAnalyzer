@@ -50,6 +50,13 @@ function Settings(){
     // only draw the settings if settings pane is open.
 
 		if(this.open){
+			// draw settings pane
+			fill(255, 255, 255, 240);
+			textSize(18);
+			rect(0, 75, width, height);
+			fill(0);
+			text(this.name, width / 2, 100);
+			// draw selected settings
 			this.selectedSettings.draw();
 		}
 		else{

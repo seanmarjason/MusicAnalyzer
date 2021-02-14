@@ -61,10 +61,6 @@ function StageSettings() {
   }
 
   this.draw = function() {
-    fill(255);
-    textSize(18);
-    rect(0, 75, width, height / 2);
-    fill(0);
     text(this.name, width / 2, 100);
 
     text('Stage Lights', stageLightSettings.x, stageLightSettings.y)

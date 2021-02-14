@@ -28,10 +28,6 @@ function ClippingSettings() {
 
   // draw canvas elements of settings pane
   this.draw = function() {
-    fill(255);
-    textSize(18);
-    rect(0, 75, width, height / 2);
-    fill(0);
     text(this.name, width / 2, 100);
 
     text('Signal Threshold (Hz):', clippingSettings.x, clippingSettings.y - 10)

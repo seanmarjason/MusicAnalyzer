@@ -67,27 +67,48 @@ function Synthesizer() {
   this.oscillators = [
     {
       osc: new p5.Oscillator(),
-      'wave': 'sine',
+      env: new p5.Envelope(),
+      'wave': 'triangle',
       'amplitude': 0.2,
       'enabled': true,
       'octave': 0,
-      'offset': 0
+      'offset': 0,
+      'envelope': {
+        'attack': 0.05,
+        'decay': 0.05,
+        'sustain': 0.1,
+        'release': 2
+      }
     },
     {
       osc: new p5.Oscillator(),
-      'wave': 'square',
+      env: new p5.Envelope(),
+      'wave': 'sine',
       'amplitude': 0.05,
       'enabled': true,
       'octave': 0,
-      'offset': 0
+      'offset': 0,
+      'envelope': {
+        'attack': 0.05,
+        'decay': 0.05,
+        'sustain': 0.2,
+        'release': 2
+      }
     },
     {
       osc: new p5.Oscillator(),
-      'wave': 'sawtooth',
+      env: new p5.Envelope(),
+      'wave': 'triangle',
       'amplitude': 0.05,
       'enabled': true,
-      'octave': 0,
-      'offset': 0
+      'octave': -1,
+      'offset': 0,
+      'envelope': {
+        'attack': 0.05,
+        'decay': 0.05,
+        'sustain': 0.2,
+        'release': 2
+      }
     },
   ]
 
@@ -172,9 +193,16 @@ function Synthesizer() {
     this.oscillators.forEach(function(oscillator) {
       if (oscillator.enabled) {
         var playfrequency = adjustFrequency((adjustOctave(frequency, oscillator.octave)), oscillator.offset);
-        oscillator.osc.start();
+        oscillator.osc.start(); 
         oscillator.osc.setType(oscillator.wave);
         oscillator.osc.amp(oscillator.amplitude);
+        oscillator.env.setADSR(
+          oscillator.envelope.attack,
+          oscillator.envelope.decay,
+          oscillator.envelope.sustain,
+          oscillator.envelope.release); //set envelope for oscillator
+        oscillator.env.setRange(1,0);
+        oscillator.env.play(oscillator.osc);
         oscillator.osc.freq(playfrequency);
       }
     });
