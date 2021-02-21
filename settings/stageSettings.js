@@ -14,6 +14,8 @@ function StageSettings() {
   var featureLightEnergy;
   var featureLightColour;
 
+  var energyValues = ['treble', 'highMid', 'mid', 'lowMid', 'bass'];
+
   this.onResize = function() {
     stageLightSettings = {x: (width/2) - (width/4), y: 200}
     featureLightSettings = {x: (width/2) + (width/4) - 100, y: 200}
@@ -26,37 +28,37 @@ function StageSettings() {
     // Number of lights
     stageLightAmt = createSlider(0, 10, vis.selectedVisual.stageLight.amount, 1);
     stageLightAmt.position(stageLightSettings.x, stageLightSettings.y + 125)
-    stageLightAmt.changed(() => vis.selectedVisual.setStageLightAmt(stageLightAmt.value()));
+    stageLightAmt.changed(() => vis.selectedVisual.setLightAmount('stageLight', stageLightAmt.value()));
 
     // Energy to follow
     stageLightEnergy = createSelect();
     stageLightEnergy.position(stageLightSettings.x, stageLightSettings.y + 200);
-    ['treble', 'highMid', 'mid', 'lowMid', 'bass'].forEach(item => stageLightEnergy.option(item));
+    energyValues.forEach(item => stageLightEnergy.option(item));
     stageLightEnergy.value(vis.selectedVisual.stageLight.energy);
-    stageLightEnergy.changed(() => vis.selectedVisual.stageLight.energy = stageLightEnergy.value());
+    stageLightEnergy.changed(() => vis.selectedVisual.setLightEnergy('stageLight', stageLightEnergy.value()));
 
     // Light Colour
     stageLightColour = createColorPicker(vis.selectedVisual.stageLight.colour);
     stageLightColour.position(stageLightSettings.x, stageLightSettings.y + 300);
-    stageLightColour.changed(() => vis.selectedVisual.stageLight.colour = stageLightColour.color());
+    stageLightColour.changed(() => vis.selectedVisual.setLightColour('stageLight', stageLightColour.color()));
 
     // FEATURE LIGHTS
     // Number of lights
     featureLightAmt = createSlider(0, 10, vis.selectedVisual.featureLight.amount, 1);
     featureLightAmt.position(featureLightSettings.x, featureLightSettings.y + 125)
-    featureLightAmt.changed(() => vis.selectedVisual.setFeatureLightAmt(featureLightAmt.value()));
+    featureLightAmt.changed(() => vis.selectedVisual.setLightAmount('featureLight', featureLightAmt.value()));
 
     // Energy to follow
     featureLightEnergy = createSelect();
     featureLightEnergy.position(featureLightSettings.x, featureLightSettings.y + 200);
-    ['treble', 'highMid', 'mid', 'lowMid', 'bass'].forEach(item => featureLightEnergy.option(item));
+    energyValues.forEach(item => featureLightEnergy.option(item));
     featureLightEnergy.value(vis.selectedVisual.featureLight.energy);
-    featureLightEnergy.changed(() => vis.selectedVisual.featureLight.energy = featureLightEnergy.value());
+    featureLightEnergy.changed(() => vis.selectedVisual.setLightEnergy('featureLight', featureLightEnergy.value()));
 
     // Light Colour
     featureLightColour = createColorPicker(vis.selectedVisual.featureLight.colour);
     featureLightColour.position(featureLightSettings.x, featureLightSettings.y + 300);
-    featureLightColour.changed(() => vis.selectedVisual.featureLight.colour = featureLightColour.color());
+    featureLightColour.changed(() => vis.selectedVisual.setLightColour('featureLight', featureLightColour.color()));
     
   }
 

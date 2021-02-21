@@ -21,8 +21,14 @@ function WavePattern() {
 
 	// settings for 3D effect
 	this.retentionHistory = 100;
-	this.offsetX = 10;
-	this.offsetY = 10;
+	this.offset = {
+		x: 10,
+		y: 10
+	}
+
+	this.setOffset = function(direction, value) {
+		this.offset[direction] = value;
+	}
 
 	//draw the wave form to the screen
 	this.draw = function() {
@@ -63,14 +69,14 @@ function WavePattern() {
 		for (var i = 1; i < waveHistory.length; i++) {
 			stroke(255 - (map(i, 1, waveHistory.length, 0, 255)));
 			beginShape();
-			vertex((wave.start - 10) + (i * this.offsetX), wave.position - (i * this.offsetY));
+			vertex((wave.start - 10) + (i * this.offset.x), wave.position - (i * this.offset.y));
 			// for each value in the wavepattern
 			for (var j = 0; j < waveHistory[i].length; j++) {
-				var x = map(j, 0, waveHistory[i].length, wave.start + (i * this.offsetX), wave.end + (i * this.offsetX));
-				var y = map(waveHistory[i][j], -1, 1, wave.position - wave.height - (i * this.offsetY), wave.position + wave.height - (i * this.offsetY))
+				var x = map(j, 0, waveHistory[i].length, wave.start + (i * this.offset.x), wave.end + (i * this.offset.x));
+				var y = map(waveHistory[i][j], -1, 1, wave.position - wave.height - (i * this.offset.y), wave.position + wave.height - (i * this.offset.y))
 				vertex(x, y);
 			}
-			vertex((wave.end + 10) + (i * this.offsetX), wave.position - (i * this.offsetY));
+			vertex((wave.end + 10) + (i * this.offset.x), wave.position - (i * this.offset.y));
 			endShape();
 		}
 

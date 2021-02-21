@@ -17,23 +17,23 @@ function LevelsSettings() {
   this.open = function() {
     bassToggle = createCheckbox('', vis.selectedVisual.plots.bass);
     bassToggle.position(levelsSettings.x + 100, levelsSettings.y + 50);
-    bassToggle.changed(() => vis.selectedVisual.plots.bass = !vis.selectedVisual.plots.bass)
+    bassToggle.changed(() => vis.selectedVisual.togglePlot('bass'));
 
     lowMidToggle = createCheckbox('', vis.selectedVisual.plots.lowMid);
     lowMidToggle.position(levelsSettings.x + 100, levelsSettings.y + 100);
-    lowMidToggle.changed(() => vis.selectedVisual.plots.lowMid = !vis.selectedVisual.plots.lowMid)
+    lowMidToggle.changed(() => vis.selectedVisual.togglePlot('lowMid'));
 
     midToggle = createCheckbox('', vis.selectedVisual.plots.mid);
     midToggle.position(levelsSettings.x + 100, levelsSettings.y + 150);
-    midToggle.changed(() => vis.selectedVisual.plots.mid = !vis.selectedVisual.plots.mid)
+    midToggle.changed(() => vis.selectedVisual.togglePlot('mid'));
 
     highMidToggle = createCheckbox('', vis.selectedVisual.plots.highMid);
     highMidToggle.position(levelsSettings.x + 100, levelsSettings.y + 200);
-    highMidToggle.changed(() => vis.selectedVisual.plots.highMid = !vis.selectedVisual.plots.highMid)
+    highMidToggle.changed(() => vis.selectedVisual.togglePlot('highMid'));
 
     trebleToggle = createCheckbox('', vis.selectedVisual.plots.treble);
     trebleToggle.position(levelsSettings.x + 100, levelsSettings.y + 250);
-    trebleToggle.changed(() => vis.selectedVisual.plots.treble = !vis.selectedVisual.plots.treble)
+    trebleToggle.changed(() => vis.selectedVisual.togglePlot('treble'));
   }
 
   this.draw = function() {

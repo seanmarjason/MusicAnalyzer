@@ -63,21 +63,20 @@ function Stage() {
     }
   }
 
-  // create function to call to update stage light amount
-  this.setStageLightAmt = function (value) {
-    this.stageLight.amount = value;
-    createStageLights(value);
-  };
+  // update amount of lights
+  this.setLightAmount = function (lightType, amount) {
+    this[lightType].amount = amount;
+  }
 
-  // create function to call to update stage light amount
-  this.setFeatureLightAmt = function (value) {
-    this.featureLight.amount = value;
-    createFeatureLights(value);
-  };
+  // update energy for lights to follow
+  this.setLightEnergy = function (lightType, energy) {
+    this[lightType].energy = energy;
+  }
 
-  // create lights before draw loop
-  createStageLights(this.stageLight.amount);
-  createFeatureLights(this.featureLight.amount);
+  // update colour of lights
+  this.setLightColour = function (lightType, colour) {
+    this[lightType].colour = colour;
+  }
 
 	//draw the stage to the screen
 	this.draw = function() {
@@ -89,6 +88,9 @@ function Stage() {
     rect(0, stage.height, width, stage.depth); //stage
     rect(0, 0, width, height / 5); //light assembley
     pop();
+
+    createStageLights(this.stageLight.amount);
+    createFeatureLights(this.featureLight.amount);
 
     // draw stage lights
     push();

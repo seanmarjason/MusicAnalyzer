@@ -1,6 +1,8 @@
 //draw the synthesizer to the screen
 function Synthesizer() {
 
+  var self = this;
+
   //vis name
   this.name = "Synthesizer";
 
@@ -64,53 +66,71 @@ function Synthesizer() {
   var currentNote = 'Play Something!';
 
   // Instantiate Oscillators
-  this.oscillators = [
-    {
-      osc: new p5.Oscillator(),
-      env: new p5.Envelope(),
-      'wave': 'triangle',
-      'amplitude': 0.2,
-      'enabled': true,
-      'octave': 0,
-      'offset': 0,
-      'envelope': {
-        'attack': 0.05,
-        'decay': 0.05,
-        'sustain': 0.1,
-        'release': 2
-      }
-    },
-    {
-      osc: new p5.Oscillator(),
-      env: new p5.Envelope(),
-      'wave': 'sine',
-      'amplitude': 0.05,
-      'enabled': true,
-      'octave': 0,
-      'offset': 0,
-      'envelope': {
-        'attack': 0.05,
-        'decay': 0.05,
-        'sustain': 0.2,
-        'release': 2
-      }
-    },
-    {
-      osc: new p5.Oscillator(),
-      env: new p5.Envelope(),
-      'wave': 'triangle',
-      'amplitude': 0.05,
-      'enabled': true,
-      'octave': -1,
-      'offset': 0,
-      'envelope': {
-        'attack': 0.05,
-        'decay': 0.05,
-        'sustain': 0.2,
-        'release': 2
-      }
-    },
-  ]
+  this.oscillators = {
+    'oscillator1': 
+      {
+        osc: new p5.Oscillator(),
+        env: new p5.Envelope(),
+        ref: 0,
+        'wave': 'triangle',
+        'amplitude': 0.2,
+        'enabled': true,
+        'octave': 0,
+        'offset': 0,
+        'envelope': {
+          'attack': 0.05,
+          'decay': 0.05,
+          'sustain': 0.1,
+          'release': 2
+        }
+      },
+    'oscillator2':
+      {
+        osc: new p5.Oscillator(),
+        env: new p5.Envelope(),
+        ref: 1,
+        'wave': 'sine',
+        'amplitude': 0.05,
+        'enabled': true,
+        'octave': 0,
+        'offset': 0,
+        'envelope': {
+          'attack': 0.05,
+          'decay': 0.05,
+          'sustain': 0.2,
+          'release': 2
+        }
+      },
+    'oscillator3':
+      {
+        osc: new p5.Oscillator(),
+        env: new p5.Envelope(),
+        ref: 2,
+        'wave': 'triangle',
+        'amplitude': 0.05,
+        'enabled': true,
+        'octave': -1,
+        'offset': 0,
+        'envelope': {
+          'attack': 0.05,
+          'decay': 0.05,
+          'sustain': 0.2,
+          'release': 2
+        }
+      },
+  }
+
+  this.toggleOscillator = function (oscillator) {
+    this.oscillators[oscillator].enabled = !this.oscillators[oscillator].enabled;
+  }
+
+  this.setOscillatorParameter = function (oscillator, parameter, value) {
+    this.oscillators[oscillator][parameter] = value;
+  }
+
+  this.setOscillatorEnvelope = function (oscillator, envelopeParameter, value) {
+    this.oscillators[oscillator].envelope[envelopeParameter] = value;
+  }
 
 	this.draw = function() {
 
@@ -133,19 +153,20 @@ function Synthesizer() {
     fill(255);
     textSize(16);
     textAlign(CENTER);
-    var settingsWidth = (width - 100) / this.oscillators.length;
-    var startPosition = (width / 2) - ((settingsWidth * this.oscillators.length) / 2);
+    var settingsWidth = (width - 100) / Object.keys(this.oscillators).length;
+    var startPosition = (width / 2) - ((settingsWidth * Object.keys(this.oscillators).length) / 2);
 
-    for(i = 0; i < this.oscillators.length; i++) {
-      var positionX = startPosition + (i * settingsWidth) + (settingsWidth / 2);
+    Object.keys(this.oscillators).forEach(function(oscillator) {
+      var OS = self.oscillators[oscillator];
+      var positionX = startPosition + (OS.ref * settingsWidth) + (settingsWidth / 2);
       var positionY = height / 2
-      text('Oscillator ' + (i+1), positionX, positionY);
-      text('Enabled: ' + this.oscillators[i].enabled, positionX, positionY + 50)
-      text('Amplitude: ' + this.oscillators[i].amplitude, positionX, positionY + 75)
-      text('Wave Type: ' + this.oscillators[i].wave, positionX, positionY + 100)
-      text('Octave Offset: ' + this.oscillators[i].octave, positionX, positionY + 125)
-      text('Tone Offset: ' + this.oscillators[i].offset, positionX, positionY + 150)
-    };
+      text('Oscillator ' + (OS.ref+1), positionX, positionY);
+      text('Enabled: ' + OS.enabled, positionX, positionY + 50)
+      text('Amplitude: ' + OS.amplitude, positionX, positionY + 75)
+      text('Wave Type: ' + OS.wave, positionX, positionY + 100)
+      text('Octave Offset: ' + OS.octave, positionX, positionY + 125)
+      text('Tone Offset: ' + OS.offset, positionX, positionY + 150)
+    });
     pop();
 
     // draw notes
@@ -190,20 +211,21 @@ function Synthesizer() {
 
   // play the note selected, with harmonies based on oscillator settings
   this.playNote = function(frequency) {
-    this.oscillators.forEach(function(oscillator) {
-      if (oscillator.enabled) {
-        var playfrequency = adjustFrequency((adjustOctave(frequency, oscillator.octave)), oscillator.offset);
-        oscillator.osc.start(); 
-        oscillator.osc.setType(oscillator.wave);
-        oscillator.osc.amp(oscillator.amplitude);
-        oscillator.env.setADSR(
-          oscillator.envelope.attack,
-          oscillator.envelope.decay,
-          oscillator.envelope.sustain,
-          oscillator.envelope.release); //set envelope for oscillator
-        oscillator.env.setRange(1,0);
-        oscillator.env.play(oscillator.osc);
-        oscillator.osc.freq(playfrequency);
+    Object.keys(this.oscillators).forEach(function(oscillator) {
+      var OS = self.oscillators[oscillator];
+      if (OS.enabled) {
+        var playfrequency = adjustFrequency((adjustOctave(frequency, OS.octave)), OS.offset);
+        OS.osc.start(); 
+        OS.osc.setType(OS.wave);
+        OS.osc.amp(OS.amplitude);
+        OS.env.setADSR(
+          OS.envelope.attack,
+          OS.envelope.decay,
+          OS.envelope.sustain,
+          OS.envelope.release); //set envelope for oscillator
+          OS.env.setRange(1,0);
+          OS.env.play(OS.osc);
+          OS.osc.freq(playfrequency);
       }
     });
   }
@@ -231,9 +253,9 @@ function Synthesizer() {
 
   // stop oscillators when mouse released
   this.mouseReleased = function() {
-    this.oscillators.forEach(function(oscillator) {
-      if (oscillator.enabled) {
-        oscillator.osc.stop();
+    Object.keys(this.oscillators).forEach(function(oscillator) {
+      if (self.oscillators[oscillator].enabled) {
+        self.oscillators[oscillator].osc.stop();
       }
     });
     currentNote = 'Play Something!';

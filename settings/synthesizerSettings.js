@@ -45,163 +45,163 @@ function SynthesizerSettings() {
 
     // OSCILLATOR 1
     // Enabled
-    enabled1 = createCheckbox('', vis.selectedVisual.oscillators[0].enabled);
+    enabled1 = createCheckbox('', vis.selectedVisual.oscillators['oscillator1'].enabled);
     enabled1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 35);
-    enabled1.changed(() => vis.selectedVisual.oscillators[0].enabled = !vis.selectedVisual.oscillators[0].enabled);
+    enabled1.changed(() => vis.selectedVisual.toggleOscillator('oscillator1'));
 
     // Amplitude
-    amp1 = createSlider(0, 1, vis.selectedVisual.oscillators[0].amplitude, 0.05);
+    amp1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].amplitude, 0.05);
     amp1.position(oscillator1Settings.x, oscillator1Settings.y + 125)
-    amp1.changed(() => vis.selectedVisual.oscillators[0].amplitude = amp1.value());
+    amp1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'amplitude', amp1.value()));
 
     // Wave
     wave1 = createSelect();
     wave1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 175);
     ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave1.option(item));
-    wave1.value(vis.selectedVisual.oscillators[0].wave);
-    wave1.changed(() => vis.selectedVisual.oscillators[0].wave = wave1.value());
+    wave1.value(vis.selectedVisual.oscillators['oscillator1'].wave);
+    wave1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'wave', wave1.value()));
 
     // Octave
     octave1 = createSelect();
     octave1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 225);
     [-2, -1, 0, 1, 2].forEach(item => octave1.option(item));
-    octave1.value(vis.selectedVisual.oscillators[0].octave);
-    octave1.changed(() => vis.selectedVisual.oscillators[0].octave = octave1.value());
+    octave1.value(vis.selectedVisual.oscillators['oscillator1'].octave);
+    octave1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'octave', octave1.value()));
 
     // Tone
     offset1 = createSelect();
     offset1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 275);
     [-2, -1, 0, 1, 2].forEach(item => offset1.option(item));
-    offset1.value(vis.selectedVisual.oscillators[0].offset);
-    offset1.changed(() => vis.selectedVisual.oscillators[0].offset = offset1.value());
+    offset1.value(vis.selectedVisual.oscillators['oscillator1'].offset);
+    offset1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'offset', offset1.value()));
 
     // Envelope
-    attack1 = createSlider(0, 1, vis.selectedVisual.oscillators[0].envelope.attack, 0.05);
+    attack1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.attack, 0.05);
     attack1.style('transform', 'rotate(270deg)');
     attack1.position(oscillator1Settings.x - 60, oscillator1Settings.y + 420);
-    attack1.changed(() => vis.selectedVisual.oscillators[0].envelope.attack = attack1.value());
+    attack1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'attack', attack1.value()));
     
-    decay1 = createSlider(0, 1, vis.selectedVisual.oscillators[0].envelope.decay, 0.05);
+    decay1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.decay, 0.05);
     decay1.style('transform', 'rotate(270deg)');
     decay1.position(oscillator1Settings.x - 30, oscillator1Settings.y + 420);
-    decay1.changed(() => vis.selectedVisual.oscillators[0].envelope.decay = decay1.value());
+    decay1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'decay', decay1.value()));
     
-    sustain1 = createSlider(0, 1, vis.selectedVisual.oscillators[0].envelope.sustain, 0.05);
+    sustain1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.sustain, 0.05);
     sustain1.style('transform', 'rotate(270deg)');
     sustain1.position(oscillator1Settings.x, oscillator1Settings.y + 420);
-    sustain1.changed(() => vis.selectedVisual.oscillators[0].envelope.sustain = sustain1.value());
+    sustain1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'decay', sustain1.value()));
     
-    release1 = createSlider(0, 5, vis.selectedVisual.oscillators[0].envelope.release, 0.1);
+    release1 = createSlider(0, 5, vis.selectedVisual.oscillators['oscillator1'].envelope.release, 0.1);
     release1.style('transform', 'rotate(270deg)');
     release1.position(oscillator1Settings.x + 30, oscillator1Settings.y + 420);
-    release1.changed(() => vis.selectedVisual.oscillators[0].envelope.release = release1.value());
+    release1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'release', release1.value()));
 
     // OSCILLATOR 2
     // Enabled
-    enabled2 = createCheckbox('', vis.selectedVisual.oscillators[1].enabled);
+    enabled2 = createCheckbox('', vis.selectedVisual.oscillators['oscillator2'].enabled);
     enabled2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 35);
-    enabled2.changed(() => vis.selectedVisual.oscillators[1].enabled = !vis.selectedVisual.oscillators[1].enabled);
+    enabled2.changed(() => vis.selectedVisual.toggleOscillator('oscillator2'));
 
     // Amplitude
-    amp2 = createSlider(0, 1, vis.selectedVisual.oscillators[1].amplitude, 0.05);
+    amp2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].amplitude, 0.05);
     amp2.position(oscillator2Settings.x, oscillator2Settings.y + 125)
-    amp2.changed(() => vis.selectedVisual.oscillators[1].amplitude = amp2.value());
+    amp2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'amplitude',  amp2.value()));
 
     // Wave
     wave2 = createSelect();
     wave2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 175);
     ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave2.option(item));
-    wave2.value(vis.selectedVisual.oscillators[1].wave);
-    wave2.changed(() => vis.selectedVisual.oscillators[1].wave = wave2.value());
+    wave2.value(vis.selectedVisual.oscillators['oscillator2'].wave);
+    wave2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'wave', wave2.value()));
 
     // Octave
     octave2 = createSelect();
     octave2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 225);
     [-2, -1, 0, 1, 2].forEach(item => octave2.option(item));
-    octave2.value(vis.selectedVisual.oscillators[1].octave);
-    octave2.changed(() => vis.selectedVisual.oscillators[1].octave = octave2.value());
+    octave2.value(vis.selectedVisual.oscillators['oscillator2'].octave);
+    octave2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'octave', octave2.value()));
 
     // Tone
     offset2 = createSelect();
     offset2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 275);
     [-2, -1, 0, 1, 2].forEach(item => offset2.option(item));
-    offset2.value(vis.selectedVisual.oscillators[1].offset);
-    offset2.changed(() => vis.selectedVisual.oscillators[1].offset = offset2.value());
+    offset2.value(vis.selectedVisual.oscillators['oscillator2'].offset);
+    offset2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'offset', offset2.value()));
 
     // Envelope
-    attack2 = createSlider(0, 1, vis.selectedVisual.oscillators[1].envelope.attack, 0.05);
+    attack2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.attack, 0.05);
     attack2.style('transform', 'rotate(270deg)');
     attack2.position(oscillator2Settings.x - 60, oscillator2Settings.y + 420);
-    attack2.changed(() => vis.selectedVisual.oscillators[1].envelope.attack = attack2.value());
+    attack2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'attack', attack2.value()));
     
-    decay2 = createSlider(0, 1, vis.selectedVisual.oscillators[1].envelope.decay, 0.05);
+    decay2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.decay, 0.05);
     decay2.style('transform', 'rotate(270deg)');
     decay2.position(oscillator2Settings.x - 30, oscillator2Settings.y + 420);
-    decay2.changed(() => vis.selectedVisual.oscillators[1].envelope.decay = decay2.value());
+    decay2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'decay', decay2.value()));
     
-    sustain2 = createSlider(0, 1, vis.selectedVisual.oscillators[1].envelope.sustain, 0.05);
+    sustain2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.sustain, 0.05);
     sustain2.style('transform', 'rotate(270deg)');
     sustain2.position(oscillator2Settings.x, oscillator2Settings.y + 420);
-    sustain2.changed(() => vis.selectedVisual.oscillators[1].envelope.sustain = sustain2.value());
+    sustain2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'sustain', sustain2.value()));
     
-    release2 = createSlider(0, 5, vis.selectedVisual.oscillators[1].envelope.release, 0.1);
+    release2 = createSlider(0, 5, vis.selectedVisual.oscillators['oscillator2'].envelope.release, 0.1);
     release2.style('transform', 'rotate(270deg)');
     release2.position(oscillator2Settings.x + 30, oscillator2Settings.y + 420);
-    release2.changed(() => vis.selectedVisual.oscillators[1].envelope.release = release2.value());
+    release2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'release', release2.value()));
     
 
     // OSCILLATOR 3
     // Enabled
-    enabled3 = createCheckbox('', vis.selectedVisual.oscillators[2].enabled);
+    enabled3 = createCheckbox('', vis.selectedVisual.oscillators['oscillator3'].enabled);
     enabled3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 35);
-    enabled3.changed(() => vis.selectedVisual.oscillators[2].enabled = !vis.selectedVisual.oscillators[2].enabled);
+    enabled3.changed(() => vis.selectedVisual.toggleOscillator('oscillator3'));
 
     // Amplitude
-    amp3 = createSlider(0, 1, vis.selectedVisual.oscillators[2].amplitude, 0.05);
+    amp3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].amplitude, 0.05);
     amp3.position(oscillator3Settings.x, oscillator3Settings.y + 125)
-    amp3.changed(() => vis.selectedVisual.oscillators[2].amplitude = amp3.value());
+    amp3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'amplitude', amp3.value()));
 
     // Wave
     wave3 = createSelect();
     wave3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 175);
     ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave3.option(item));
-    wave3.value(vis.selectedVisual.oscillators[2].wave);
-    wave3.changed(() => vis.selectedVisual.oscillators[2].wave = wave3.value());
+    wave3.value(vis.selectedVisual.oscillators['oscillator3'].wave);
+    wave3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'wave', wave3.value()));
 
     // Octave
     octave3 = createSelect();
     octave3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 225);
     [-2, -1, 0, 1, 2].forEach(item => octave3.option(item));
-    octave3.value(vis.selectedVisual.oscillators[2].octave);
-    octave3.changed(() => vis.selectedVisual.oscillators[2].octave = octave3.value());
+    octave3.value(vis.selectedVisual.oscillators['oscillator3'].octave);
+    octave3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'octave', octave3.value()));
 
     // Tone
     offset3 = createSelect();
     offset3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 275);
     [-2, -1, 0, 1, 2].forEach(item => offset3.option(item));
-    offset3.value(vis.selectedVisual.oscillators[2].offset);
-    offset3.changed(() => vis.selectedVisual.oscillators[2].offset = offset3.value());
+    offset3.value(vis.selectedVisual.oscillators['oscillator3'].offset);
+    offset3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'offset', offset3.value()));
 
     // Envelope
-    attack3 = createSlider(0, 1, vis.selectedVisual.oscillators[2].envelope.attack, 0.05);
+    attack3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.attack, 0.05);
     attack3.style('transform', 'rotate(270deg)');
     attack3.position(oscillator3Settings.x - 60, oscillator3Settings.y + 420);
-    attack3.changed(() => vis.selectedVisual.oscillators[2].envelope.attack = attack3.value());
+    attack3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'attack', attack3.value()));
     
-    decay3 = createSlider(0, 1, vis.selectedVisual.oscillators[2].envelope.decay, 0.05);
+    decay3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.decay, 0.05);
     decay3.style('transform', 'rotate(270deg)');
     decay3.position(oscillator3Settings.x - 30, oscillator3Settings.y + 420);
-    decay3.changed(() => vis.selectedVisual.oscillators[2].envelope.decay = decay3.value());
+    decay3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'decay', decay3.value()));
     
-    sustain3 = createSlider(0, 1, vis.selectedVisual.oscillators[2].envelope.sustain, 0.05);
+    sustain3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.sustain, 0.05);
     sustain3.style('transform', 'rotate(270deg)');
     sustain3.position(oscillator3Settings.x, oscillator3Settings.y + 420);
-    sustain3.changed(() => vis.selectedVisual.oscillators[2].envelope.sustain = sustain3.value());
+    sustain3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'sustain', sustain3.value()));
     
-    release3 = createSlider(0, 5, vis.selectedVisual.oscillators[2].envelope.release, 0.1);
+    release3 = createSlider(0, 5, vis.selectedVisual.oscillators['oscillator3'].envelope.release, 0.1);
     release3.style('transform', 'rotate(270deg)');
     release3.position(oscillator3Settings.x + 30, oscillator3Settings.y + 420);
-    release3.changed(() => vis.selectedVisual.oscillators[2].envelope.release = release3.value());
+    release3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'release', release3.value()));
     
   }
 
@@ -210,7 +210,7 @@ function SynthesizerSettings() {
 
     text('Oscillator 1', oscillator1Settings.x, oscillator1Settings.y)
     text('Enabled:', oscillator1Settings.x, oscillator1Settings.y + 50)
-    text('Amplitude: ' + vis.selectedVisual.oscillators[0].amplitude, oscillator1Settings.x, oscillator1Settings.y + 100)
+    text('Amplitude: ' + vis.selectedVisual.oscillators['oscillator1'].amplitude, oscillator1Settings.x, oscillator1Settings.y + 100)
     text('Wave: ', oscillator1Settings.x, oscillator1Settings.y + 190)
     text('Octave: ', oscillator1Settings.x, oscillator1Settings.y + 240)
     text('Offset: ', oscillator1Settings.x, oscillator1Settings.y + 290)
@@ -223,7 +223,7 @@ function SynthesizerSettings() {
 
     text('Oscillator 2', oscillator2Settings.x, oscillator2Settings.y)
     text('Enabled:', oscillator2Settings.x, oscillator2Settings.y + 50)
-    text('Amplitude: ' + vis.selectedVisual.oscillators[1].amplitude, oscillator2Settings.x, oscillator2Settings.y + 100)
+    text('Amplitude: ' + vis.selectedVisual.oscillators['oscillator2'].amplitude, oscillator2Settings.x, oscillator2Settings.y + 100)
     text('Wave: ', oscillator2Settings.x, oscillator2Settings.y + 190)
     text('Octave: ', oscillator2Settings.x, oscillator2Settings.y + 240)
     text('Offset: ', oscillator2Settings.x, oscillator2Settings.y + 290)
@@ -235,7 +235,7 @@ function SynthesizerSettings() {
 
     text('Oscillator 3', oscillator3Settings.x, oscillator3Settings.y)
     text('Enabled:', oscillator3Settings.x, oscillator3Settings.y + 50)
-    text('Amplitude: ' + vis.selectedVisual.oscillators[2].amplitude, oscillator3Settings.x, oscillator3Settings.y + 100)
+    text('Amplitude: ' + vis.selectedVisual.oscillators['oscillator3'].amplitude, oscillator3Settings.x, oscillator3Settings.y + 100)
     text('Wave: ', oscillator3Settings.x, oscillator3Settings.y + 190)
     text('Octave: ', oscillator3Settings.x, oscillator3Settings.y + 240)
     text('Offset: ', oscillator3Settings.x, oscillator3Settings.y + 290)

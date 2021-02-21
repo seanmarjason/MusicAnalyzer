@@ -12,20 +12,20 @@ function WavepatternSettings() {
   this.onResize();
 
   this.open = function() {
-    offsetXAmt = createSlider(0, 50, vis.selectedVisual.offsetX, 1);
+    offsetXAmt = createSlider(0, 50, vis.selectedVisual.offset.x, 1);
     offsetXAmt.position(wavepatternSettings.x, wavepatternSettings.y + 100);
-    offsetXAmt.changed(() => vis.selectedVisual.offsetX = offsetXAmt.value());
+    offsetXAmt.changed(() => vis.selectedVisual.setOffset('x', offsetXAmt.value()));
 
-    offsetYAmt = createSlider(0, 50, vis.selectedVisual.offsetY, 1);
+    offsetYAmt = createSlider(0, 50, vis.selectedVisual.offset.y, 1);
     offsetYAmt.position(wavepatternSettings.x, wavepatternSettings.y + 200);
-    offsetYAmt.changed(() => vis.selectedVisual.offsetY = offsetYAmt.value());
+    offsetYAmt.changed(() => vis.selectedVisual.setOffset('y', offsetYAmt.value()));
   }
 
   this.draw = function() {
     text(this.name, width / 2, 100);
 
-    text('X Offset: ' + vis.selectedVisual.offsetX, wavepatternSettings.x, wavepatternSettings.y + 75)
-    text('Y Offset: ' + vis.selectedVisual.offsetY, wavepatternSettings.x, wavepatternSettings.y + 175)
+    text('X Offset: ' + vis.selectedVisual.offset.x, wavepatternSettings.x, wavepatternSettings.y + 75)
+    text('Y Offset: ' + vis.selectedVisual.offset.y, wavepatternSettings.x, wavepatternSettings.y + 175)
   }
 
   this.close = function() {

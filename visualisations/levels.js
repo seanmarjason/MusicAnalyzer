@@ -27,8 +27,12 @@ function Levels() {
 		this.pad = width / 20;
 		this.plotWidth = (width - this.pad) / plotsAcross;
 		this.plotHeight = (height - this.pad) / plotsDown;
-		this.dialRadius = (this.plotWidth - this.pad) / 2 - 50;
+		this.dialRadius = (min(this.plotWidth, this.plotHeight) - this.pad) / 2 - 50;
 	};
+
+	this.togglePlot = function(plot) {
+		this.plots[plot] = !this.plots[plot];
+	}
 
 	// draw the plots to the screen
 	this.draw = function() {
