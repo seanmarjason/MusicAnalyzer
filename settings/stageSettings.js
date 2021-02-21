@@ -39,19 +39,19 @@ function StageSettings() {
                                     () => vis.selectedVisual.setLightEnergy('stageLight', stageLightEnergy.value)
                                   );
 
-
     // Light Colour
-    stageLightColour = createColorPicker(vis.selectedVisual.stageLight.colour);
-    stageLightColour.position(stageLightSettings.x, stageLightSettings.y + 300);
-    stageLightColour.changed(() => vis.selectedVisual.setLightColour('stageLight', stageLightColour.color()));
+    stageLightColour = new ColourPicker(  stageLightSettings.x, stageLightSettings.y + 300,
+                                          vis.selectedVisual.stageLight.colour,
+                                          () => vis.selectedVisual.setLightColour('stageLight', stageLightColour.colour)
+                                        );
 
+                                        
     // FEATURE LIGHTS
     // Number of lights
     featureLightAmt = new Slider( featureLightSettings.x, featureLightSettings.y + 125,
                                   0, 10, 1, vis.selectedVisual.featureLight.amount,
                                   () => vis.selectedVisual.setLightAmount('featureLight', featureLightAmt.value)
                                 );
-
 
     // Energy to follow
     featureLightEnergy = new Select(  featureLightSettings.x,
@@ -61,12 +61,12 @@ function StageSettings() {
                                       () => vis.selectedVisual.setLightEnergy('featureLight', featureLightEnergy.value)
                                     );
 
+    // Light Colour   
+    featureLightColour = new ColourPicker(  featureLightSettings.x, featureLightSettings.y + 300,
+                                            vis.selectedVisual.featureLight.colour,
+                                            () => vis.selectedVisual.setLightColour('featureLight', featureLightColour.colour)
+                                          );
 
-    // Light Colour
-    featureLightColour = createColorPicker(vis.selectedVisual.featureLight.colour);
-    featureLightColour.position(featureLightSettings.x, featureLightSettings.y + 300);
-    featureLightColour.changed(() => vis.selectedVisual.setLightColour('featureLight', featureLightColour.color()));
-    
   }
 
   this.draw = function() {
