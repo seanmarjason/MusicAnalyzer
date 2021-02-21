@@ -49,9 +49,10 @@ function SynthesizerSettings() {
 
     // OSCILLATOR 1
     // Enabled
-    enabled1 = createCheckbox('', vis.selectedVisual.oscillators['oscillator1'].enabled);
-    enabled1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 35);
-    enabled1.changed(() => vis.selectedVisual.toggleOscillator('oscillator1'));
+    enabled1 = new Checkbox(  oscillator1Settings.x + 75, oscillator1Settings.y + 35,
+                              vis.selectedVisual.oscillators['oscillator1'].enabled,
+                              () => vis.selectedVisual.toggleOscillator('oscillator1')
+                            );
 
     // Amplitude
     amp1 = new Slider(  oscillator1Settings.x, oscillator1Settings.y + 125,
@@ -67,7 +68,6 @@ function SynthesizerSettings() {
                         () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'wave', wave1.value),
                       );
 
-
     // Octave
     octave1 = new Select( oscillator1Settings.x + 75,
                           oscillator1Settings.y + 225,
@@ -76,7 +76,6 @@ function SynthesizerSettings() {
                           () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'octave', octave1.value)
                         );
 
-
     // Tone
     offset1 = new Select( oscillator1Settings.x + 75,
                           oscillator1Settings.y + 275,
@@ -84,7 +83,6 @@ function SynthesizerSettings() {
                           vis.selectedVisual.oscillators['oscillator1'].offset,
                           () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'offset', offset1.value)
                         );
-
 
     // Envelope
     attack1 = new Slider( oscillator1Settings.x - 60, oscillator1Settings.y + 420,
@@ -113,9 +111,10 @@ function SynthesizerSettings() {
 
     // OSCILLATOR 2
     // Enabled
-    enabled2 = createCheckbox('', vis.selectedVisual.oscillators['oscillator2'].enabled);
-    enabled2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 35);
-    enabled2.changed(() => vis.selectedVisual.toggleOscillator('oscillator2'));
+    enabled2 = new Checkbox(  oscillator2Settings.x + 75, oscillator2Settings.y + 35,
+                              vis.selectedVisual.oscillators['oscillator2'].enabled,
+                              () => vis.selectedVisual.toggleOscillator('oscillator2')
+                            );
 
     // Amplitude
     amp2 = new Slider(  oscillator2Settings.x, oscillator2Settings.y + 125,
@@ -147,7 +146,6 @@ function SynthesizerSettings() {
                           () => vis.selectedVisual.setOscillatorParameter('oscillator2', 'offset', offset2.value)
                         );
 
-
     // Envelope  
     attack2 = new Slider( oscillator2Settings.x - 60, oscillator2Settings.y + 420,
                           0, 1, 0.05, vis.selectedVisual.oscillators['oscillator2'].envelope.attack,
@@ -175,9 +173,10 @@ function SynthesizerSettings() {
 
     // OSCILLATOR 3
     // Enabled
-    enabled3 = createCheckbox('', vis.selectedVisual.oscillators['oscillator3'].enabled);
-    enabled3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 35);
-    enabled3.changed(() => vis.selectedVisual.toggleOscillator('oscillator3'));
+    enabled3 = new Checkbox(  oscillator3Settings.x + 75, oscillator3Settings.y + 35,
+                              vis.selectedVisual.oscillators['oscillator3'].enabled,
+                              () => vis.selectedVisual.toggleOscillator('oscillator3')
+                            );
 
     // Amplitude
     amp3 = new Slider(  oscillator3Settings.x, oscillator3Settings.y + 125,
@@ -192,7 +191,6 @@ function SynthesizerSettings() {
                         vis.selectedVisual.oscillators['oscillator3'].wave,
                         () => vis.selectedVisual.setOscillatorParameter('oscillator3', 'wave', wave3.value)
                       );
-
 
     // Octave
     octave3 = new Select( oscillator3Settings.x + 75, 
@@ -209,7 +207,6 @@ function SynthesizerSettings() {
                           vis.selectedVisual.oscillators['oscillator3'].offset,
                           () => vis.selectedVisual.setOscillatorParameter('oscillator3', 'offset', offset3.value)
                         );
-
 
     // Envelope 
     attack3 = new Slider( oscillator3Settings.x - 60, oscillator3Settings.y + 420,

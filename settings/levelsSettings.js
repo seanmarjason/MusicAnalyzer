@@ -15,25 +15,32 @@ function LevelsSettings() {
   this.onResize();
 
   this.open = function() {
-    bassToggle = createCheckbox('', vis.selectedVisual.plots.bass);
-    bassToggle.position(levelsSettings.x + 100, levelsSettings.y + 50);
-    bassToggle.changed(() => vis.selectedVisual.togglePlot('bass'));
 
-    lowMidToggle = createCheckbox('', vis.selectedVisual.plots.lowMid);
-    lowMidToggle.position(levelsSettings.x + 100, levelsSettings.y + 100);
-    lowMidToggle.changed(() => vis.selectedVisual.togglePlot('lowMid'));
+    bassToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 50,
+                                vis.selectedVisual.plots.bass,
+                                () => vis.selectedVisual.togglePlot('bass')
+                              );
 
-    midToggle = createCheckbox('', vis.selectedVisual.plots.mid);
-    midToggle.position(levelsSettings.x + 100, levelsSettings.y + 150);
-    midToggle.changed(() => vis.selectedVisual.togglePlot('mid'));
+    lowMidToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 100,
+                                  vis.selectedVisual.plots.lowMid,
+                                  () => vis.selectedVisual.togglePlot('lowMid')
+                                );
 
-    highMidToggle = createCheckbox('', vis.selectedVisual.plots.highMid);
-    highMidToggle.position(levelsSettings.x + 100, levelsSettings.y + 200);
-    highMidToggle.changed(() => vis.selectedVisual.togglePlot('highMid'));
+    midToggle = new Checkbox( levelsSettings.x + 100, levelsSettings.y + 150,
+                              vis.selectedVisual.plots.mid,
+                              () => vis.selectedVisual.togglePlot('mid')
+                            );
 
-    trebleToggle = createCheckbox('', vis.selectedVisual.plots.treble);
-    trebleToggle.position(levelsSettings.x + 100, levelsSettings.y + 250);
-    trebleToggle.changed(() => vis.selectedVisual.togglePlot('treble'));
+    highMidToggle = new Checkbox( levelsSettings.x + 100, levelsSettings.y + 200,
+                                  vis.selectedVisual.plots.highMid,
+                                  () => vis.selectedVisual.togglePlot('highMid')
+                                );
+
+    trebleToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 250,
+                                  vis.selectedVisual.plots.treble,
+                                  () => vis.selectedVisual.togglePlot('treble')
+                                );
+
   }
 
   this.draw = function() {
