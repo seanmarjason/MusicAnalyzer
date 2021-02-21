@@ -26,9 +26,10 @@ function StageSettings() {
 
     // STAGE LIGHTS
     // Number of lights
-    stageLightAmt = createSlider(0, 10, vis.selectedVisual.stageLight.amount, 1);
-    stageLightAmt.position(stageLightSettings.x, stageLightSettings.y + 125)
-    stageLightAmt.changed(() => vis.selectedVisual.setLightAmount('stageLight', stageLightAmt.value()));
+    stageLightAmt = new Slider( stageLightSettings.x, stageLightSettings.y + 125,
+                                0, 10, 1, vis.selectedVisual.stageLight.amount,
+                                () => vis.selectedVisual.setLightAmount('stageLight', stageLightAmt.value)
+                              );
 
     // Energy to follow
     stageLightEnergy = new Select(  stageLightSettings.x,
@@ -46,9 +47,11 @@ function StageSettings() {
 
     // FEATURE LIGHTS
     // Number of lights
-    featureLightAmt = createSlider(0, 10, vis.selectedVisual.featureLight.amount, 1);
-    featureLightAmt.position(featureLightSettings.x, featureLightSettings.y + 125)
-    featureLightAmt.changed(() => vis.selectedVisual.setLightAmount('featureLight', featureLightAmt.value()));
+    featureLightAmt = new Slider( featureLightSettings.x, featureLightSettings.y + 125,
+                                  0, 10, 1, vis.selectedVisual.featureLight.amount,
+                                  () => vis.selectedVisual.setLightAmount('featureLight', featureLightAmt.value)
+                                );
+
 
     // Energy to follow
     featureLightEnergy = new Select(  featureLightSettings.x,

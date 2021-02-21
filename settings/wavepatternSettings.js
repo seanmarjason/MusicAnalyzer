@@ -12,13 +12,16 @@ function WavepatternSettings() {
   this.onResize();
 
   this.open = function() {
-    offsetXAmt = createSlider(0, 50, vis.selectedVisual.offset.x, 1);
-    offsetXAmt.position(wavepatternSettings.x, wavepatternSettings.y + 100);
-    offsetXAmt.changed(() => vis.selectedVisual.setOffset('x', offsetXAmt.value()));
+    
+    offsetXAmt = new Slider(  wavepatternSettings.x, wavepatternSettings.y + 100,
+                              0, 50, 1, vis.selectedVisual.offset.x,
+                              () => vis.selectedVisual.setOffset('x', offsetXAmt.value)
+                            );
 
-    offsetYAmt = createSlider(0, 50, vis.selectedVisual.offset.y, 1);
-    offsetYAmt.position(wavepatternSettings.x, wavepatternSettings.y + 200);
-    offsetYAmt.changed(() => vis.selectedVisual.setOffset('y', offsetYAmt.value()));
+    offsetYAmt = new Slider(  wavepatternSettings.x, wavepatternSettings.y + 200,
+                              0, 50, 1, vis.selectedVisual.offset.y,
+                              () => vis.selectedVisual.setOffset('y', offsetYAmt.value)
+                            );
   }
 
   this.draw = function() {

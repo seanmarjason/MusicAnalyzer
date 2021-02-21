@@ -54,9 +54,10 @@ function SynthesizerSettings() {
     enabled1.changed(() => vis.selectedVisual.toggleOscillator('oscillator1'));
 
     // Amplitude
-    amp1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].amplitude, 0.05);
-    amp1.position(oscillator1Settings.x, oscillator1Settings.y + 125)
-    amp1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'amplitude', amp1.value()));
+    amp1 = new Slider(  oscillator1Settings.x, oscillator1Settings.y + 125,
+                        0, 1, 0.05, vis.selectedVisual.oscillators['oscillator1'].amplitude,
+                        () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'amplitude', amp1.value)
+                      );
 
     // Wave
     wave1 = new Select( oscillator1Settings.x + 75, 
@@ -86,25 +87,29 @@ function SynthesizerSettings() {
 
 
     // Envelope
-    attack1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.attack, 0.05);
-    attack1.style('transform', 'rotate(270deg)');
-    attack1.position(oscillator1Settings.x - 60, oscillator1Settings.y + 420);
-    attack1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'attack', attack1.value()));
+    attack1 = new Slider( oscillator1Settings.x - 60, oscillator1Settings.y + 420,
+                          0, 1, 0.05, vis.selectedVisual.oscillators['oscillator1'].envelope.attack,
+                          () => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'attack', attack1.value),
+                          'verticle'
+                        );
+
+    decay1 = new Slider( oscillator1Settings.x - 30, oscillator1Settings.y + 420,
+                          0, 1, 0.05, vis.selectedVisual.oscillators['oscillator1'].envelope.decay,
+                          () => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'decay', decay1.value),
+                          'verticle'
+                       );
     
-    decay1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.decay, 0.05);
-    decay1.style('transform', 'rotate(270deg)');
-    decay1.position(oscillator1Settings.x - 30, oscillator1Settings.y + 420);
-    decay1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'decay', decay1.value()));
-    
-    sustain1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.sustain, 0.05);
-    sustain1.style('transform', 'rotate(270deg)');
-    sustain1.position(oscillator1Settings.x, oscillator1Settings.y + 420);
-    sustain1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'decay', sustain1.value()));
-    
-    release1 = createSlider(0, 5, vis.selectedVisual.oscillators['oscillator1'].envelope.release, 0.1);
-    release1.style('transform', 'rotate(270deg)');
-    release1.position(oscillator1Settings.x + 30, oscillator1Settings.y + 420);
-    release1.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'release', release1.value()));
+    sustain1 = new Slider(  oscillator1Settings.x, oscillator1Settings.y + 420, 
+                            0, 1, 0.05, vis.selectedVisual.oscillators['oscillator1'].envelope.sustain,
+                            () => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'sustain', sustain1.value),
+                            'verticle'
+                          );
+
+    release1 = new Slider(  oscillator1Settings.x + 30, oscillator1Settings.y + 420,
+                            0, 5, 0.1, vis.selectedVisual.oscillators['oscillator1'].envelope.release,
+                            () => vis.selectedVisual.setOscillatorEnvelope('oscillator1', 'release', release1.value),
+                            'verticle'
+                          );
 
     // OSCILLATOR 2
     // Enabled
@@ -113,9 +118,10 @@ function SynthesizerSettings() {
     enabled2.changed(() => vis.selectedVisual.toggleOscillator('oscillator2'));
 
     // Amplitude
-    amp2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].amplitude, 0.05);
-    amp2.position(oscillator2Settings.x, oscillator2Settings.y + 125)
-    amp2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'amplitude',  amp2.value()));
+    amp2 = new Slider(  oscillator2Settings.x, oscillator2Settings.y + 125,
+                        0, 1, 0.05, vis.selectedVisual.oscillators['oscillator2'].amplitude,
+                        () => vis.selectedVisual.setOscillatorParameter('oscillator2', 'amplitude',  amp2.value)
+                      );
 
     // Wave
     wave2 = new Select( oscillator2Settings.x + 75,
@@ -133,7 +139,6 @@ function SynthesizerSettings() {
                           () => vis.selectedVisual.setOscillatorParameter('oscillator2', 'octave', octave2.value)
                         );
 
-
     // Tone
     offset2 = new Select( oscillator2Settings.x + 75, 
                           oscillator2Settings.y + 275,
@@ -143,27 +148,30 @@ function SynthesizerSettings() {
                         );
 
 
-    // Envelope
-    attack2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.attack, 0.05);
-    attack2.style('transform', 'rotate(270deg)');
-    attack2.position(oscillator2Settings.x - 60, oscillator2Settings.y + 420);
-    attack2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'attack', attack2.value()));
+    // Envelope  
+    attack2 = new Slider( oscillator2Settings.x - 60, oscillator2Settings.y + 420,
+                          0, 1, 0.05, vis.selectedVisual.oscillators['oscillator2'].envelope.attack,
+                          () => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'attack', attack2.value),
+                          'verticle'
+                        );
     
-    decay2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.decay, 0.05);
-    decay2.style('transform', 'rotate(270deg)');
-    decay2.position(oscillator2Settings.x - 30, oscillator2Settings.y + 420);
-    decay2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'decay', decay2.value()));
+    decay2 = new Slider(  oscillator2Settings.x - 30, oscillator2Settings.y + 420,
+                          0, 1, 0.05, vis.selectedVisual.oscillators['oscillator2'].envelope.decay,
+                          () => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'decay', decay2.value),
+                          'verticle'
+                        );
     
-    sustain2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.sustain, 0.05);
-    sustain2.style('transform', 'rotate(270deg)');
-    sustain2.position(oscillator2Settings.x, oscillator2Settings.y + 420);
-    sustain2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'sustain', sustain2.value()));
+    sustain2 = new Slider(  oscillator2Settings.x, oscillator2Settings.y + 420,
+                            0, 1, 0.05, vis.selectedVisual.oscillators['oscillator2'].envelope.sustain,
+                            () => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'sustain', sustain2.value),
+                            'verticle'
+                          );
     
-    release2 = createSlider(0, 5, vis.selectedVisual.oscillators['oscillator2'].envelope.release, 0.1);
-    release2.style('transform', 'rotate(270deg)');
-    release2.position(oscillator2Settings.x + 30, oscillator2Settings.y + 420);
-    release2.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'release', release2.value()));
-    
+    release2 = new Slider(  oscillator2Settings.x + 30, oscillator2Settings.y + 420,
+                            0, 5, 0.1, vis.selectedVisual.oscillators['oscillator2'].envelope.release,
+                            () => vis.selectedVisual.setOscillatorEnvelope('oscillator2', 'release', release2.value),
+                            'verticle'
+                          );
 
     // OSCILLATOR 3
     // Enabled
@@ -172,9 +180,10 @@ function SynthesizerSettings() {
     enabled3.changed(() => vis.selectedVisual.toggleOscillator('oscillator3'));
 
     // Amplitude
-    amp3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].amplitude, 0.05);
-    amp3.position(oscillator3Settings.x, oscillator3Settings.y + 125)
-    amp3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'amplitude', amp3.value()));
+    amp3 = new Slider(  oscillator3Settings.x, oscillator3Settings.y + 125,
+                        0, 1, 0.05, vis.selectedVisual.oscillators['oscillator3'].amplitude,
+                        () => vis.selectedVisual.setOscillatorParameter('oscillator3', 'amplitude', amp3.value)
+                      );
 
     // Wave
     wave3 = new Select( oscillator3Settings.x + 75, 
@@ -202,27 +211,31 @@ function SynthesizerSettings() {
                         );
 
 
-    // Envelope
-    attack3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.attack, 0.05);
-    attack3.style('transform', 'rotate(270deg)');
-    attack3.position(oscillator3Settings.x - 60, oscillator3Settings.y + 420);
-    attack3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'attack', attack3.value()));
+    // Envelope 
+    attack3 = new Slider( oscillator3Settings.x - 60, oscillator3Settings.y + 420,
+                          0, 1, 0.05, vis.selectedVisual.oscillators['oscillator3'].envelope.attack,
+                          () => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'attack', attack3.value),
+                          'verticle'
+                        );
     
-    decay3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.decay, 0.05);
-    decay3.style('transform', 'rotate(270deg)');
-    decay3.position(oscillator3Settings.x - 30, oscillator3Settings.y + 420);
-    decay3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'decay', decay3.value()));
+    decay3 = new Slider(  oscillator3Settings.x - 30, oscillator3Settings.y + 420,
+                          0, 1, 0.05, vis.selectedVisual.oscillators['oscillator3'].envelope.decay,
+                          () => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'decay', decay3.value),
+                          'verticle'
+                        );
     
-    sustain3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.sustain, 0.05);
-    sustain3.style('transform', 'rotate(270deg)');
-    sustain3.position(oscillator3Settings.x, oscillator3Settings.y + 420);
-    sustain3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'sustain', sustain3.value()));
+    sustain3 = new Slider(  oscillator3Settings.x, oscillator3Settings.y + 420,
+                            0, 1, 0.05, vis.selectedVisual.oscillators['oscillator3'].envelope.sustain,
+                            () => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'sustain', sustain3.value),
+                            'verticle'
+                          );
     
-    release3 = createSlider(0, 5, vis.selectedVisual.oscillators['oscillator3'].envelope.release, 0.1);
-    release3.style('transform', 'rotate(270deg)');
-    release3.position(oscillator3Settings.x + 30, oscillator3Settings.y + 420);
-    release3.changed(() => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'release', release3.value()));
-    
+    release3 = new Slider(  oscillator3Settings.x + 30, oscillator3Settings.y + 420,
+                            0, 5, 0.1, vis.selectedVisual.oscillators['oscillator3'].envelope.release,
+                            () => vis.selectedVisual.setOscillatorEnvelope('oscillator3', 'release', release3.value),
+                            'verticle'
+                          );
+
   }
 
   this.draw = function() {
