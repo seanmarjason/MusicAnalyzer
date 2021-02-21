@@ -17,12 +17,12 @@ function ClippingSettings() {
   this.open = function() {
 
     // SIGNAL THRESHOLD
-    signalThreshold = createSelect();
-    signalThreshold.position(clippingSettings.x, clippingSettings.y);
-    signalThreshold.size(100, 25)
-    signalThresholdOptions.forEach(option => signalThreshold.option(option));
-    signalThreshold.selected(vis.selectedVisual.signalThreshold);
-    signalThreshold.changed(() => vis.selectedVisual.setSignalThreshold(signalThreshold.value()));
+    signalThreshold = new Select( clippingSettings.x, 
+                                  clippingSettings.y,
+                                  signalThresholdOptions,
+                                  vis.selectedVisual.signalThreshold,
+                                  vis.selectedVisual.setSignalThreshold
+                                );
 
   }
 

@@ -1,4 +1,7 @@
 function Clipping(){
+
+	var self = this;
+
 	this.name = "Analyze Track Clipping";
 
 	this.bins = 64;
@@ -24,8 +27,8 @@ function Clipping(){
 	}
 
 	this.setSignalThreshold = function(value) {
-		this.signalThreshold = value;
-		this.reset();
+		self.signalThreshold = value;
+		self.reset();
 	}
 
 	this.draw = function(){
