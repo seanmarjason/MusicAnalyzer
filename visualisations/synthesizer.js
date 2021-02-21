@@ -121,15 +121,15 @@ function Synthesizer() {
   }
 
   this.toggleOscillator = function (oscillator) {
-    this.oscillators[oscillator].enabled = !this.oscillators[oscillator].enabled;
+    self.oscillators[oscillator].enabled = !self.oscillators[oscillator].enabled;
   }
 
   this.setOscillatorParameter = function (oscillator, parameter, value) {
-    this.oscillators[oscillator][parameter] = value;
+    self.oscillators[oscillator][parameter] = value;
   }
 
   this.setOscillatorEnvelope = function (oscillator, envelopeParameter, value) {
-    this.oscillators[oscillator].envelope[envelopeParameter] = value;
+    self.oscillators[oscillator].envelope[envelopeParameter] = value;
   }
 
 	this.draw = function() {

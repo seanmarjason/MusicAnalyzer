@@ -1,4 +1,4 @@
-function Select(x, y, options, selectedOption, callback) {
+function Select(x, y, options, selectedOption, callback ) {
 
   this.select = createSelect();
 
@@ -8,7 +8,12 @@ function Select(x, y, options, selectedOption, callback) {
   options.forEach(option => this.select.option(option));
   this.select.selected(selectedOption);
 
-  this.select.changed(() => callback(this.select.value()));
+  this.value = this.select.value();
+
+  this.select.changed(() => {
+    this.value = this.select.value();
+    callback();
+  });
 
   this.remove = () => this.select.remove();
 }

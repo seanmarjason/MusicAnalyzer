@@ -31,11 +31,13 @@ function StageSettings() {
     stageLightAmt.changed(() => vis.selectedVisual.setLightAmount('stageLight', stageLightAmt.value()));
 
     // Energy to follow
-    stageLightEnergy = createSelect();
-    stageLightEnergy.position(stageLightSettings.x, stageLightSettings.y + 200);
-    energyValues.forEach(item => stageLightEnergy.option(item));
-    stageLightEnergy.value(vis.selectedVisual.stageLight.energy);
-    stageLightEnergy.changed(() => vis.selectedVisual.setLightEnergy('stageLight', stageLightEnergy.value()));
+    stageLightEnergy = new Select(  stageLightSettings.x,
+                                    stageLightSettings.y + 200,
+                                    energyValues,
+                                    vis.selectedVisual.stageLight.energy,
+                                    () => vis.selectedVisual.setLightEnergy('stageLight', stageLightEnergy.value)
+                                  );
+
 
     // Light Colour
     stageLightColour = createColorPicker(vis.selectedVisual.stageLight.colour);
@@ -49,11 +51,13 @@ function StageSettings() {
     featureLightAmt.changed(() => vis.selectedVisual.setLightAmount('featureLight', featureLightAmt.value()));
 
     // Energy to follow
-    featureLightEnergy = createSelect();
-    featureLightEnergy.position(featureLightSettings.x, featureLightSettings.y + 200);
-    energyValues.forEach(item => featureLightEnergy.option(item));
-    featureLightEnergy.value(vis.selectedVisual.featureLight.energy);
-    featureLightEnergy.changed(() => vis.selectedVisual.setLightEnergy('featureLight', featureLightEnergy.value()));
+    featureLightEnergy = new Select(  featureLightSettings.x,
+                                      featureLightSettings.y + 200,
+                                      energyValues,
+                                      vis.selectedVisual.featureLight.energy,
+                                      () => vis.selectedVisual.setLightEnergy('featureLight', featureLightEnergy.value)
+                                    );
+
 
     // Light Colour
     featureLightColour = createColorPicker(vis.selectedVisual.featureLight.colour);

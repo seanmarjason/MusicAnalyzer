@@ -34,6 +34,10 @@ function SynthesizerSettings() {
   var octave3;
   var offset3;
 
+  var waveOptions = ['sine', 'triangle', 'square', 'sawtooth'];
+  var octaveOptions = [-2, -1, 0, 1, 2];
+  var offsetOptions = [-2, -1, 0, 1, 2];
+
   this.onResize = function() {
     oscillator1Settings = {x: (width/2) - (width/3), y: 200}
     oscillator2Settings = {x: (width/2) - 50, y: 200}
@@ -55,25 +59,31 @@ function SynthesizerSettings() {
     amp1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'amplitude', amp1.value()));
 
     // Wave
-    wave1 = createSelect();
-    wave1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 175);
-    ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave1.option(item));
-    wave1.value(vis.selectedVisual.oscillators['oscillator1'].wave);
-    wave1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'wave', wave1.value()));
+    wave1 = new Select( oscillator1Settings.x + 75, 
+                        oscillator1Settings.y + 175,
+                        waveOptions,
+                        vis.selectedVisual.oscillators['oscillator1'].wave,
+                        () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'wave', wave1.value),
+                      );
+
 
     // Octave
-    octave1 = createSelect();
-    octave1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 225);
-    [-2, -1, 0, 1, 2].forEach(item => octave1.option(item));
-    octave1.value(vis.selectedVisual.oscillators['oscillator1'].octave);
-    octave1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'octave', octave1.value()));
+    octave1 = new Select( oscillator1Settings.x + 75,
+                          oscillator1Settings.y + 225,
+                          octaveOptions,
+                          vis.selectedVisual.oscillators['oscillator1'].octave,
+                          () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'octave', octave1.value)
+                        );
+
 
     // Tone
-    offset1 = createSelect();
-    offset1.position(oscillator1Settings.x + 75, oscillator1Settings.y + 275);
-    [-2, -1, 0, 1, 2].forEach(item => offset1.option(item));
-    offset1.value(vis.selectedVisual.oscillators['oscillator1'].offset);
-    offset1.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator1', 'offset', offset1.value()));
+    offset1 = new Select( oscillator1Settings.x + 75,
+                          oscillator1Settings.y + 275,
+                          offsetOptions,
+                          vis.selectedVisual.oscillators['oscillator1'].offset,
+                          () => vis.selectedVisual.setOscillatorParameter('oscillator1', 'offset', offset1.value)
+                        );
+
 
     // Envelope
     attack1 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator1'].envelope.attack, 0.05);
@@ -108,25 +118,30 @@ function SynthesizerSettings() {
     amp2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'amplitude',  amp2.value()));
 
     // Wave
-    wave2 = createSelect();
-    wave2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 175);
-    ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave2.option(item));
-    wave2.value(vis.selectedVisual.oscillators['oscillator2'].wave);
-    wave2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'wave', wave2.value()));
+    wave2 = new Select( oscillator2Settings.x + 75,
+                        oscillator2Settings.y + 175,
+                        waveOptions,
+                        vis.selectedVisual.oscillators['oscillator2'].wave,
+                        () => vis.selectedVisual.setOscillatorParameter('oscillator2', 'wave', wave2.value)
+                      );
 
     // Octave
-    octave2 = createSelect();
-    octave2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 225);
-    [-2, -1, 0, 1, 2].forEach(item => octave2.option(item));
-    octave2.value(vis.selectedVisual.oscillators['oscillator2'].octave);
-    octave2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'octave', octave2.value()));
+    octave2 = new Select( oscillator2Settings.x + 75,
+                          oscillator2Settings.y + 225,
+                          octaveOptions,
+                          vis.selectedVisual.oscillators['oscillator2'].octave,
+                          () => vis.selectedVisual.setOscillatorParameter('oscillator2', 'octave', octave2.value)
+                        );
+
 
     // Tone
-    offset2 = createSelect();
-    offset2.position(oscillator2Settings.x + 75, oscillator2Settings.y + 275);
-    [-2, -1, 0, 1, 2].forEach(item => offset2.option(item));
-    offset2.value(vis.selectedVisual.oscillators['oscillator2'].offset);
-    offset2.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator2', 'offset', offset2.value()));
+    offset2 = new Select( oscillator2Settings.x + 75, 
+                          oscillator2Settings.y + 275,
+                          offsetOptions,
+                          vis.selectedVisual.oscillators['oscillator2'].offset,
+                          () => vis.selectedVisual.setOscillatorParameter('oscillator2', 'offset', offset2.value)
+                        );
+
 
     // Envelope
     attack2 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator2'].envelope.attack, 0.05);
@@ -162,25 +177,30 @@ function SynthesizerSettings() {
     amp3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'amplitude', amp3.value()));
 
     // Wave
-    wave3 = createSelect();
-    wave3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 175);
-    ['sine', 'triangle', 'square', 'sawtooth'].forEach(item => wave3.option(item));
-    wave3.value(vis.selectedVisual.oscillators['oscillator3'].wave);
-    wave3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'wave', wave3.value()));
+    wave3 = new Select( oscillator3Settings.x + 75, 
+                        oscillator3Settings.y + 175,
+                        waveOptions,
+                        vis.selectedVisual.oscillators['oscillator3'].wave,
+                        () => vis.selectedVisual.setOscillatorParameter('oscillator3', 'wave', wave3.value)
+                      );
+
 
     // Octave
-    octave3 = createSelect();
-    octave3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 225);
-    [-2, -1, 0, 1, 2].forEach(item => octave3.option(item));
-    octave3.value(vis.selectedVisual.oscillators['oscillator3'].octave);
-    octave3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'octave', octave3.value()));
+    octave3 = new Select( oscillator3Settings.x + 75, 
+                          oscillator3Settings.y + 225,
+                          octaveOptions,
+                          vis.selectedVisual.oscillators['oscillator3'].octave,
+                          () => vis.selectedVisual.setOscillatorParameter('oscillator3', 'octave', octave3.value)
+                        );
 
     // Tone
-    offset3 = createSelect();
-    offset3.position(oscillator3Settings.x + 75, oscillator3Settings.y + 275);
-    [-2, -1, 0, 1, 2].forEach(item => offset3.option(item));
-    offset3.value(vis.selectedVisual.oscillators['oscillator3'].offset);
-    offset3.changed(() => vis.selectedVisual.setOscillatorParameter('oscillator3', 'offset', offset3.value()));
+    offset3 = new Select( oscillator3Settings.x + 75,
+                          oscillator3Settings.y + 275,
+                          offsetOptions,
+                          vis.selectedVisual.oscillators['oscillator3'].offset,
+                          () => vis.selectedVisual.setOscillatorParameter('oscillator3', 'offset', offset3.value)
+                        );
+
 
     // Envelope
     attack3 = createSlider(0, 1, vis.selectedVisual.oscillators['oscillator3'].envelope.attack, 0.05);

@@ -1,5 +1,7 @@
 //draw the waveform to the screen
 function Stage() {
+
+  var self = this;
 	//vis name
   this.name = "Stage Visualiser";
 

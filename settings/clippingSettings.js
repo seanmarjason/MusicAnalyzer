@@ -21,7 +21,7 @@ function ClippingSettings() {
                                   clippingSettings.y,
                                   signalThresholdOptions,
                                   vis.selectedVisual.signalThreshold,
-                                  vis.selectedVisual.setSignalThreshold
+                                  () => vis.selectedVisual.setSignalThreshold(signalThreshold.value)
                                 );
 
   }
