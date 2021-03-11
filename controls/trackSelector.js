@@ -11,13 +11,15 @@ function TrackSelector(){
     'Ukulele': 'assets/bensound-ukulele.mp3',
   }
 
+  var sel;
+
   this.loading = false;
 
   // set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
   this.onResize = function() {
     this.x = 80;
-    this.y = 25;
+    this.y = 10;
     this.width = 250;
     this.height = 25;
   }
@@ -26,7 +28,7 @@ function TrackSelector(){
   this.setup = function() {
 
     // create selector element for user to select a track
-    var sel;
+    // var sel;
     sel = createSelect();
     sel.position(this.x, this.y);
     sel.size(this.width, this.height);
@@ -52,6 +54,18 @@ function TrackSelector(){
   var soundLoaded = function(){
     controls.playbackButton.enabled = true;
     controls.reset();
+  }
+
+  this.addTrack = function(track) {
+    // Add track as an option
+    tracks[track.name] = track
+    
+    // Adjust selected track
+    sel.option(track.name);
+    sel.value(track.name);
+
+    // Load the new track
+    changeTrack(track.name);
   }
 
 }

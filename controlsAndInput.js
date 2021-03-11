@@ -11,6 +11,7 @@ function ControlsAndInput(){
 		this.fullscreenButton = new FullscreenButton();
 		this.trackSelector = new TrackSelector();
 		this.trackNavigator = new TrackNavigator();
+		this.trackUploader = new TrackUploader();
 		this.menu = new Menu();
 		
 		// initialise track selector
