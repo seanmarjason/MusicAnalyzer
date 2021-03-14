@@ -20,8 +20,8 @@ function Menu() {
 		text("Select a tool using number keys:", this.x, this.y);
 
 		//draw out menu items for each visualisation
-		for(var i = 0; i < vis.visuals.length; i++){
-			var yLoc = this.y + 70 + i*40;
+		for(let i = 0; i < vis.visuals.length; i++){
+			const yLoc = this.y + 70 + i*40;
 			text((i+1) + ":  " +vis.visuals[i].name, this.x, yLoc);
 		}
 	};

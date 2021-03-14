@@ -1,10 +1,10 @@
 //global for the controls and input 
-var controls = null;
+let controls = null;
 //store visualisations in a container
-var vis = null;
+let vis = null;
 //variable for the p5 sound object
-var sound = null;
-var soundTime = 0;
+let sound = null;
+let soundTime = 0;
 
 function preload(){
 	// load default sound

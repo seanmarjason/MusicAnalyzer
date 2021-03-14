@@ -21,7 +21,7 @@ function Settings(){
 	//select a settings pane using it name property
 	//@param settingsName: name property of the settings pane
 	this.selectSettings = function(settingsName){
-		for(var i = 0; i < this.settings.length; i++){
+		for(let i = 0; i < this.settings.length; i++){
 			if(settingsName == this.settings[i].name){
 				this.selectedSettings = this.settings[i];
 			}
@@ -40,7 +40,7 @@ function Settings(){
 		if(keycode > 48 && keycode < 58){
 			this.open && this.selectedSettings.close();
 			this.open = false;
-			var settingsNumber = keycode - 49;
+			const settingsNumber = keycode - 49;
 			this.selectSettings(this.settings[settingsNumber].name); 
 		}
 

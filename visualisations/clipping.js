@@ -1,14 +1,14 @@
 function Clipping(){
 
-	var self = this;
+	const self = this;
 
 	this.name = "Analyze Track Clipping";
 
 	this.bins = 64;
 	this.signalThreshold = 240;
 	
-	var binWidth;
-	var binHeight;
+	let binWidth;
+	let binHeight;
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -18,10 +18,10 @@ function Clipping(){
 	}
 	this.resize();
 
-	var clippingFourier = new p5.FFT(0.8, this.bins);
+	const clippingFourier = new p5.FFT(0.8, this.bins);
 
 	// initialize maxSignals array
-	var maxSignals = [];
+	let maxSignals = [];
 	for(i = 0; i < this.bins; i++) {
 		maxSignals.push(0);
 	}
@@ -33,15 +33,15 @@ function Clipping(){
 
 	this.draw = function(){
 
-		var spectrum = clippingFourier.analyze(this.bins);
+		const spectrum = clippingFourier.analyze(this.bins);
 
-		for(var i = 0; i < this.bins; i++){
+		for(let i = 0; i < this.bins; i++){
 
 			// draw signal threshold
 			push();
 			stroke(100);
 			strokeWeight(1);
-			var signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight);
+			const signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight);
 			line(0, signalThresholdLine, width, signalThresholdLine);
 
 			fill(100);
@@ -54,12 +54,12 @@ function Clipping(){
 			// fade the colour of the bin
 			push();
 			noStroke();
-			var b = map(spectrum[i], 0, 255, 255, 0);
+			const b = map(spectrum[i], 0, 255, 255, 0);
 			fill(spectrum[i], 150, b);
 
 			// draw each bin as a rectangle from the left of the screen across
-			var x = map(i, 0, this.bins, 0, width);
-			var h = -binHeight + map(spectrum[i], 0, 255, binHeight, 0);
+			const x = map(i, 0, this.bins, 0, width);
+			const h = -binHeight + map(spectrum[i], 0, 255, binHeight, 0);
 			rect(x, height, binWidth - 2, h);
 			pop()
 
@@ -72,7 +72,7 @@ function Clipping(){
 			// draw max signals
 			stroke(255);
 			strokeWeight(5);
-			var l = map(maxSignals[i], 0, 255, height, height - binHeight);
+			const l = map(maxSignals[i], 0, 255, height, height - binHeight);
 			line(x + 1, l, x + binWidth - 1, l);
 			pop();
 
@@ -83,7 +83,7 @@ function Clipping(){
 			stroke(50);
 			strokeWeight(2);
 			if (maxSignals[i] > this.signalThreshold) {
-				var issue = (map(i, 0, this.bins, 20, 20000)).toFixed(2);
+				const issue = (map(i, 0, this.bins, 20, 20000)).toFixed(2);
 				text('~' + issue + 'Hz', x, l - 25);
 				line(x + (binWidth / 2), height, x + (binWidth / 2), l + 5);
 			}

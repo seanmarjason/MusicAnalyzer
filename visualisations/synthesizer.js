@@ -1,13 +1,13 @@
 //draw the synthesizer to the screen
 function Synthesizer() {
 
-  var self = this;
+  const self = this;
 
   //vis name
   this.name = "Synthesizer";
 
   // notes that will be available for user selection
-  var notes = [
+  const notes = [
     {'note': 'C3', 'freq': 130.8128, 'position': 0, 'type': 'white'},
     {'note': 'C#3', 'freq': 138.5913, 'position': 0.5, 'type': 'black'},
     {'note': 'D3', 'freq': 146.8324, 'position': 1, 'type': 'white'},
@@ -36,7 +36,7 @@ function Synthesizer() {
   ]
 
   // keyboard parameters
-  var keyboard = {
+  const keyboard = {
     x: 0,
     y: 0,
     start: 0,
@@ -51,8 +51,8 @@ function Synthesizer() {
   }
 
   // separate white and black keys for drawing and hit checks
-  var whiteKeys = notes.filter((note) => note.type == 'white');
-  var blackKeys = notes.filter((note) => note.type == 'black');
+  const whiteKeys = notes.filter((note) => note.type == 'white');
+  const blackKeys = notes.filter((note) => note.type == 'black');
 
   // set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -63,7 +63,7 @@ function Synthesizer() {
   };
   this.resize();
 
-  var currentNote = 'Play Something!';
+  let currentNote = 'Play Something!';
 
   // Instantiate Oscillators
   this.oscillators = {
@@ -153,13 +153,13 @@ function Synthesizer() {
     fill(255);
     textSize(16);
     textAlign(CENTER);
-    var settingsWidth = (width - 100) / Object.keys(this.oscillators).length;
-    var startPosition = (width / 2) - ((settingsWidth * Object.keys(this.oscillators).length) / 2);
+    const settingsWidth = (width - 100) / Object.keys(this.oscillators).length;
+    const startPosition = (width / 2) - ((settingsWidth * Object.keys(this.oscillators).length) / 2);
 
     Object.keys(this.oscillators).forEach(function(oscillator) {
-      var OS = self.oscillators[oscillator];
-      var positionX = startPosition + (OS.ref * settingsWidth) + (settingsWidth / 2);
-      var positionY = height / 3
+      let OS = self.oscillators[oscillator];
+      let positionX = startPosition + (OS.ref * settingsWidth) + (settingsWidth / 2);
+      let positionY = height / 3
       // show oscillator's settings
       text('Oscillator ' + (OS.ref+1), positionX, positionY);
       text('Enabled: ' + OS.enabled, positionX, positionY + 50)
@@ -173,7 +173,7 @@ function Synthesizer() {
       stroke('#FFFFFF');
       strokeWeight(3);
       noFill();
-      var envelopePos = {x: positionX - 50, y: positionY + 275}
+      let envelopePos = {x: positionX - 50, y: positionY + 275}
       beginShape();
       vertex(envelopePos.x, envelopePos.y);
       vertex(envelopePos.x + map(OS.envelope.attack, 0, 1, 0, 40), envelopePos.y - 50); //attack
@@ -228,9 +228,9 @@ function Synthesizer() {
   // play the note selected, with harmonies based on oscillator settings
   this.playNote = function(frequency) {
     Object.keys(this.oscillators).forEach(function(oscillator) {
-      var OS = self.oscillators[oscillator];
+      let OS = self.oscillators[oscillator];
       if (OS.enabled) {
-        var playfrequency = adjustFrequency((adjustOctave(frequency, OS.octave)), OS.offset);
+        let playfrequency = adjustFrequency((adjustOctave(frequency, OS.octave)), OS.offset);
         OS.osc.start(); 
         OS.osc.setType(OS.wave);
         OS.osc.amp(OS.amplitude);
@@ -247,7 +247,7 @@ function Synthesizer() {
   }
 
   // private function to adjust octave based on oscillator settings to create harmonies (1 unit = 1 octave)
-  var adjustOctave = function(frequency, octave) {
+  const adjustOctave = function(frequency, octave) {
     if (octave == 0) {
       return frequency
     }
@@ -257,8 +257,8 @@ function Synthesizer() {
   }
 
   // private function to adjust frequency based on oscillator settings to create harmonies (1 unit = 1 half-step)
-  var adjustFrequency = function(frequency, offset) {
-    var twelfthRootOfTwo = Math.pow(2, 1/12);
+  const adjustFrequency = function(frequency, offset) {
+    const twelfthRootOfTwo = Math.pow(2, 1/12);
     if (offset == 0) {
       return frequency;
     }

@@ -2,7 +2,7 @@
 function TrackSelector(){
 
   // set up mapping between selector label and path to audio file
-  var tracks = {
+  let tracks = {
     'Default': 'assets/stomper_reggae_bit.mp3',
     'Dubstep': 'assets/bensound-dubstep.mp3',
     'Epic': 'assets/bensound-epic.mp3',
@@ -11,7 +11,7 @@ function TrackSelector(){
     'Ukulele': 'assets/bensound-ukulele.mp3',
   }
 
-  var sel;
+  let sel;
 
   this.loading = false;
 
@@ -45,7 +45,7 @@ function TrackSelector(){
   }
 
   // private function to change track on selection
-  var changeTrack = function(track) {
+  const changeTrack = function(track) {
     controls.playbackButton.enabled = false;
     if(sound.isPlaying()) {
       sound.pause();
@@ -55,7 +55,7 @@ function TrackSelector(){
   }
 
   // private callback upon successful loading of new audio file
-  var soundLoaded = function(){
+  const soundLoaded = function(){
     controls.playbackButton.enabled = true;
     controls.reset();
   }

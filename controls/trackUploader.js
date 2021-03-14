@@ -20,7 +20,7 @@ function TrackUploader(){
   inputLabel.position(this.x-30, this.y-14);
   inputLabel.style('color: white; font-family: sans-serif;');
 
-  var fileInput;
+  let fileInput;
   fileInput = createFileInput((tracks) => uploadTracks(tracks), true);
   fileInput.position(this.x, this.y);
   fileInput.size(this.width, this.height);
@@ -30,7 +30,7 @@ function TrackUploader(){
 
   // Upload tracks to the track selector for use in visualisations
   // @param tracks each track object handled by the file input object
-  var uploadTracks = function(tracks) {
+  const uploadTracks = function(tracks) {
     // Add and load track
     controls.trackSelector.addTrack(tracks);
   }

@@ -13,10 +13,10 @@ function TrackNavigator(){
   this.onResize();
 
   // set variables to use for drawing navigator
-  var trackDuration;
-  var trackElapsed = 0;
-  var trackRemaining;
-  var trackPosition = this.start;
+  let trackDuration;
+  let trackElapsed = 0;
+  let trackRemaining;
+  let trackPosition = this.start;
 
   // method to update the track position while playing or on click
   this.updateTrackPosition = function(currentSoundDuration, currentSoundTime) {
@@ -72,9 +72,9 @@ function TrackNavigator(){
   }
 
   // private method to convert seconds to minutes and seconds for display to user
-  var convertSecondsToMinutes = function(seconds) {
-    var elapsedMinutes = (Math.floor(seconds / 60)).toFixed();
-    var elapsedSeconds = (seconds % 60).toFixed();
+  const convertSecondsToMinutes = function(seconds) {
+    const elapsedMinutes = (Math.floor(seconds / 60)).toFixed();
+    const elapsedSeconds = (seconds % 60).toFixed();
     return  (elapsedSeconds < 10 ? 
             (elapsedMinutes + '.0' + elapsedSeconds) 
             : (elapsedMinutes + '.' + elapsedSeconds));
@@ -90,7 +90,7 @@ function TrackNavigator(){
 
   // public method to jump to another position in track on click
   this.jumpTrack = function(position) {
-      var jumpPosition = map(position, this.start, this.end, 0, trackDuration);
+      const jumpPosition = map(position, this.start, this.end, 0, trackDuration);
       return jumpPosition;
   }
 

@@ -2,11 +2,11 @@ function Levels() {
 	//name of the visualisation
 	this.name = "Analyze Levels";
 
-	var levelsFourier = new p5.FFT();
+	const levelsFourier = new p5.FFT();
 
 	//how large is the arc of the needle plot.
-	var minAngle = PI + PI / 10;
-	var maxAngle = TWO_PI - PI / 10;
+	const minAngle = PI + PI / 10;
+	const maxAngle = TWO_PI - PI / 10;
 
 	// setup default plots to draw
 	this.plots = {
@@ -17,9 +17,9 @@ function Levels() {
 		treble: true
 	}
 
-	var plotsEnabled;
-	var plotsAcross;
-	var plotsDown;
+	let plotsEnabled;
+	let plotsAcross;
+	let plotsDown;
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -50,16 +50,16 @@ function Levels() {
 		this.resize();
 
 		//create an array amplitude values from the fft.
-		var spectrum = levelsFourier.analyze();
+		const spectrum = levelsFourier.analyze();
 
 		//iterator for selecting frequency bin.
-		var currentBin = 0;
+		let currentBin = 0;
 
 		push();
 		fill('#f0f2d2');
 		//nested for loop to place plots in grid
-		for (var i = 0; i < plotsDown; i++) {
-			for (var j = 0; j < plotsAcross; j++) {
+		for (let i = 0; i < plotsDown; i++) {
+			for (let j = 0; j < plotsAcross; j++) {
 
 				// exit loop if all plots drawn
 				if(currentBin >= plotsEnabled.length) {
@@ -67,10 +67,10 @@ function Levels() {
 				}
 
 				//calculate the size of the plots
-				var x = this.pad + j * this.plotWidth;
-				var y = this.pad + i * this.plotHeight + 25;
-				var w = this.plotWidth - this.pad;
-				var h = this.plotHeight - this.pad;
+				const x = this.pad + j * this.plotWidth;
+				const y = this.pad + i * this.plotHeight + 25;
+				const w = this.plotWidth - this.pad;
+				const h = this.plotHeight - this.pad;
 
 				//draw a rectangle at that location and size
 				rect(x, y, w, h);
@@ -87,7 +87,7 @@ function Levels() {
 				//add on the ticks
 				this.ticks(x + w / 2, y + h);
 
-				var energy = levelsFourier.getEnergy(plotsEnabled[currentBin]);
+				const energy = levelsFourier.getEnergy(plotsEnabled[currentBin]);
 
 				//add label for plot
 				push();
@@ -122,8 +122,8 @@ function Levels() {
 		//map the energy to the angle for the plot
 		theta = map(energy, 0, 255, minAngle, maxAngle);
 		//calculate x and y coorindates from angle for the length of needle
-		var x = this.dialRadius * cos(theta);
-		var y = this.dialRadius * sin(theta);
+		const x = this.dialRadius * cos(theta);
+		const y = this.dialRadius * sin(theta);
 		//draw the needle
 		line(0, 0, x, y);
 		pop();
@@ -137,7 +137,7 @@ function Levels() {
 	 */
 	this.ticks = function(centreX, bottomY) {
 		// 8 ticks from pi to 2pi
-		var nextTickAngle = minAngle;
+		let nextTickAngle = minAngle;
 		push();
 		stroke('#333333');
 		fill('#333333');
@@ -148,16 +148,16 @@ function Levels() {
 		textSize(12);
 
 
-		for (var i = 0; i < 9; i++) {
+		for (let i = 0; i < 9; i++) {
 			//for each tick work out the start and end coordinates of
 			//based on its angle from the needle's origin.
-			var x = this.dialRadius * cos(nextTickAngle);
-			var x1 = (this.dialRadius + 5) * cos(nextTickAngle);
+			const x = this.dialRadius * cos(nextTickAngle);
+			const x1 = (this.dialRadius + 5) * cos(nextTickAngle);
 
-			var y = (this.dialRadius) * sin(nextTickAngle);
-			var y1 = (this.dialRadius + 5) * sin(nextTickAngle);
+			const y = (this.dialRadius) * sin(nextTickAngle);
+			const y1 = (this.dialRadius + 5) * sin(nextTickAngle);
 
-			var tag = (map(i, 0, 8, 0, 255)).toFixed();
+			const tag = (map(i, 0, 8, 0, 255)).toFixed();
 
 			strokeWeight(2);
 			line(x, y, x1, y1);

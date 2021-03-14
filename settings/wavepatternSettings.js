@@ -2,9 +2,9 @@
 function WavepatternSettings() {
   this.name = "Wavepattern Settings"
 
-  var wavepatternSettings;
-  var offsetXAmt;
-  var offsetYAmt;
+  let wavepatternSettings;
+  let offsetXAmt;
+  let offsetYAmt;
 
   this.onResize = function() {
     wavepatternSettings = {x: width/2, y: 200}

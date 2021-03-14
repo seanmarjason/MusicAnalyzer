@@ -49,7 +49,7 @@ function FullscreenButton(){
 	this.hitCheck = function(){
 		if(	mouseX > this.x - this.width	&& mouseX < this.x + this.width 
 				&& mouseY > this.y - this.height	&& mouseY < this.y + this.height){
-				var fs = fullscreen();
+				const fs = fullscreen();
 				fullscreen(!fs);
   			this.enabled = !this.enabled;
   			return true;

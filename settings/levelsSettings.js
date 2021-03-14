@@ -2,12 +2,12 @@
 function LevelsSettings() {
   this.name = "Levels Settings"
 
-  var levelsSettings;
-  var bassToggle;
-  var lowMidToggle;
-  var midToggle;
-  var highMidToggle;
-  var trebleToggle;
+  let levelsSettings;
+  let bassToggle;
+  let lowMidToggle;
+  let midToggle;
+  let highMidToggle;
+  let trebleToggle;
 
   this.onResize = function() {
     levelsSettings = {x: width/2, y: 200}

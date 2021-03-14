@@ -19,7 +19,7 @@ function Visualisations(){
 	//select a visualisation using it name property
 	//@param visName: name property of the visualisation
 	this.selectVisual = function(visName){
-		for(var i = 0; i < this.visuals.length; i++){
+		for(let i = 0; i < this.visuals.length; i++){
 			if(visName == this.visuals[i].name){
 				this.selectedVisual = this.visuals[i];
 			}

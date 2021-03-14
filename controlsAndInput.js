@@ -2,7 +2,7 @@
 //controls
 function ControlsAndInput(){
 
-	var headerHeight = 75;
+	const headerHeight = 75;
 
 	this.setup = function() {
 
@@ -44,7 +44,7 @@ function ControlsAndInput(){
 
 		// use number keys to select a visual
 		if(keycode > 48 && keycode < 58){
-			var visNumber = keycode - 49;
+			const visNumber = keycode - 49;
 			vis.selectVisual(vis.visuals[visNumber].name); 
 			this.menu.displayed = false;
 		}

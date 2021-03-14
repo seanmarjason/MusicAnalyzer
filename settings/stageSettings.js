@@ -3,18 +3,18 @@ function StageSettings() {
   this.name = "Stage Settings"
 
   // Stage Lights
-  var stageLightSettings;
-  var stageLightAmt;
-  var stageLightEnergy;
-  var stageLightColour;
+  let stageLightSettings;
+  let stageLightAmt;
+  let stageLightEnergy;
+  let stageLightColour;
 
   // Feature Lights
-  var featureLightSettings;
-  var featureLightAmt;
-  var featureLightEnergy;
-  var featureLightColour;
+  let featureLightSettings;
+  let featureLightAmt;
+  let featureLightEnergy;
+  let featureLightColour;
 
-  var energyValues = ['treble', 'highMid', 'mid', 'lowMid', 'bass'];
+  const energyValues = ['treble', 'highMid', 'mid', 'lowMid', 'bass'];
 
   this.onResize = function() {
     stageLightSettings = {x: (width/2) - (width/4), y: 200}
