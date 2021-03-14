@@ -2,12 +2,8 @@
 function LevelsSettings() {
   this.name = "Levels Settings"
 
+  let settings = [];
   let levelsSettings;
-  let bassToggle;
-  let lowMidToggle;
-  let midToggle;
-  let highMidToggle;
-  let trebleToggle;
 
   this.onResize = function() {
     levelsSettings = {x: width/2, y: 200}
@@ -16,30 +12,32 @@ function LevelsSettings() {
 
   this.open = function() {
 
-    bassToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 50,
+    let bassToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 50,
                                 vis.selectedVisual.plots.bass,
                                 () => vis.selectedVisual.togglePlot('bass')
                               );
 
-    lowMidToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 100,
+    let lowMidToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 100,
                                   vis.selectedVisual.plots.lowMid,
                                   () => vis.selectedVisual.togglePlot('lowMid')
                                 );
 
-    midToggle = new Checkbox( levelsSettings.x + 100, levelsSettings.y + 150,
+    let midToggle = new Checkbox( levelsSettings.x + 100, levelsSettings.y + 150,
                               vis.selectedVisual.plots.mid,
                               () => vis.selectedVisual.togglePlot('mid')
                             );
 
-    highMidToggle = new Checkbox( levelsSettings.x + 100, levelsSettings.y + 200,
+    let highMidToggle = new Checkbox( levelsSettings.x + 100, levelsSettings.y + 200,
                                   vis.selectedVisual.plots.highMid,
                                   () => vis.selectedVisual.togglePlot('highMid')
                                 );
 
-    trebleToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 250,
+    let trebleToggle = new Checkbox(  levelsSettings.x + 100, levelsSettings.y + 250,
                                   vis.selectedVisual.plots.treble,
                                   () => vis.selectedVisual.togglePlot('treble')
                                 );
+
+    settings.push(bassToggle, lowMidToggle, midToggle, highMidToggle, trebleToggle);
 
   }
 
@@ -54,10 +52,6 @@ function LevelsSettings() {
   }
 
   this.close = function() {
-    bassToggle.remove();
-    lowMidToggle.remove();
-    midToggle.remove();
-    highMidToggle.remove();
-    trebleToggle.remove();
+    settings.forEach(setting => setting.remove());
   }
 }

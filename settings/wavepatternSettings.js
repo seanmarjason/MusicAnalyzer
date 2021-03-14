@@ -2,9 +2,8 @@
 function WavepatternSettings() {
   this.name = "Wavepattern Settings"
 
+  let settings = [];
   let wavepatternSettings;
-  let offsetXAmt;
-  let offsetYAmt;
 
   this.onResize = function() {
     wavepatternSettings = {x: width/2, y: 200}
@@ -13,15 +12,18 @@ function WavepatternSettings() {
 
   this.open = function() {
     
-    offsetXAmt = new Slider(  wavepatternSettings.x, wavepatternSettings.y + 100,
+    let offsetXAmt = new Slider(  wavepatternSettings.x, wavepatternSettings.y + 100,
                               0, 50, 1, vis.selectedVisual.offset.x,
                               () => vis.selectedVisual.setOffset('x', offsetXAmt.value)
                             );
 
-    offsetYAmt = new Slider(  wavepatternSettings.x, wavepatternSettings.y + 200,
+    let offsetYAmt = new Slider(  wavepatternSettings.x, wavepatternSettings.y + 200,
                               0, 50, 1, vis.selectedVisual.offset.y,
                               () => vis.selectedVisual.setOffset('y', offsetYAmt.value)
                             );
+
+    settings.push(offsetXAmt, offsetYAmt);
+
   }
 
   this.draw = function() {
@@ -32,7 +34,6 @@ function WavepatternSettings() {
   }
 
   this.close = function() {
-    offsetXAmt.remove();
-    offsetYAmt.remove();
+    settings.forEach(setting => setting.remove());
   }
 }

@@ -2,56 +2,16 @@
 function SynthesizerSettings() {
   this.name = "Synthesizer Settings"
 
-  // Oscillator 1
-  let oscillator1Settings;
-  let enabled1;
-  let amp1;
-  let wave1;
-  let octave1;
-  let offset1;
-  let attack1;
-  let decay1;
-  let sustain1;
-  let release1;
-
-  // Oscillator 2
-  let oscillator2Settings;
-  let enabled2;
-  let amp2;
-  let wave2;
-  let octave2;
-  let offset2;
-  let attack2;
-  let decay2;
-  let sustain2;
-  let release2;
-
-  // Oscillator 3
-  let oscillator3Settings;
-  let enabled3;
-  let amp3;
-  let wave3;
-  let octave3;
-  let offset3;
-  let attack3;
-  let decay3;
-  let sustain3;
-  let release3;
-
   let settings = [];
   let settingsPos = {};
-  let oscillatorCount
+  let oscillatorCount;
 
   const waveOptions = ['sine', 'triangle', 'square', 'sawtooth'];
   const octaveOptions = [-2, -1, 0, 1, 2];
   const offsetOptions = [-2, -1, 0, 1, 2];
 
   this.onResize = function() {
-    oscillator1Settings = {x: (width/2) - (width/3), y: 200}
-    oscillator2Settings = {x: (width/2) - 50, y: 200}
-    oscillator3Settings = {x: (width/2) + (width/3) - 100, y: 200}
   }
-  this.onResize();
 
   this.open = function() {
 

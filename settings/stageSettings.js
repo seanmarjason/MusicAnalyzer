@@ -2,17 +2,9 @@
 function StageSettings() {
   this.name = "Stage Settings"
 
-  // Stage Lights
+  let settings = [];
   let stageLightSettings;
-  let stageLightAmt;
-  let stageLightEnergy;
-  let stageLightColour;
-
-  // Feature Lights
   let featureLightSettings;
-  let featureLightAmt;
-  let featureLightEnergy;
-  let featureLightColour;
 
   const energyValues = ['treble', 'highMid', 'mid', 'lowMid', 'bass'];
 
@@ -26,13 +18,13 @@ function StageSettings() {
 
     // STAGE LIGHTS
     // Number of lights
-    stageLightAmt = new Slider( stageLightSettings.x, stageLightSettings.y + 125,
+    let stageLightAmt = new Slider( stageLightSettings.x, stageLightSettings.y + 125,
                                 0, 10, 1, vis.selectedVisual.stageLight.amount,
                                 () => vis.selectedVisual.setLightAmount('stageLight', stageLightAmt.value)
                               );
 
     // Energy to follow
-    stageLightEnergy = new Select(  stageLightSettings.x,
+    let stageLightEnergy = new Select(  stageLightSettings.x,
                                     stageLightSettings.y + 200,
                                     energyValues,
                                     vis.selectedVisual.stageLight.energy,
@@ -40,21 +32,20 @@ function StageSettings() {
                                   );
 
     // Light Colour
-    stageLightColour = new ColourPicker(  stageLightSettings.x, stageLightSettings.y + 300,
+    let stageLightColour = new ColourPicker(  stageLightSettings.x, stageLightSettings.y + 300,
                                           vis.selectedVisual.stageLight.colour,
                                           () => vis.selectedVisual.setLightColour('stageLight', stageLightColour.colour)
                                         );
-
-                                        
+  
     // FEATURE LIGHTS
     // Number of lights
-    featureLightAmt = new Slider( featureLightSettings.x, featureLightSettings.y + 125,
+    let featureLightAmt = new Slider( featureLightSettings.x, featureLightSettings.y + 125,
                                   0, 10, 1, vis.selectedVisual.featureLight.amount,
                                   () => vis.selectedVisual.setLightAmount('featureLight', featureLightAmt.value)
                                 );
 
     // Energy to follow
-    featureLightEnergy = new Select(  featureLightSettings.x,
+    let featureLightEnergy = new Select(  featureLightSettings.x,
                                       featureLightSettings.y + 200,
                                       energyValues,
                                       vis.selectedVisual.featureLight.energy,
@@ -62,10 +53,12 @@ function StageSettings() {
                                     );
 
     // Light Colour   
-    featureLightColour = new ColourPicker(  featureLightSettings.x, featureLightSettings.y + 300,
+    let featureLightColour = new ColourPicker(  featureLightSettings.x, featureLightSettings.y + 300,
                                             vis.selectedVisual.featureLight.colour,
                                             () => vis.selectedVisual.setLightColour('featureLight', featureLightColour.colour)
                                           );
+
+    settings.push(stageLightAmt, stageLightEnergy, stageLightColour, featureLightAmt, featureLightEnergy, featureLightColour)
 
   }
 
@@ -85,12 +78,6 @@ function StageSettings() {
   }
 
   this.close = function() {
-    stageLightAmt.remove();
-    stageLightEnergy.remove();
-    stageLightColour.remove();
-
-    featureLightAmt.remove();
-    featureLightEnergy.remove();
-    featureLightColour.remove();
+    settings.forEach(setting => setting.remove());
   }
 }
