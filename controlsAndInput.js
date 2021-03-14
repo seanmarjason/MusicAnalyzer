@@ -46,6 +46,7 @@ function ControlsAndInput(){
 		if(keycode > 48 && keycode < 58){
 			var visNumber = keycode - 49;
 			vis.selectVisual(vis.visuals[visNumber].name); 
+			this.menu.displayed = false;
 		}
 	};
 

@@ -159,13 +159,29 @@ function Synthesizer() {
     Object.keys(this.oscillators).forEach(function(oscillator) {
       var OS = self.oscillators[oscillator];
       var positionX = startPosition + (OS.ref * settingsWidth) + (settingsWidth / 2);
-      var positionY = height / 2
+      var positionY = height / 3
+      // show oscillator's settings
       text('Oscillator ' + (OS.ref+1), positionX, positionY);
       text('Enabled: ' + OS.enabled, positionX, positionY + 50)
       text('Amplitude: ' + OS.amplitude, positionX, positionY + 75)
       text('Wave Type: ' + OS.wave, positionX, positionY + 100)
       text('Octave Offset: ' + OS.octave, positionX, positionY + 125)
       text('Tone Offset: ' + OS.offset, positionX, positionY + 150)
+      text('Envelope: ', positionX, positionY + 200);
+      // draw oscillator's envelope
+      push();
+      stroke('#FFFFFF');
+      strokeWeight(3);
+      noFill();
+      var envelopePos = {x: positionX - 50, y: positionY + 275}
+      beginShape();
+      vertex(envelopePos.x, envelopePos.y);
+      vertex(envelopePos.x + map(OS.envelope.attack, 0, 1, 0, 40), envelopePos.y - 50); //attack
+      vertex(envelopePos.x + map(OS.envelope.attack, 0, 1, 0, 40) + map(OS.envelope.decay, 0, 1, 0, 40), envelopePos.y - map(OS.envelope.sustain, 0, 1, 0, 50)); // decay & sustain
+      vertex(envelopePos.x + map(OS.envelope.release, 0, 5, 100, 80), envelopePos.y - map(OS.envelope.sustain, 0, 1, 0, 50)); //decay
+      vertex(envelopePos.x + 100, envelopePos.y);
+      endShape();
+      pop();
     });
     pop();
 

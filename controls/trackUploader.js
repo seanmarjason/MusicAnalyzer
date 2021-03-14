@@ -5,15 +5,21 @@ function TrackUploader(){
   // set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
   this.onResize = function() {
-    this.x = 80;
+    this.x = 150;
     this.y = 45;
-    this.width = 250;
+    this.width = 200;
     this.height = 20;
   }
   this.onResize();
 
   push();
   fill(255);
+
+  // create uploader label
+  inputLabel = createP('or:');
+  inputLabel.position(this.x-30, this.y-14);
+  inputLabel.style('color: white; font-family: sans-serif;');
+
   var fileInput;
   fileInput = createFileInput((tracks) => uploadTracks(tracks), true);
   fileInput.position(this.x, this.y);

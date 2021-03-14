@@ -18,17 +18,21 @@ function TrackSelector(){
   // set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
   this.onResize = function() {
-    this.x = 80;
+    this.x = 150;
     this.y = 10;
-    this.width = 250;
+    this.width = 200;
     this.height = 25;
   }
   this.onResize();
 
   this.setup = function() {
 
+    // create selector label
+    selLabel = createP('Select:');
+    selLabel.position(this.x-60, this.y-12);
+    selLabel.style('color: white; font-family: sans-serif;');
+
     // create selector element for user to select a track
-    // var sel;
     sel = createSelect();
     sel.position(this.x, this.y);
     sel.size(this.width, this.height);
