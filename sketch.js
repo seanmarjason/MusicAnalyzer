@@ -46,24 +46,28 @@ function draw(){
 }
 
 function mouseClicked(){
-	controls.mousePressed();
+	if (vis) {
+		controls.mousePressed();
+	}
 }
 
 function mousePressed() {
-	if(vis.selectedVisual.mousePressed) {
+	if(vis && vis.selectedVisual.mousePressed) {
 		vis.selectedVisual.mousePressed();
 	}
 }
 
 function mouseReleased() {
-	if(vis.selectedVisual.mouseReleased) {
+	if(vis && vis.selectedVisual.mouseReleased) {
 		vis.selectedVisual.mouseReleased();
 	}
 }
 
 function keyPressed(){
-	controls.keyPressed(keyCode);
-	settings.keyPressed(keyCode);
+	if (vis) {
+		controls.keyPressed(keyCode);
+		settings.keyPressed(keyCode);
+	}
 }
 
 //when the window has been resized. Resize canvas to fit 
