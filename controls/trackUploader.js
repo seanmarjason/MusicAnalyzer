@@ -1,4 +1,5 @@
-// TBC
+// Allows upload of a track from the user's file system 
+// handled only on client side to prevent track licensing issues
 function TrackUploader(){
 
   // set initial size values in resize function to enable responsiveness
@@ -6,7 +7,6 @@ function TrackUploader(){
   this.onResize = function() {
     this.x = 80;
     this.y = 45;
-    // this.width = 85;
     this.width = 250;
     this.height = 20;
   }
@@ -15,28 +15,17 @@ function TrackUploader(){
   push();
   fill(255);
   var fileInput;
-  fileInput = createFileInput((track) => uploadTrack(track));
-  fileInput.type = 'audio'
+  fileInput = createFileInput((tracks) => uploadTracks(tracks), true);
   fileInput.position(this.x, this.y);
   fileInput.size(this.width, this.height);
+  fileInput.style('color: white; font-style: italic'); // style the selected file text
+  fileInput.attribute('accept', 'audio/*'); // force fileInput to only allow audio files
   pop();
 
-  this.setup = function() {
-
-    // create selector element for user to select a track
-    // var fileInput;
-    // fileInput = createFileInput(this.addTrack);
-    // fileInput.position(this.x, this.y);
-    // fileInput.size(this.width, this.height);
-
-  }
-
-  // TBC
-  var uploadTrack = function(track) {
-    // Check track is correct file type
-
+  // Upload tracks to the track selector for use in visualisations
+  // @param tracks each track object handled by the file input object
+  var uploadTracks = function(tracks) {
     // Add and load track
-    controls.trackSelector.addTrack(track);
+    controls.trackSelector.addTrack(tracks);
   }
-
 }
