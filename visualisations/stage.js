@@ -1,4 +1,13 @@
-//draw the waveform to the screen
+// Constructor to display visualisation to compare stage light arrangements
+// @param name: Title to be used for menu
+// @param stageLight: define stage light amount, energy and colour
+// @param featureLight: define feature light amount, energy and colour
+// @method resize: set size values in resize function to enable responsiveness
+// @method draw: draw visualisation to canvas
+// @method setLightAmount: set new amount of lights for a given light type
+// @method setLightEnergy: set new energy for lights to track for a given light type
+// @method setLightColour: set new light colour for a given light type
+// @method reset: clear current analysis
 function Stage() {
 
   const self = this;
@@ -13,19 +22,6 @@ function Stage() {
   let speakers = {};
   let lightRack = {};
 
-  // set initial size values in resize function to enable responsiveness
-	// call resize function immediately to set values on first load
-  this.resize = function() {
-    stage.height = height / 4 * 3;
-    stage.depth = height / 4;
-    desk.height = 250;
-    desk.width = width / 4 * 2;
-    speakers.height = 400;
-    speakers.width = 100;
-    lightRack.height = height / 5;
-  }
-  this.resize();
-
   // define key settings for each froup of lights
   this.stageLight = {
     amount: 5,
@@ -38,6 +34,19 @@ function Stage() {
     energy: 'bass',
     colour: color(255, 255, 255)
   }
+
+  // set initial size values in resize function to enable responsiveness
+	// call resize function immediately to set values on first load
+  this.resize = function() {
+    stage.height = height / 4 * 3;
+    stage.depth = height / 4;
+    desk.height = 250;
+    desk.width = width / 4 * 2;
+    speakers.height = 400;
+    speakers.width = 100;
+    lightRack.height = height / 5;
+  }
+  this.resize();
 
   // arrays to hold lights to retain position values
   let stageLights = [];
@@ -63,21 +72,6 @@ function Stage() {
       const y = stage.height + (desk.height / 2)
       featureLights.push({x, y});
     }
-  }
-
-  // update amount of lights
-  this.setLightAmount = function (lightType, amount) {
-    this[lightType].amount = amount;
-  }
-
-  // update energy for lights to follow
-  this.setLightEnergy = function (lightType, energy) {
-    this[lightType].energy = energy;
-  }
-
-  // update colour of lights
-  this.setLightColour = function (lightType, colour) {
-    this[lightType].colour = colour;
   }
 
 	//draw the stage to the screen
@@ -128,6 +122,21 @@ function Stage() {
     });
     pop();
 	};
+
+    // update amount of lights
+    this.setLightAmount = function (lightType, amount) {
+      this[lightType].amount = amount;
+    }
+  
+    // update energy for lights to follow
+    this.setLightEnergy = function (lightType, energy) {
+      this[lightType].energy = energy;
+    }
+  
+    // update colour of lights
+    this.setLightColour = function (lightType, colour) {
+      this[lightType].colour = colour;
+    }
 
 	this.reset = function() {
 

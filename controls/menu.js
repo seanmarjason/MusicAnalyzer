@@ -1,4 +1,11 @@
+// Constructor to handle creation of menu listing all visualisations
+// @param displayed: boolean tracking if menu is enabled
+// @method onResize: set size values in resize function to enable responsiveness
+// @method draw: draw menu to canvas
 function Menu() {
+
+	// set boolean to toggle menu on / off
+	this.displayed = false;
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -8,9 +15,7 @@ function Menu() {
 	}
 	this.onResize();
 
-	// set boolean to toggle menu on / off
-  this.displayed = false;
-
+	// draw menu to canvas
   this.draw = function(){
 		noStroke();
 		fill(255);

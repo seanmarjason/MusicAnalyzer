@@ -1,19 +1,28 @@
-
+// Constructor to create user customisable settings for clipping visualiser
+// @param name: Title to be used for settings pane
+// @method onResize: set size values in resize function to enable responsiveness
+// @method open: create settings elements on opening settings pane
+// @method draw: create labels for settings
+// @method close: remove settings elements on closing settings pane
 function StageSettings() {
   this.name = "Stage Settings"
 
   let settings = [];
-  let stageLightSettings;
-  let featureLightSettings;
+
+  let stageLightSettings; //store location parameters for stageLights
+  let featureLightSettings; //store location parameters for featureLights
 
   const energyValues = ['treble', 'highMid', 'mid', 'lowMid', 'bass'];
 
+  // set settings location
   this.onResize = function() {
     stageLightSettings = {x: (width/2) - (width/4), y: 200}
     featureLightSettings = {x: (width/2) + (width/4) - 100, y: 200}
   }
   this.onResize();
 
+  // create DOM elements only on open
+  // avoids multiple elements created in draw loop
   this.open = function() {
 
     // STAGE LIGHTS
@@ -62,6 +71,7 @@ function StageSettings() {
 
   }
 
+  // Draw labels for settings
   this.draw = function() {
     text(this.name, width / 2, 100);
 
@@ -77,6 +87,8 @@ function StageSettings() {
 
   }
 
+  // remove DOM elements on close
+  // ensures elements do not overlap with current canvas
   this.close = function() {
     settings.forEach(setting => setting.remove());
   }

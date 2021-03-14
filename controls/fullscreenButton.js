@@ -1,5 +1,13 @@
-//displays and handles clicks on the fullscreen button.
+// Constructor to display fullscreen button and handles clicks to toggle fullscreen.
+// @param enabled: boolean tracking if full screen is enabled
+// @method onResize: set size values in resize function to enable responsiveness
+// @method draw: draw button to canvas
+// @method hitCheck: check if user clicks on fullscreen button, and toggle @param enabled
 function FullscreenButton(){
+
+	//flag to determine whether to expand or collapse on button click and
+	//to determine which icon to draw
+	this.enabled = false;
 	
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -11,10 +19,7 @@ function FullscreenButton(){
 	};
 	this.onResize()
 
-	//flag to determine whether to expand or collapse on button click and
-	//to determine which icon to draw
-	this.enabled = false;
-
+	// Draw button to canvas
 	this.draw = function(){
 		if(this.enabled){
 			push();

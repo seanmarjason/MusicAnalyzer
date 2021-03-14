@@ -1,4 +1,18 @@
-//draw the synthesizer to the screen
+// Constructor to display visualisation to trial new additions to a track with sound synthesis
+// @param name: Title to be used for menu
+// @param oscillators: define number of oscillators and key oscillator settings
+// @method resize: set size values in resize function to enable responsiveness
+// @method draw: draw visualisation to canvas
+// @method toggleOscillator: enable / disable a given oscillator
+// @method setOscillatorParameter: amend a key oscillator setting
+// @method setOscillatorEnvelope: amend the envelope for a given oscillator
+// @method mousePressed: handle user interaction with oscillator (playing a note)
+// @method playNote: play a note using enabled oscillators
+// @method adjustOctave: adjust the octave of a note being played
+// @method adjustFrequency: offset the frequency of a note being played
+// @method mouseReleased: handle user ineration with oscillator (releasing a note)
+// @method stopNote: stop a note currently being played on oscilators
+// @method reset: clear current analysis
 function Synthesizer() {
 
   const self = this;
@@ -64,18 +78,6 @@ function Synthesizer() {
       },
   }
 
-  this.toggleOscillator = function (oscillator) {
-    self.oscillators[oscillator].enabled = !self.oscillators[oscillator].enabled;
-  }
-
-  this.setOscillatorParameter = function (oscillator, parameter, value) {
-    self.oscillators[oscillator][parameter] = value;
-  }
-
-  this.setOscillatorEnvelope = function (oscillator, envelopeParameter, value) {
-    self.oscillators[oscillator].envelope[envelopeParameter] = value;
-  }
-
   this.resize = function() {
     keyboard.resize();
   }
@@ -123,6 +125,18 @@ function Synthesizer() {
     pop();
 
   };
+
+  this.toggleOscillator = function (oscillator) {
+    self.oscillators[oscillator].enabled = !self.oscillators[oscillator].enabled;
+  }
+
+  this.setOscillatorParameter = function (oscillator, parameter, value) {
+    self.oscillators[oscillator][parameter] = value;
+  }
+
+  this.setOscillatorEnvelope = function (oscillator, envelopeParameter, value) {
+    self.oscillators[oscillator].envelope[envelopeParameter] = value;
+  }
   
   this.mousePressed = function() {
     keyboard.mousePressed();

@@ -1,3 +1,12 @@
+// Constructor to display visualisation to analyse track levels per signal bin
+// @param name: Title to be used for menu
+// @param plots: Signal bins to be displayed
+// @method resize: set size values in resize function to enable responsiveness
+// @method draw: draw visualisation to canvas
+// @method togglePlot: enable / disable a plot in visualisation
+// @method drawNeedle: place needle in position of current signal for bin
+// @method ticks: place ticks on plot
+// @method reset: clear current analysis
 function Levels() {
 	//name of the visualisation
 	this.name = "Analyze Levels";
@@ -29,10 +38,6 @@ function Levels() {
 		this.plotHeight = (height - this.pad) / plotsDown;
 		this.dialRadius = (min(this.plotWidth, this.plotHeight) - this.pad) / 2 - 50;
 	};
-
-	this.togglePlot = function(plot) {
-		this.plots[plot] = !this.plots[plot];
-	}
 
 	// draw the plots to the screen
 	this.draw = function() {
@@ -107,6 +112,10 @@ function Levels() {
 
 		pop();
 	};
+
+	this.togglePlot = function(plot) {
+		this.plots[plot] = !this.plots[plot];
+	}
 
 	/*
 	 *draws a needle to an individual plot

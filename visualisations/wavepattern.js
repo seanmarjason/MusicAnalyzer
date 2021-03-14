@@ -1,4 +1,11 @@
-//draw the waveform to the screen
+// Constructor to display visualisation to trial new additions to a track with sound synthesis
+// @param name: Title to be used for menu
+// @param retentionHistory: number of historic waveforms to keep in visualisation
+// @param offset: amount of pixels to offset historic waveforms on x and y axis
+// @method resize: set size values in resize function to enable responsiveness
+// @method draw: draw visualisation to canvas
+// @method setOffset: amend offset value for x or y coordinate
+// @method reset: clear current analysis
 function WavePattern() {
 	//vis name
 	this.name = "Waveform Visualiser";
@@ -9,6 +16,13 @@ function WavePattern() {
 	let wave = {}; // private object to hold wave position parameters
 	let waveHistory = []; // private array to hold historic waves for 3D effect
 
+	// settings for 3D effect
+	this.retentionHistory = 100;
+	this.offset = {
+		x: 10,
+		y: 10
+	}
+
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
 	this.resize = function() {
@@ -18,17 +32,6 @@ function WavePattern() {
 		wave.end = width - 100;
 	}
 	this.resize();
-
-	// settings for 3D effect
-	this.retentionHistory = 100;
-	this.offset = {
-		x: 10,
-		y: 10
-	}
-
-	this.setOffset = function(direction, value) {
-		this.offset[direction] = value;
-	}
 
 	//draw the wave form to the screen
 	this.draw = function() {
@@ -82,6 +85,10 @@ function WavePattern() {
 
 		pop();
 	};
+
+	this.setOffset = function(direction, value) {
+		this.offset[direction] = value;
+	}
 
 	this.reset = function() {
 		waveHistory = [];

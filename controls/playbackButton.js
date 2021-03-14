@@ -1,5 +1,15 @@
-//displays and handles clicks on the playback button.
+// Constructor to display and handles clicks on the playback button
+// @param playing: boolean tracking if playback set to playing
+// @param enabled: boolean tracking if playback button is enabled / can be clicked
+// @method onResize: set size values in resize function to enable responsiveness
+// @method draw: draw button to canvas
+// @method hitCheck: check if user clicks on playback button, and play / pause track
 function PlaybackButton(){
+
+	//flag to determine whether to play or pause after button click and
+	//to determine which icon to draw
+	this.playing = false;
+	this.enabled = true;
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -10,12 +20,8 @@ function PlaybackButton(){
 		this.height = 20;
 	}
 	this.onResize();
-	
-	//flag to determine whether to play or pause after button click and
-	//to determine which icon to draw
-	this.playing = false;
-	this.enabled = true;
 
+	// draw button to canvas
 	this.draw = function(){
 		if(this.playing){
 			push();

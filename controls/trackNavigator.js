@@ -1,5 +1,10 @@
-// Displays the length of the track, current playback point, 
-// and handles ability to navigate track
+// Constructor to display the length of the track, current playback point, 
+// and handle ability to navigate track
+// @method onResize: set size values in resize function to enable responsiveness
+// @method updateTrackPosition: handle skipping to another part of track
+// @method draw: draw navigator to canvas
+// @method hitCheck: check if user clicks on track navigator
+// @method jumpTrack: allow jumping to a different part of the track
 function TrackNavigator(){
 
   // set initial size values in resize function to enable responsiveness

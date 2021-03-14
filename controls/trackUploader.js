@@ -1,5 +1,6 @@
 // Allows upload of a track from the user's file system 
 // handled only on client side to prevent track licensing issues
+// @method onResize: set size values in resize function to enable responsiveness
 function TrackUploader(){
 
   // set initial size values in resize function to enable responsiveness

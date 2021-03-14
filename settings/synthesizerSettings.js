@@ -1,25 +1,34 @@
-
+// Constructor to create user customisable settings for clipping visualiser
+// @param name: Title to be used for settings pane
+// @method onResize: set size values in resize function to enable responsiveness
+// @method open: create settings elements on opening settings pane
+// @method draw: create labels for settings
+// @method close: remove settings elements on closing settings pane
 function SynthesizerSettings() {
   this.name = "Synthesizer Settings"
 
   let settings = [];
-  let settingsPos = {};
+  let settingsPos = {}; //store location parameters
+
   let oscillatorCount;
 
   const waveOptions = ['sine', 'triangle', 'square', 'sawtooth'];
   const octaveOptions = [-2, -1, 0, 1, 2];
   const offsetOptions = [-2, -1, 0, 1, 2];
 
+  // set settings location
   this.onResize = function() {
   }
 
+  // create DOM elements only on open
+  // avoids multiple elements created in draw loop
   this.open = function() {
 
     oscillatorCount = Object.keys(vis.selectedVisual.oscillators).length;
 
     // set the position of each oscillator's settings
     let i = 0;
-    for (const [oscillator, options] of Object.entries(vis.selectedVisual.oscillators)) {
+    for (const [oscillator] of Object.entries(vis.selectedVisual.oscillators)) {
       settingsPos[oscillator] = { x: (width / oscillatorCount) * i + 75,
                                   y: 200
                                 }
@@ -93,6 +102,7 @@ function SynthesizerSettings() {
     }
   }
 
+  // Draw labels for settings
   this.draw = function() {
     text(this.name, width / 2, 100);
 
@@ -110,6 +120,8 @@ function SynthesizerSettings() {
     }
   }
 
+  // remove DOM elements on close
+  // ensures elements do not overlap with current canvas
   this.close = function() {
     settings.forEach(setting => setting.remove());
   }

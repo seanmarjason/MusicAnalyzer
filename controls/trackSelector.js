@@ -1,4 +1,9 @@
-// Displays and handles menu to select a music track to analyse and visualise
+// Constructor to create selector to pick a track, define default tracks
+// and allow addition of tracks to the selector
+// @param loading: boolean tracking if a selected track is loading
+// @method onResize: set size values in resize function to enable responsiveness
+// @method setup: define DOM elements for user to select track
+// @method addTrack: allow addition of new tracks to selector
 function TrackSelector(){
 
   // set up mapping between selector label and path to audio file
@@ -60,6 +65,8 @@ function TrackSelector(){
     controls.reset();
   }
 
+  // Allow addition of tracks to the selector
+  // @param track: file object to be added
   this.addTrack = function(track) {
     // Add track as an option
     tracks[track.name] = track

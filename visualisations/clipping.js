@@ -1,3 +1,11 @@
+// Constructor to display visualisation to analyse track levels for potential clipping
+// @param name: Title to be used for menu
+// @param bins: number of bins to segment track levels for visualisation
+// @param signalThreshold: level at which track signals will be flagged for potential clipping
+// @method resize: set size values in resize function to enable responsiveness
+// @method draw: draw visualisation to canvas
+// @method setSignalThreshold: set the threshold to be used to analyse clipping
+// @method reset: clear current analysis
 function Clipping(){
 
 	const self = this;
@@ -24,11 +32,6 @@ function Clipping(){
 	let maxSignals = [];
 	for(i = 0; i < this.bins; i++) {
 		maxSignals.push(0);
-	}
-
-	this.setSignalThreshold = function(value) {
-		self.signalThreshold = value;
-		self.reset();
 	}
 
 	this.draw = function(){
@@ -90,6 +93,11 @@ function Clipping(){
 			pop();
 		}
 	};
+
+	this.setSignalThreshold = function(value) {
+		self.signalThreshold = value;
+		self.reset();
+	}
 
 	this.reset = function() {
 		maxSignals = [];

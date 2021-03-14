@@ -1,6 +1,11 @@
+// Constructor to create piano keyboard and handle key presses
 function Keyboard() {
 
     // notes that will be available for user selection
+    // @param note: formal definition of the note
+    // @param frequency: the frequency (in Hz) the note resonates
+    // @param position: where the note exists on the keyboard (relative to far left of keyboard)
+    // @param type: white / black key
     const notes = [
       {'note': 'C3', 'freq': 130.8128, 'position': 0, 'type': 'white'},
       {'note': 'C#3', 'freq': 138.5913, 'position': 0.5, 'type': 'black'},
@@ -29,6 +34,8 @@ function Keyboard() {
       {'note': 'C5', 'freq': 523.2511, 'position': 14, 'type': 'white'},
     ]
 
+    let currentNote = 'Play Something!'; // placeholder for current note being played
+
     // keyboard parameters
     const keyboard = {
       x: 0,
@@ -48,7 +55,18 @@ function Keyboard() {
     const whiteKeys = notes.filter((note) => note.type == 'white');
     const blackKeys = notes.filter((note) => note.type == 'black');
 
-    let currentNote = 'Play Something!';
+    // utility function to calculate white key position
+    // @param keyReference relative location of the defined key 
+    var calculateWhiteKeyPosition = function(keyReference) {
+      return keyboardStart + keyReference * keyboard.whiteKey.width;
+    }
+  
+    // utility function to calculate black key position
+    // @param keyReference relative location of the defined key 
+    var calculateBlackKeyPosition = function(keyReference) {
+      return keyboardStart + (keyReference * keyboard.blackKey.width * 2) + (keyboard.blackKey.width/2);
+    }
+
 
     // set initial size values in resize function to enable responsiveness
     // call resize function immediately to set values on first load
@@ -59,23 +77,24 @@ function Keyboard() {
     };
     this.resize();
 
-    this.draw = function() {
 
-      // draw keyboard to the screen
+    // logic to draw the keyboard to the canvas
+    this.draw = function() {
+      // draw keys to the screen
       push();
       fill(255)
-      whiteKeys.forEach(key => { rect( keyboardStart + key.position * keyboard.whiteKey.width,
+      whiteKeys.forEach(key => { rect( calculateWhiteKeyPosition(key.position),
                                       keyboardY, 
                                       keyboard.whiteKey.width, 
                                       keyboard.whiteKey.height) });
       fill(0)
-      blackKeys.forEach(key => { rect( (keyboardStart + (key.position * 2) * keyboard.blackKey.width) + (keyboard.blackKey.width/2),
+      blackKeys.forEach(key => { rect(  calculateBlackKeyPosition(key.position),
                                         keyboardY,
                                         keyboard.blackKey.width,
                                         keyboard.blackKey.height) });
       pop();
 
-      // draw note
+      // draw note to the screen
       push();
       stroke(255);
       strokeWeight(2);
@@ -86,27 +105,31 @@ function Keyboard() {
       pop();
     }
 
+    // logic to handle clicking on a key
     this.mousePressed = function() {
-
     // check if mouse press is within keyboard
     if(mouseY > keyboardY && mouseY < keyboardY + keyboard.whiteKey.height) {
-
       // check if black key pressed
       for(i = 0; i < blackKeys.length; i++) {
-        if( mouseX > ((keyboardStart + (blackKeys[i].position * 2) * keyboard.blackKey.width) + (keyboard.blackKey.width/2)) 
-            && mouseX < (((keyboardStart + (blackKeys[i].position * 2) * keyboard.blackKey.width) + (keyboard.blackKey.width/2)) + keyboard.blackKey.width)
-            && mouseY > keyboardY
-            && mouseY < (keyboardY + keyboard.blackKey.height)){
+        let keyBoundaryX = {  left: calculateBlackKeyPosition(blackKeys[i].position),
+                              right: calculateBlackKeyPosition(blackKeys[i].position) + keyboard.blackKey.width
+                            }
+        let keyBoundaryY = {  left: keyboardY,
+                              right: keyboardY + keyboard.blackKey.height
+                            }
+        if( keyBoundaryX.left < mouseX && mouseX < keyBoundaryX.right
+            && keyBoundaryY.left < mouseY && mouseY < keyBoundaryY.right) {
               vis.selectedVisual.playNote(blackKeys[i].freq);
               currentNote = blackKeys[i].note;
               return
         }
       }
-
       // if no black key pressed, check if white key pressed
       for(i = 0; i < whiteKeys.length; i++) {
-        if( mouseX > (keyboardStart + whiteKeys[i].position * keyboard.whiteKey.width) 
-            && mouseX < ((keyboardStart + whiteKeys[i].position * keyboard.whiteKey.width) + keyboard.whiteKey.width)){
+        let keyBoundaryX = {  left: calculateWhiteKeyPosition(whiteKeys[i].position),
+                              right: calculateWhiteKeyPosition(whiteKeys[i].position) + keyboard.whiteKey.width
+                            }
+        if( keyBoundaryX.left < mouseX && mouseX < keyBoundaryX.right) {
               vis.selectedVisual.playNote(whiteKeys[i].freq);
               currentNote = whiteKeys[i].note;
               return
