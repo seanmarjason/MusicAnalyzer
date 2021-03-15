@@ -109,7 +109,8 @@ function SynthesizerSettings() {
     for (const [oscillator, settings] of Object.entries(vis.selectedVisual.oscillators)) {
       text('Oscillator ' + (settings.ref+1), settingsPos[oscillator].x, settingsPos[oscillator].y);
       text('Enabled:', settingsPos[oscillator].x, settingsPos[oscillator].y + 50);
-      text('Amplitude: ' + vis.selectedVisual.oscillators[oscillator].amplitude, settingsPos[oscillator].x, settingsPos[oscillator].y + 100);
+      text('Amplitude: ' + vis.selectedVisual.oscillators[oscillator].amplitude, 
+            settingsPos[oscillator].x, settingsPos[oscillator].y + 100);
       text('Wave: ', settingsPos[oscillator].x, settingsPos[oscillator].y + 190);
       text('Octave: ', settingsPos[oscillator].x, settingsPos[oscillator].y + 240);
       text('Offset: ', settingsPos[oscillator].x, settingsPos[oscillator].y + 290);

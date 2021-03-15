@@ -115,8 +115,10 @@ function Synthesizer() {
       beginShape();
       vertex(envelopePos.x, envelopePos.y);
       vertex(envelopePos.x + map(OS.envelope.attack, 0, 1, 0, 40), envelopePos.y - 50); //attack
-      vertex(envelopePos.x + map(OS.envelope.attack, 0, 1, 0, 40) + map(OS.envelope.decay, 0, 1, 0, 40), envelopePos.y - map(OS.envelope.sustain, 0, 1, 0, 50)); // decay & sustain
-      vertex(envelopePos.x + map(OS.envelope.release, 0, 5, 100, 80), envelopePos.y - map(OS.envelope.sustain, 0, 1, 0, 50)); //decay
+      vertex( envelopePos.x + map(OS.envelope.attack, 0, 1, 0, 40) + map(OS.envelope.decay, 0, 1, 0, 40), 
+              envelopePos.y - map(OS.envelope.sustain, 0, 1, 0, 50)); // decay & sustain
+      vertex( envelopePos.x + map(OS.envelope.release, 0, 5, 100, 80),
+              envelopePos.y - map(OS.envelope.sustain, 0, 1, 0, 50)); //decay
       vertex(envelopePos.x + 100, envelopePos.y);
       endShape();
       pop();

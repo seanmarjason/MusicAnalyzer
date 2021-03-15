@@ -10,7 +10,6 @@
 function Stage() {
 
   const self = this;
-	//vis name
   this.name = "Stage Visualiser";
 
   const stageFourier = new p5.FFT();

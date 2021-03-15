@@ -75,8 +75,12 @@ function WavePattern() {
 			vertex((wave.start - 10) + (i * this.offset.x), wave.position - (i * this.offset.y));
 			// for each value in the wavepattern
 			for (let j = 0; j < waveHistory[i].length; j++) {
-				const x = map(j, 0, waveHistory[i].length, wave.start + (i * this.offset.x), wave.end + (i * this.offset.x));
-				const y = map(waveHistory[i][j], -1, 1, wave.position - wave.height - (i * this.offset.y), wave.position + wave.height - (i * this.offset.y))
+				const x = map(j, 0, waveHistory[i].length, 
+											wave.start + (i * this.offset.x), 
+											wave.end + (i * this.offset.x));
+				const y = map(waveHistory[i][j], -1, 1, 
+											wave.position - wave.height - (i * this.offset.y),
+											wave.position + wave.height - (i * this.offset.y))
 				vertex(x, y);
 			}
 			vertex((wave.end + 10) + (i * this.offset.x), wave.position - (i * this.offset.y));

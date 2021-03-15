@@ -104,8 +104,6 @@ function Levels() {
 				//add the needle
 				this.drawNeedle(energy, x + w / 2, y + h);
 				currentBin++;
-
-
 			}
 		}
 
@@ -116,12 +114,10 @@ function Levels() {
 		this.plots[plot] = !this.plots[plot];
 	}
 
-	/*
-	 *draws a needle to an individual plot
-	 *@param energy: The energy for the current frequency
-	 *@param centreX: central x coordinate of the plot rectangle
-	 *@param bottomY: The bottom y coordinate of the plot rectangle
-	 */
+	// draws a needle to an individual plot
+	// @param energy: The energy for the current frequency
+	// @param centreX: central x coordinate of the plot rectangle
+	// @param bottomY: The bottom y coordinate of the plot rectangle
 	this.drawNeedle = function(energy, centreX, bottomY) {
 		push();
 		stroke('#333333');
@@ -137,12 +133,10 @@ function Levels() {
 		pop();
 	};
 
-	/*
-	 *draw the graph ticks on an indivisual plot
-	 *@param centreX: central x coordinate of the plot rectangle
-	 *@param bottomY: The bottom y coordinate of the plot rectangle
-	 *@param freqLabel: Label denoting the frequency of the plot
-	 */
+	// draw the graph ticks on an indivisual plot
+	// @param centreX: central x coordinate of the plot rectangle
+	// @param bottomY: The bottom y coordinate of the plot rectangle
+	// @param freqLabel: Label denoting the frequency of the plot
 	this.ticks = function(centreX, bottomY) {
 		// 8 ticks from pi to 2pi
 		let nextTickAngle = minAngle;
@@ -154,7 +148,6 @@ function Levels() {
 		arc(0, 0, 20, 20, PI, 2 * PI);
 		textAlign(CENTER);
 		textSize(12);
-
 
 		for (let i = 0; i < 9; i++) {
 			//for each tick work out the start and end coordinates of

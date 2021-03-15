@@ -43,13 +43,16 @@ function Clipping(){
 			push();
 			stroke(100);
 			strokeWeight(1);
-			const signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight); // map chosen threshold to height of bins
-			line(0, signalThresholdLine, width, signalThresholdLine); // draw horizontal line at signal threshold
+			// map chosen threshold to height of bins
+			const signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight); 
+			// draw horizontal line at signal threshold
+			line(0, signalThresholdLine, width, signalThresholdLine);
 			fill(100);
 			noStroke();
 			textAlign(RIGHT);
 			textSize(14);
-			text('Signal Threshold: ' + this.signalThreshold, width - 50, signalThresholdLine - 20); // specify chosen threshold on canvas
+			// specify chosen threshold on canvas
+			text('Signal Threshold: ' + this.signalThreshold, width - 50, signalThresholdLine - 20);
 			pop();
 
 			// fade the colour of the bin
