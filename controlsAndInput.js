@@ -84,7 +84,9 @@ function ControlsAndInput(){
 	};
 
 	this.reset = function() {
-		vis.selectedVisual.reset();
+		if(vis.selectedVisual.reset) {
+			vis.selectedVisual.reset();
+		}
 	}
 }
 

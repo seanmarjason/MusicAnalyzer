@@ -1,4 +1,8 @@
 // Constructor to create piano keyboard and handle key presses
+// @method onResize: set size values in resize function to enable responsiveness
+// @method draw: draw button to canvas
+// @method mousePressed: check if user clicks on a key, and play corresponding note
+// @method mouseReleased: check if user releases a key, and stop corresponding note
 function Keyboard() {
 
     // notes that will be available for user selection

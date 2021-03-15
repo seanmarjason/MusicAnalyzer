@@ -12,7 +12,6 @@
 // @method adjustFrequency: offset the frequency of a note being played
 // @method mouseReleased: handle user ineration with oscillator (releasing a note)
 // @method stopNote: stop a note currently being played on oscilators
-// @method reset: clear current analysis
 function Synthesizer() {
 
   const self = this;
@@ -196,8 +195,4 @@ function Synthesizer() {
       }
     });
   }
-
-  this.reset = function() {
-		
-	}
 }

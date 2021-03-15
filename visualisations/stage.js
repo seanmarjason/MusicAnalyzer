@@ -7,7 +7,6 @@
 // @method setLightAmount: set new amount of lights for a given light type
 // @method setLightEnergy: set new energy for lights to track for a given light type
 // @method setLightColour: set new light colour for a given light type
-// @method reset: clear current analysis
 function Stage() {
 
   const self = this;
@@ -138,7 +137,4 @@ function Stage() {
       this[lightType].colour = colour;
     }
 
-	this.reset = function() {
-
-	}
 }

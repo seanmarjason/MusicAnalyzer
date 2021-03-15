@@ -11,12 +11,18 @@ function Clipping(){
 	const self = this;
 
 	this.name = "Analyze Track Clipping";
-
 	this.bins = 64;
 	this.signalThreshold = 240;
 	
 	let binWidth;
 	let binHeight;
+	const clippingFourier = new p5.FFT(0.8, this.bins);
+
+	// initialize maxSignals array
+	let maxSignals = [];
+	for(i = 0; i < this.bins; i++) {
+		maxSignals.push(0);
+	}
 
 	// set initial size values in resize function to enable responsiveness
 	// call resize function immediately to set values on first load
@@ -26,39 +32,31 @@ function Clipping(){
 	}
 	this.resize();
 
-	const clippingFourier = new p5.FFT(0.8, this.bins);
-
-	// initialize maxSignals array
-	let maxSignals = [];
-	for(i = 0; i < this.bins; i++) {
-		maxSignals.push(0);
-	}
-
+	// draw the signals to the canvas
 	this.draw = function(){
 
 		const spectrum = clippingFourier.analyze(this.bins);
 
+		// for each signal bin (based on number of bins defined)
 		for(let i = 0; i < this.bins; i++){
-
 			// draw signal threshold
 			push();
 			stroke(100);
 			strokeWeight(1);
-			const signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight);
-			line(0, signalThresholdLine, width, signalThresholdLine);
-
+			const signalThresholdLine = map(this.signalThreshold, 0, 255, height, height - binHeight); // map chosen threshold to height of bins
+			line(0, signalThresholdLine, width, signalThresholdLine); // draw horizontal line at signal threshold
 			fill(100);
 			noStroke();
 			textAlign(RIGHT);
 			textSize(14);
-			text('Signal Threshold: ' + this.signalThreshold, width - 50, signalThresholdLine - 20);
+			text('Signal Threshold: ' + this.signalThreshold, width - 50, signalThresholdLine - 20); // specify chosen threshold on canvas
 			pop();
 
 			// fade the colour of the bin
 			push();
 			noStroke();
 			const b = map(spectrum[i], 0, 255, 255, 0);
-			fill(spectrum[i], 150, b);
+			fill(spectrum[i], 150, b); // more orange as signal strength increases
 
 			// draw each bin as a rectangle from the left of the screen across
 			const x = map(i, 0, this.bins, 0, width);
@@ -66,7 +64,7 @@ function Clipping(){
 			rect(x, height, binWidth - 2, h);
 			pop()
 
-			// update max signals
+			// update max signal identified for the bin in playing track 
 			push();
 			if (maxSignals[i] < spectrum[i]) {
 				maxSignals[i] = spectrum[i];
@@ -94,11 +92,14 @@ function Clipping(){
 		}
 	};
 
+	// function to set the threshold at which a signal is considered as potential clipping
+	// @param value: signal value in Hz
 	this.setSignalThreshold = function(value) {
 		self.signalThreshold = value;
 		self.reset();
 	}
 
+	// function to reset the visualisation
 	this.reset = function() {
 		maxSignals = [];
 		for(i = 0; i < this.bins; i++) {

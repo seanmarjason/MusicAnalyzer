@@ -90,6 +90,7 @@ function WavePattern() {
 		this.offset[direction] = value;
 	}
 
+	// function to reset the visualisation
 	this.reset = function() {
 		waveHistory = [];
 	}

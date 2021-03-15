@@ -6,7 +6,6 @@
 // @method togglePlot: enable / disable a plot in visualisation
 // @method drawNeedle: place needle in position of current signal for bin
 // @method ticks: place ticks on plot
-// @method reset: clear current analysis
 function Levels() {
 	//name of the visualisation
 	this.name = "Analyze Levels";
@@ -176,9 +175,4 @@ function Levels() {
 		}
 		pop();
 	};
-
-	this.reset = function() {
-		
-	}
-
 }

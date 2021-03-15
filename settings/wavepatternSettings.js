@@ -37,7 +37,6 @@ function WavepatternSettings() {
   // Draw labels for settings
   this.draw = function() {
     text(this.name, width / 2, 100);
-
     text('X Offset: ' + vis.selectedVisual.offset.x, wavepatternSettings.x, wavepatternSettings.y + 75)
     text('Y Offset: ' + vis.selectedVisual.offset.y, wavepatternSettings.x, wavepatternSettings.y + 175)
   }
